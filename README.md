@@ -1,44 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Reddit Client
 
-## Available Scripts
+This project is being completed as part of the Codecademy Frontend Engineer Career Path. Core requirements are as follows:
 
-In the project directory, you can run:
+- Build the application using React and Redux
+- Users can see an initial view of the data when first visiting the app
+- Users can search using terms
+- Users can filter data based on categories that are predefined
+- Users are shown a detailed view (modal or new page/route) when they select an item
+- Users are delighted with a cohesive design, animations and transitions
+- Users are able to leave error states
+- Write unit tests for components using Jest and Enzyme (or another suitable React component testing library)
+- Write end-to-end tests
+- Application is responsive
+- Application gets 90+ scores on Lighthouse (allowing for lower scores for Performance related to assets served from Reddit)
+- Application is deployed using GitHub pages or Netlify
+- Optional - set up a CI/CD workflow to automatically deploy your application when the master branch is updated
+- Optional - make the application a Progressive Web App
 
-### `npm start`
+## Wireframes
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Per the wireframes below I've opted for a grid layout to display the content returned from Reddit. Each post will be shown as a card, with the image from the post used as a background for the card. The image will be darkened with pseudo element and gradient, and the post title displayed over the top of the image. This is intended to offer a richer visual experience by showing a variety of content without the need to scroll.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The title of each post will be a clickable link that opens the full post and comments in a modal.
 
-### `npm test`
+This type of grid layout will also lend itself to a consistent look and feel across devices as we can simply reduce the number of columns in each row as the size of the screen decreases.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img width="1005" alt="image" src="https://user-images.githubusercontent.com/42552076/163736548-6cce415a-9317-413f-b9d2-a1a6e2127219.png">
 
-### `npm run build`
+## Tech
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Per the requirements, this application will be built with React and Redux. React Router will also be implemented to handle client-side routing for available subreddits, and when browsing to specific posts.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Reactstrap will be used to provide basic styling and components.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+- Users can see an initial view of the data when first visiting the app
+- Users can search using terms
+- Users can filter data based on categories that are predefined
+- Users are shown a detailed view (modal or new page/route) when they select an item
+- Users are delighted with a cohesive design, animations and transitions
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Future Work
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Optional - set up a CI/CD workflow to automatically deploy your application when the master branch is updated
+- Optional - make the application a Progressive Web App
