@@ -9,7 +9,7 @@ This project is being completed as part of the Codecademy Frontend Engineer Care
 - Users are shown a detailed view (modal or new page/route) when they select an item
 - Users are delighted with a cohesive design, animations and transitions
 - Users are able to leave error states
-- Write unit tests for components using Jest and Enzyme (or another suitable React component testing library)
+- Write unit tests for components using Jest and React Testing Library
 - Write end-to-end tests
 - Application is responsive
 - Application gets 90+ scores on Lighthouse (allowing for lower scores for Performance related to assets served from Reddit)
