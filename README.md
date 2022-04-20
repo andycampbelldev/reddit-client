@@ -17,7 +17,7 @@ This project is being completed as part of the Codecademy Frontend Engineer Care
 - Optional - set up a CI/CD workflow to automatically deploy your application when the master branch is updated
 - Optional - make the application a Progressive Web App
 
-## Wireframes
+## Wireframes & Components
 
 Per the wireframes below I've opted for a grid layout to display the content returned from Reddit. Each post will be shown as a card, with the image from the post used as a background for the card. The image will be darkened with pseudo element and gradient, and the post title displayed over the top of the image. This is intended to offer a richer visual experience by showing a variety of content without the need to scroll.
 
@@ -26,6 +26,17 @@ The title of each post will be a clickable link that opens the full post and com
 This type of grid layout will also lend itself to a consistent look and feel across devices as we can simply reduce the number of columns in each row as the size of the screen decreases.
 
 <img width="1005" alt="image" src="https://user-images.githubusercontent.com/42552076/163736548-6cce415a-9317-413f-b9d2-a1a6e2127219.png">
+
+Components needed:
+- Navbar
+- SearchForm
+- SubredditContainer
+- SubredditLink
+- PostsGrid
+- Post
+- PostDetail
+- Comment
+- Footer
 
 ## Tech
 
