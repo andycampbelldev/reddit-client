@@ -1,9 +1,17 @@
 import React from "react";
+import { Navbar, NavbarBrand, NavbarToggler, Nav, NavbarText } from 'reactstrap'
 
-function Navbar() {
+export default () => {
     return (
-        <nav>Reddit-Client</nav>
+        <Navbar
+            color="light"
+            expand="md"
+            light
+        >
+            <NavbarBrand href="/">
+                Reddit-Client
+            </NavbarBrand>
+            <NavbarToggler onClick={function noRefCheck() { }} />
+        </Navbar>
     )
 }
-
-export default Navbar;
