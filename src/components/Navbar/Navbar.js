@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarBrand, NavbarToggler, Nav, NavbarText } from 'reactstrap'
+import { Navbar, NavbarBrand, Nav, NavbarText } from 'reactstrap'
 import SearchForm from "../../features/searchForm/searchForm";
 
 export default () => {
@@ -12,8 +12,7 @@ export default () => {
             <NavbarBrand href="/">
                 Reddit-Client
             </NavbarBrand>
-            <SearchForm />
-            <NavbarToggler onClick={function noRefCheck() { }} />
+            <SearchForm />  
         </Navbar>
     )
 }
