@@ -1,9 +1,6 @@
 import React from "react";
 import { screen, render } from '@testing-library/react';
 import Navbar from './Navbar'
-//import { Provider } from 'react-redux';
-//import { store } from './app/store';
-//import App from './App';
 
 describe('Navbar component testing', () => {
     test('Navbar will render and contains the name "Reddit-Client"', () => {
