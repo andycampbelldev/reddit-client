@@ -1,13 +1,37 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
+import SubredditContainer from './containers/SubredditContainer/SubredditContainer';
 
 import { Counter } from './features/counter/Counter';
 import './App.css';
 
 function App() {
+  const subredditList = [
+    {
+      name: 'homebrewing',
+      url: 'https://www.reddit.com/r/Homebrewing/'
+    },
+    {
+      name: 'patiogardening',
+      url: 'https://www.reddit.com/r/patiogardening/'
+    },
+    {
+      name: 'reactjs',
+      url: 'https://www.reddit.com/r/reactjs/'
+    },
+    {
+      name: 'sourdough',
+      url: 'https://www.reddit.com/r/Sourdough/'
+    },
+    {
+      name: 'pizza',
+      url: 'https://www.reddit.com/r/Pizza/'
+    },
+  ]
   return (
     <div>
       <Navbar />
+      <SubredditContainer list={subredditList} />
     </div>
     // <div className="App">
     //   <header className="App-header">
