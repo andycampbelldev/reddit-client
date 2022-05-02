@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { FormGroup, Label, Input, Button } from 'reactstrap';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectSearchTerm, setSearchTerm } from "./searchTermSlice";
+import { Label, Input, Button } from 'reactstrap';
 
 function SearchForm() {
-    const [searchTerm, setSearchTerm] = useState('');
-    
-    const handleChange = ({ target }) => {
-        setSearchTerm(target.value);
-    }
+    const dispatch = useDispatch();
+    const searchTerm = useSelector(selectSearchTerm);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         alert(`You searched for: ${searchTerm}`);
-        setSearchTerm('');
+    }
+
+    const handleChange = e => {
+        dispatch(setSearchTerm(e.target.value));
     }
     
     return (

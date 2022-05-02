@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarBrand, Nav, NavbarText } from 'reactstrap'
+import { Navbar, NavbarBrand } from 'reactstrap'
 import SearchForm from "../../features/searchForm/searchForm";
 
 export default () => {

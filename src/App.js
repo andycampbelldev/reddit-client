@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import SubredditContainer from './containers/SubredditContainer/SubredditContainer';
 
-import { Counter } from './features/counter/Counter';
 import './App.css';
 
 function App() {
