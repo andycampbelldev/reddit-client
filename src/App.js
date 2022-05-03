@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
-import SubredditContainer from './containers/SubredditContainer/SubredditContainer';
+import SubredditNav from './features/SubredditNav/SubredditNav';
 
 import './App.css';
 
@@ -30,7 +30,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <SubredditContainer subreddits={subredditList} />
+      <SubredditNav subreddits={subredditList} />
     </div>
     // <div className="App">
     //   <header className="App-header">
