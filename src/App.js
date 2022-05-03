@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
-import SubredditNav from './features/SubredditNav/SubredditNav';
+import SubredditNav from './features/subredditNav/SubredditNav';
 
 import './App.css';
 

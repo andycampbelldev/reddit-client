@@ -1,7 +1,7 @@
 import React from 'react';
-import SubredditLink from '../SubredditLink/SubredditLink';
+import SubredditLink from '../../components/SubredditLink/SubredditLink';
 import { useSelector, useDispatch } from "react-redux";
-import { selectSubreddit, setSubreddit } from "../SubredditNav/SubredditSlice";
+import { selectSubreddit, setSubreddit } from "./subredditSlice";
 
 const SubredditNav = (props) => {
     const { subreddits } = props;
