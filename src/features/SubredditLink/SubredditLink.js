@@ -1,6 +1,4 @@
 import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { selectSubreddit, setSubreddit } from "../SubredditNav/SubredditSlice";
 
 function SubredditLink(props) {
     const { name, active, setSubreddit } = props;
