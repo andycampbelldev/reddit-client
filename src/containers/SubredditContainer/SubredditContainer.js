@@ -1,10 +1,11 @@
 import React from 'react';
+import SubredditLink from '../../features/SubredditLink/SubredditLink';
 
 const SubredditContainer = (props) => {
-    const { list } = props;
+    const { subreddits } = props;
     return (
-        <div>
-            {list.map(subreddit => <li>{subreddit.name}</li>)}
+        <div className='d-flex justify-content-between'>
+            {subreddits.map(subreddit => <SubredditLink name={subreddit.name} url={subreddit.url}/>)}
         </div>
     )
 }

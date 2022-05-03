@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, NavbarBrand } from 'reactstrap'
-import SearchForm from "../../features/searchForm/searchForm";
+import SearchForm from "../../features/searchForm/SearchForm";
 
 export default () => {
     return (

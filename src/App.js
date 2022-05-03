@@ -7,30 +7,30 @@ import './App.css';
 function App() {
   const subredditList = [
     {
-      name: 'homebrewing',
+      name: '/r/homebrewing',
       url: 'https://www.reddit.com/r/Homebrewing/'
     },
     {
-      name: 'patiogardening',
+      name: '/r/patiogardening',
       url: 'https://www.reddit.com/r/patiogardening/'
     },
     {
-      name: 'reactjs',
+      name: '/r/reactjs',
       url: 'https://www.reddit.com/r/reactjs/'
     },
     {
-      name: 'sourdough',
+      name: '/r/sourdough',
       url: 'https://www.reddit.com/r/Sourdough/'
     },
     {
-      name: 'pizza',
+      name: '/r/pizza',
       url: 'https://www.reddit.com/r/Pizza/'
     },
   ]
   return (
     <div>
       <Navbar />
-      <SubredditContainer list={subredditList} />
+      <SubredditContainer subreddits={subredditList} />
     </div>
     // <div className="App">
     //   <header className="App-header">
