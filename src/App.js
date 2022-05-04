@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import SubredditNav from './features/subredditNav/SubredditNav';
+import PostsGrid from './features/postsGrid/PostsGrid';
 
 import './App.css';
 
@@ -31,6 +32,7 @@ function App() {
     <div>
       <Navbar />
       <SubredditNav subreddits={subredditList} />
+      <PostsGrid />
     </div>
     // <div className="App">
     //   <header className="App-header">
