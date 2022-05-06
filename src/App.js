@@ -8,8 +8,8 @@ import './App.css';
 function App() {
   const subredditList = [
     {
-      name: '/r/homebrewing',
-      url: 'https://www.reddit.com/r/Homebrewing/'
+      name: '/r/beerporn',
+      url: 'https://www.reddit.com/r/beerporn/'
     },
     {
       name: '/r/patiogardening',

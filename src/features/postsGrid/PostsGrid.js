@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectPosts, setPosts } from "./postsSlice";
 import { selectSubreddit } from "../subredditNav/subredditSlice";
 
+import { Container, Row } from "reactstrap";
+import PostCard from "../../components/PostCard/PostCard";
+
 function PostsGrid(props) {
     const dispatch = useDispatch();
     const posts = useSelector(selectPosts);
@@ -20,18 +23,20 @@ function PostsGrid(props) {
                 } else {
                     throw new Error(`Something went wrong: ${response.status}`)
                 }
-    
+
             } catch(error) {
                 console.log(error);
             }
         }
         fetchData();
-    }, [subreddit]);
+    }, [subreddit, dispatch]);
 
     return (
-        <div className="row">
-
-        </div>
+        <Container>
+            <Row>
+                {posts.map(post => <PostCard data={post.data}/>)}
+            </Row>
+        </Container>
     )
 
 }
