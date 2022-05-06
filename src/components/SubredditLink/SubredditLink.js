@@ -1,5 +1,7 @@
 import React from "react";
 
+import { NavItem, NavLink } from "reactstrap";
+
 function SubredditLink(props) {
     const { name, active, setSubreddit } = props;
 
@@ -8,12 +10,11 @@ function SubredditLink(props) {
     }
 
     return (
-        <li 
-            className={`${active ? 'border-bottom border-primary' : ''} m-4`}
-            onClick={handleClick}
-        >
-            {name}
-        </li>
+        <NavItem>
+            <NavLink onClick={handleClick} active={active} href='#'>
+                {name}
+            </NavLink>
+        </NavItem>
     )
 }
 
