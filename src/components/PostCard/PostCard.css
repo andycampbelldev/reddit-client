@@ -4,4 +4,9 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: transform 0.3s;
+}
+
+.PostCard:hover {
+    transform: scale(1.02);
 }
