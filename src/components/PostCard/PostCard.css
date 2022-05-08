@@ -2,6 +2,7 @@
     height: 400px;
     overflow: hidden;
     transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .PostCard:hover {

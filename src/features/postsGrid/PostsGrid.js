@@ -32,11 +32,19 @@ function PostsGrid(props) {
     }, [subreddit, dispatch]);
 
     return (
-        <Container className='mt-5'>
-            <Row>
-                {posts.map(post => <PostCard data={post.data}/>)}
-            </Row>
-        </Container>
+        <Row>
+            {posts.map(post => 
+                <PostCard 
+                    url={post.data.url} 
+                    title={post.data.title}
+                    author={post.data.author} 
+                    content={post.data.selftext} 
+                    ups={post.data.ups} 
+                    downs={post.data.downs}
+                    data={post.data}
+                />
+            )}
+        </Row>
     )
 
 }

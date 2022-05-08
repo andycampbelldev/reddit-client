@@ -10,7 +10,7 @@ export default () => {
             light
         >
             <NavbarBrand href="/">
-                Reddit-Client
+                Reddit-Board
             </NavbarBrand>
             <SearchForm />  
         </Navbar>
