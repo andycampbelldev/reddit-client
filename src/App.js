@@ -1,6 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectDisplayingPost } from './features/post/postSlice';
+import { selectSubreddit } from './features/subredditNav/subredditSlice';
+import { getPosts } from './features/postsGrid/postsSlice';
 
 import Navbar from './components/Navbar/Navbar';
 import SubredditNav from './features/subredditNav/SubredditNav';
@@ -13,6 +15,10 @@ import { Container } from 'reactstrap';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  const displayingPost = useSelector(selectDisplayingPost);
+  const subreddit = useSelector(selectSubreddit);
+  
   const subredditList = [
     {
       name: '/r/beerporn',
@@ -35,7 +41,11 @@ function App() {
       url: 'https://www.reddit.com/r/Pizza/'
     },
   ]
-  const displayingPost = useSelector(selectDisplayingPost);
+
+  useEffect(() => {
+    dispatch(getPosts(subreddit));
+  }, [subreddit, dispatch]);
+
   return (
     <>
       <PostDetail show={displayingPost} />
