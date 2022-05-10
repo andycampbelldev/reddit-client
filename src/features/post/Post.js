@@ -25,7 +25,7 @@ export default function PostDetail(props) {
     }, [displayingPost, dispatch])
 
     return (
-        <Modal className='Post' size='lg' trapFocus isOpen={show}>
+        <Modal className='Post' size='lg' scrollable isOpen={show}>
             <ModalHeader
                 close={<button className='btn-close' onClick={handleClick}></button>}
                 className='align-items-start'
@@ -40,8 +40,9 @@ export default function PostDetail(props) {
                 </CardSubtitle>
             </ModalHeader>
             <ModalBody>
-                {post.url.includes('.jpg') && <img className='img-fluid' src={post.url}></img>}
+                {post.type === 'image' && <img className='img-fluid' src={post.url}></img>}
                 {/* need to render video if available */}
+                {post.type === 'hosted:video' && <video controls muted src={post.videoSrc.reddit_video.fallback_url}>Error</video> }
                 {post.content}
             </ModalBody>
         </Modal>

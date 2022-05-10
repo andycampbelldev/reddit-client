@@ -11,14 +11,16 @@ import './PostCard.css'
 export default function PostCard(props) {
     const dispatch = useDispatch();
 
-    const { data, title, url, content, ups, downs, author } = props;
+    const { data } = props;
+    const { url, title, author, selftext, ups, downs, post_hint, secure_media } = data;
+
     // replace encoded ampersands in title string with ampersand character
     const decodedTitle = title.replace(/&amp;/g, '&');
     
     let backgroundImageUrl
-    if (data.post_hint === 'image') {
+    if (post_hint === 'image') {
         backgroundImageUrl = url
-    } else if (data.post_hint === 'hosted:video') {
+    } else if (post_hint === 'hosted:video') {
         backgroundImageUrl = data.thumbnail
     }
 
@@ -34,7 +36,7 @@ export default function PostCard(props) {
     }
 
     const handleClick = () => {
-        dispatch(setPost({ url, title: decodedTitle, author, ups, downs, content }));
+        dispatch(setPost({ url, type: post_hint, title: decodedTitle, author, ups, downs, content: selftext, videoSrc: secure_media  }));
         dispatch(toggleDisplayPost());
     }
     
@@ -46,7 +48,7 @@ export default function PostCard(props) {
                         {decodedTitle.length > 100 ? `${decodedTitle.substring(0, 99)}...` : decodedTitle}
                     </CardTitle>
                     <CardText>
-                        {content.length > 100 ? `${content.substring(0, 99)}...` : content}
+                        {selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext}
                     </CardText>
                 </CardBody>
                 <CardFooter className={`d-flex justify-content-between border-0 bg-transparent ${backgroundImageUrl && 'text-light'}`}>
