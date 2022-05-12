@@ -12,6 +12,10 @@ const options = {
         downs: 0,
         content: '',
         videoSrc: {},
+        gallery: {
+            items: [],
+            activeIndex: 0
+        },
         comments: []
     },
     reducers: {
@@ -19,7 +23,7 @@ const options = {
             state.displayingPost = !state.displayingPost;
         },
         setPost: (state, action) => {
-            const { url, title, author, ups, downs, content, type, videoSrc } = action.payload;
+            const { url, title, author, ups, downs, content, type, videoSrc, galleryData } = action.payload;
             state.url = url;
             state.type = type;
             state.title = title;
@@ -28,6 +32,10 @@ const options = {
             state.downs = downs;
             state.content = content;
             state.videoSrc = videoSrc;
+            state.gallery.items = galleryData ? galleryData.items : [];
+        },
+        setGalleryActiveIndex: (state, action) => {
+            state.gallery.activeIndex = action.payload;
         }
     }
 }
@@ -36,6 +44,7 @@ const postSlice = createSlice(options);
 
 export const selectDisplayingPost = state => state.post.displayingPost;
 export const selectPost = state => state.post;
+export const selectGalleryActiveIndex = state => state.post.gallery.activeIndex;
 
-export const { toggleDisplayPost, setPost } = postSlice.actions;
+export const { toggleDisplayPost, setPost, setGalleryActiveIndex } = postSlice.actions;
 export default postSlice.reducer;
