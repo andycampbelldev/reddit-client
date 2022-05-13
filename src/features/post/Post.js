@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectDisplayingPost, selectPost, selectGalleryActiveIndex, toggleDisplayPost, setGalleryActiveIndex } from "./postSlice";
+import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost } from "./postSlice";
 
-import Carousel from "../../components/ImageCarousel/ImageCarousel";
+import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 
-import { Modal, ModalHeader, ModalBody, CardSubtitle } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faArrowDown, faSpinner, faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 
 import './Post.css'
 
@@ -15,16 +15,26 @@ export default function PostDetail(props) {
     const dispatch = useDispatch();
     const post = useSelector(selectPost);
     const displayingPost = useSelector(selectDisplayingPost);
+    const comments = useSelector(selectComments);
+    const commentsLoading = useSelector(selectCommentsLoading);
+    const commentsError = useSelector(selectCommentsError);
+
+    const  { type, ups, downs, title, author, url, secure_media, gallery_data, permalink } = post;
+    //const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
 
     const handleClose = () => {
         dispatch(toggleDisplayPost());
-        dispatch(setGalleryActiveIndex(0))
+        dispatch(setGalleryIndex(0))
     }
 
     // prevent body scrolling when Post is showing
     useEffect(() => {
         document.body.style.overflow = displayingPost ? 'hidden' : 'unset';
     }, [displayingPost, dispatch])
+
+    useEffect(() => {
+        dispatch(getCommentsForPost(permalink));
+    }, [url, dispatch])
 
     return (
         <Modal className='Post' size='lg' scrollable isOpen={show}>
@@ -33,19 +43,22 @@ export default function PostDetail(props) {
                 className='align-items-start'
             >
                 <span className='Post-votes'>
-                        { post.ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {post.ups} </>}
-                        { post.downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {post.downs} </>}
+                        { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups} </>}
+                        { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs} </>}
                 </span>
-                {post.title}
+                {title}
                 <CardSubtitle className='Post-author text-muted'>
-                    /u/{post.author}
+                    /u/{author}
                 </CardSubtitle>
             </ModalHeader>
             <ModalBody>
-                {post.type === 'image' && <img className='img-fluid' src={post.url}></img>}
-                {post.type === 'video' && <video controls muted src={post.videoSrc.reddit_video.fallback_url}>Error</video> }
-                {post.type === 'gallery' && <Carousel items={post.gallery.items} /> }
+                {type === 'image' && <img className='img-fluid' src={url}></img>}
+                {type === 'video' && <video controls muted src={secure_media.reddit_video.fallback_url}>Error</video> }
+                {type === 'gallery' && <ImageCarousel items={gallery_data.items} /> }
                 {post.content}
+                {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
+                {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
+                {comments.length > 0 && <ul>{comments.map(comment => <li>{comment.data.body}</li>)}</ul>}
             </ModalBody>
         </Modal>
     )

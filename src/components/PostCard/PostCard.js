@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { toggleDisplayPost, setPost } from "../../features/post/postSlice";
+import { setPost, toggleDisplayPost } from "../../features/post/postSlice";
 
 import { Col, Card, CardBody, CardTitle, CardText, CardFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ export default function PostCard(props) {
     const dispatch = useDispatch();
 
     const { data } = props;
-    const { url, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail } = data;
+    const { url, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink } = data;
 
     // replace encoded ampersands in title string with ampersand character
     const decodedTitle = title.replace(/&amp;/g, '&');
@@ -22,23 +22,24 @@ export default function PostCard(props) {
 
     // construct post object to send to store when PostCard is clicked
     const post = {
-        url: url,
+        url,
         type: postType,
         title: decodedTitle,
-        author: author,
-        ups: ups,
-        downs: downs,
-        content: selftext
+        author,
+        ups,
+        downs,
+        content: selftext,
+        permalink
     }
 
     if (postType === 'image') {
         post.backgroundImageUrl = url
     } else if (postType === 'video') {
         post.backgroundImageUrl = thumbnail
-        post.videoSrc = secure_media
+        post.secure_media = secure_media
     } else if (postType === 'gallery') {
         post.backgroundImageUrl = `https://i.redd.it/${gallery_data.items[0].media_id}.jpg`;
-        post.galleryData = gallery_data;
+        post.gallery_data = gallery_data;
     }
 
     const background = {
@@ -53,7 +54,6 @@ export default function PostCard(props) {
     }
 
     const handleClick = () => {
-        //dispatch(setPost({ url, type: post_hint, title: decodedTitle, author, ups, downs, content: selftext, videoSrc: secure_media  }));
         dispatch(setPost(post));
         dispatch(toggleDisplayPost());
     }

@@ -1,35 +1,34 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectGalleryActiveIndex, setGalleryActiveIndex } from "../../features/post/postSlice";
+import { selectGalleryIndex, setGalleryIndex } from "../../features/post/postSlice";
 
 import { Carousel, CarouselIndicators, CarouselItem, CarouselControl } from "reactstrap";
 
 export default function ImageCarousel(props) {
     const { items } = props;
     const dispatch = useDispatch();
-    const galleryActiveIndex = useSelector(selectGalleryActiveIndex);
+    const galleryIndex = useSelector(selectGalleryIndex);
 
     const handleNextSlide = () => {
-        const next = galleryActiveIndex + 1 >= items.length ? 0 : galleryActiveIndex + 1;
-        dispatch(setGalleryActiveIndex(next));
+        const next = galleryIndex + 1 >= items.length ? 0 : galleryIndex + 1;
+        dispatch(setGalleryIndex(next));
     }
 
     const handlePrevSlide = () => {
-        const next = galleryActiveIndex - 1 < 0 ? items.length - 1 : galleryActiveIndex - 1;
-        dispatch(setGalleryActiveIndex(next));
+        const next = galleryIndex - 1 < 0 ? items.length - 1 : galleryIndex - 1;
+        dispatch(setGalleryIndex(next));
     }
 
     return (
         <Carousel
-            activeIndex={galleryActiveIndex}
+            activeIndex={galleryIndex}
             next={handleNextSlide}
             previous={handlePrevSlide}
-            slide={false}
         >
             <CarouselIndicators
-                activeIndex={galleryActiveIndex}
+                activeIndex={galleryIndex}
                 items={items.map((image, i) => ({ ...image, altText: `Slide ${i+1}`, key: `${i + 1}`, src: `https://i.redd.it/${image.media_id}.jpg` }))}
-                onClickHandler={newIndex => {dispatch(setGalleryActiveIndex(newIndex))}}
+                onClickHandler={newIndex => {dispatch(setGalleryIndex(newIndex))}}
             />
             {items.map((image, i) => (
                 <CarouselItem>
