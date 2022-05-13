@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectDisplayingPost, selectPost, selectGalleryActiveIndex } from "./postSlice";
-import { toggleDisplayPost, setGalleryActiveIndex } from "./postSlice";
+import { selectDisplayingPost, selectPost, selectGalleryActiveIndex, toggleDisplayPost, setGalleryActiveIndex } from "./postSlice";
 
-import { Modal, ModalHeader, ModalBody, CardSubtitle, Carousel, CarouselIndicators, CarouselItem, CarouselControl } from "reactstrap";
+import Carousel from "../../components/ImageCarousel/ImageCarousel";
+
+import { Modal, ModalHeader, ModalBody, CardSubtitle } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,25 +15,13 @@ export default function PostDetail(props) {
     const dispatch = useDispatch();
     const post = useSelector(selectPost);
     const displayingPost = useSelector(selectDisplayingPost);
-    const galleryActiveIndex = useSelector(selectGalleryActiveIndex);
 
     const handleClose = () => {
         dispatch(toggleDisplayPost());
         dispatch(setGalleryActiveIndex(0))
     }
 
-    const handleNextSlide = () => {
-        const next = galleryActiveIndex + 1 >= post.gallery.items.length ? 0 : galleryActiveIndex + 1;
-        dispatch(setGalleryActiveIndex(next));
-    }
-
-    const handlePrevSlide = () => {
-        const next = galleryActiveIndex - 1 < 0 ? post.gallery.items.length - 1 : galleryActiveIndex - 1;
-        dispatch(setGalleryActiveIndex(next));
-    }
-
-
-    // preven body scrolling when Post is showing
+    // prevent body scrolling when Post is showing
     useEffect(() => {
         document.body.style.overflow = displayingPost ? 'hidden' : 'unset';
     }, [displayingPost, dispatch])
@@ -55,38 +44,7 @@ export default function PostDetail(props) {
             <ModalBody>
                 {post.type === 'image' && <img className='img-fluid' src={post.url}></img>}
                 {post.type === 'video' && <video controls muted src={post.videoSrc.reddit_video.fallback_url}>Error</video> }
-                {post.type === 'gallery' && 
-                    <Carousel
-                        activeIndex={galleryActiveIndex}
-                        next={handleNextSlide}
-                        previous={handlePrevSlide}
-                        slide={false}
-                    >
-                        <CarouselIndicators
-                            activeIndex={galleryActiveIndex}
-                            items={post.gallery.items.map((image, i) => ({ ...image, altText: `Slide ${i+1}`, key: `${i + 1}`, src: `https://i.redd.it/${image.media_id}.jpg` }))}
-                            onClickHandler={newIndex => {dispatch(setGalleryActiveIndex(newIndex))}}
-                        />
-                        {post.gallery.items.map((image, i) => (
-                            <CarouselItem>
-                                <img 
-                                    alt={`Slide ${i+1}`}
-                                    src={`https://i.redd.it/${image.media_id}.jpg`}
-                                />
-                            </CarouselItem>
-                        ))}
-                        <CarouselControl
-                            direction="prev"
-                            directionText="Previous"
-                            onClickHandler={handlePrevSlide}
-                            />
-                        <CarouselControl
-                            direction="next"
-                            directionText="Next"
-                            onClickHandler={handleNextSlide}
-                        />
-                    </Carousel>
-                }
+                {post.type === 'gallery' && <Carousel items={post.gallery.items} /> }
                 {post.content}
             </ModalBody>
         </Modal>
