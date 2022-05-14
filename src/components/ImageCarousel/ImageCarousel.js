@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectGalleryIndex, setGalleryIndex } from "../../features/post/postSlice";
 
-import { Carousel, CarouselIndicators, CarouselItem, CarouselControl } from "reactstrap";
+import { Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl } from "reactstrap";
 
 import styles from './ImageCarousel.css'
 
@@ -29,7 +29,7 @@ export default function ImageCarousel(props) {
         >
             <CarouselIndicators
                 activeIndex={galleryIndex}
-                items={items.map((image, i) => ({ ...image, altText: `Slide ${i+1}`, key: `${i + 1}`, src: `https://i.redd.it/${image.media_id}.jpg` }))}
+                items={items.map((image, i) => ({ altText: `Slide ${i+1}`, key: `${i + 1}`, src: `https://i.redd.it/${image.media_id}.jpg` }))}
                 onClickHandler={newIndex => {dispatch(setGalleryIndex(newIndex))}}
             />
             {items.map((image, i) => (
@@ -38,6 +38,7 @@ export default function ImageCarousel(props) {
                         alt={`Slide ${i+1}`}
                         src={`https://i.redd.it/${image.media_id}.jpg`}
                     />
+                    {image.caption && <CarouselCaption captionText={image.caption}/>}
                 </CarouselItem>
             ))}
             <CarouselControl
