@@ -12,7 +12,8 @@ export default function PostCard(props) {
     const dispatch = useDispatch();
 
     const { data } = props;
-    const { url, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink } = data;
+    // handle crossposts from other subreddits
+    const { url, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
 
     // replace encoded ampersands in title string with ampersand character
     const decodedTitle = title.replace(/&amp;/g, '&');
