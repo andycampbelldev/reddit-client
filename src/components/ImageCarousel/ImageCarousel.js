@@ -4,7 +4,7 @@ import { selectGalleryIndex, setGalleryIndex } from "../../features/post/postSli
 
 import { Carousel, CarouselIndicators, CarouselItem, CarouselControl } from "reactstrap";
 
-import './ImageCarousel.css'
+import styles from './ImageCarousel.css'
 
 export default function ImageCarousel(props) {
     const { items } = props;
@@ -41,13 +41,13 @@ export default function ImageCarousel(props) {
                 </CarouselItem>
             ))}
             <CarouselControl
-                className='CarouselControlPrev'
+                className={'CarouselControlPrev'}
                 direction="prev"
                 directionText="Previous"
                 onClickHandler={handlePrevSlide}
                 />
             <CarouselControl
-                className='CarouselControlNext'
+                className={'CarouselControlNext'}
                 direction="next"
                 directionText="Next"
                 onClickHandler={handleNextSlide}

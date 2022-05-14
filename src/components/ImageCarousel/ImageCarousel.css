@@ -1,7 +1,7 @@
-.CarouselControlPrev {
+.CarouselControlPrev.carousel-control-prev {
     background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 90%);
 }
 
-.CarouselControlNext {
-    background: linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 90%);
+.CarouselControlNext.carousel-control-next {
+    background: linear-gradient(270deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 90%) !important;
 }
