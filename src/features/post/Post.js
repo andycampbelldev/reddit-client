@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost } from "./postSlice";
 
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
+import PostComment from "../../components/PostComment/PostComment";
 
 import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -55,10 +56,21 @@ export default function PostDetail(props) {
                 {type === 'image' && <img className='img-fluid' src={url}></img>}
                 {type === 'video' && <video controls muted src={secure_media.reddit_video.fallback_url}>Error</video> }
                 {type === 'gallery' && <ImageCarousel items={gallery_data.items} /> }
-                {post.content}
+                {post.content && <p>{post.content}</p>}
+                <h5 className='my-3'>Comments</h5>
                 {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
                 {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
-                {comments.length > 0 && <ul>{comments.map(comment => <li>{comment.data.body}</li>)}</ul>}
+                {comments.length > 0 
+                ? comments.map(comment => (
+                    <PostComment 
+                        author={comment.data.author}
+                        content={comment.data.body}
+                        createdUTC={comment.data.created_utc}
+                        ups={comment.data.ups}
+                        downs={comment.data.downs}
+                    />)
+                ) 
+                : <p>This post has no comments</p>}
             </ModalBody>
         </Modal>
     )
