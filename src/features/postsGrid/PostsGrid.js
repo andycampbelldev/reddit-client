@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from "react-redux";
 import { selectPosts, selectPostsIsLoading, selectPostsHasError } from "./postsSlice";
 
@@ -23,6 +24,7 @@ function PostsGrid() {
         <Row>
             {posts.map(post => 
                 <PostCard 
+                    key={uuidv4()}
                     url={post.data.url} 
                     title={post.data.title}
                     author={post.data.author} 
