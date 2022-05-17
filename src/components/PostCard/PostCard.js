@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setPost, toggleDisplayPost } from "../../features/post/postSlice";
 
-import { Col, Card, CardBody, CardTitle, CardText, CardFooter } from "reactstrap";
+import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,24 +13,25 @@ export default function PostCard(props) {
 
     const { data } = props;
     // handle crossposts from other subreddits
-    const { url, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
+    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
 
     // replace encoded ampersands in title string with ampersand character
     const decodedTitle = title.replace(/&amp;/g, '&');
     
     // determine what type of post - image, gallery or video
-    const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
+    const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : post_hint === 'link' ? 'link' : is_gallery ? 'gallery' : undefined;
 
     // construct post object to send to store when PostCard is clicked
     const post = {
-        url,
+        url: postType !== 'link' ? url : url_overridden_by_dest,
         type: postType,
         title: decodedTitle,
         author,
         ups,
         downs,
         content: selftext,
-        permalink
+        permalink,
+        thumbnail
     }
 
     if (postType === 'image') {
@@ -62,13 +63,15 @@ export default function PostCard(props) {
     return (
         <Col sm={{size: 6}} md={{size: 4}} className='d-flex align-items-stretch mb-2 px-1'>
             <Card className='PostCard flex-grow-1' style={background} onClick={handleClick}>
-                <CardBody>
+                <CardBody className='CardBody'>
                     <CardTitle className={`CardTitle ${post.backgroundImageUrl && 'text-light'}`}>
                         {decodedTitle.length > 100 ? `${decodedTitle.substring(0, 99)}...` : decodedTitle}
                     </CardTitle>
+                    {postType === 'link' && <CardSubtitle>{url_overridden_by_dest}</CardSubtitle>}
                     <CardText>
                         {selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext}
                     </CardText>
+                    {postType === 'link' && <img src={thumbnail} />}
                 </CardBody>
                 <CardFooter className={`d-flex justify-content-between border-0 bg-transparent ${post.backgroundImageUrl && 'text-light'}`}>
                     <span>

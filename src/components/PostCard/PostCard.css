@@ -5,6 +5,10 @@
     cursor: pointer;
 }
 
+.CardBody {
+    overflow: hidden;
+}
+
 .PostCard:hover {
     transform: scale(1.02);
 }
@@ -12,4 +16,8 @@
 .PostCard .CardTitle {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.PostCard img {
+    width: 100%;
 }

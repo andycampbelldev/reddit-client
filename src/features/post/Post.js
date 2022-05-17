@@ -20,7 +20,7 @@ export default function PostDetail(props) {
     const commentsLoading = useSelector(selectCommentsLoading);
     const commentsError = useSelector(selectCommentsError);
 
-    const  { type, ups, downs, title, author, url, secure_media, gallery_data, permalink } = post;
+    const  { type, ups, downs, title, author, url, secure_media, gallery_data, permalink, thumbnail } = post;
     //const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
 
     const handleClose = () => {
@@ -56,6 +56,12 @@ export default function PostDetail(props) {
                 {type === 'image' && <img className='img-fluid' src={url}></img>}
                 {type === 'video' && <video controls muted src={secure_media.reddit_video.fallback_url}>Error</video> }
                 {type === 'gallery' && <ImageCarousel items={gallery_data.items} /> }
+                {type === 'link' &&
+                    <Row className='Post-external-link d-flex justify-content-between align-items-center'>
+                        <a target='_blank' href={url}>{url}</a>
+                        <img className='m-2' src={thumbnail}/>
+                    </Row>
+                }
                 {post.content && <p>{post.content}</p>}
                 <h5 className='my-3'>Comments</h5>
                 {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
