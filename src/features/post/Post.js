@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from "react-redux";
 import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost } from "./postSlice";
 
@@ -71,6 +72,7 @@ export default function PostDetail(props) {
                 {comments.length > 0 
                 ? comments.map(comment => (
                     <PostComment 
+                        key={uuidv4()}
                         author={comment.data.author}
                         content={comment.data.body}
                         createdUTC={comment.data.created_utc}
