@@ -48,7 +48,7 @@ export default function PostCard(props) {
         backgroundColor: post.backgroundImageUrl ? 'unset' : '#e5e5f7',
         opacity: 1,
         backgroundImage: post.backgroundImageUrl ?
-        `linear-gradient(180deg, rgba(0, 0, 0, 0.8) -20%, transparent 60%), linear-gradient(360deg, rgba(0, 0, 0, 1) -10%, transparent 20%), url(${post.backgroundImageUrl})`
+        `linear-gradient(180deg, rgba(0, 0, 0, 0.8) -20%, transparent 60%), linear-gradient(360deg, rgba(0, 0, 0, 1) -10%, transparent 50%), url(${post.backgroundImageUrl})`
         : 'linear-gradient(135deg, rgb(13 110 253 / 0.1) 25%, transparent 25%), linear-gradient(225deg, rgb(13 110 253 / 0.1) 25%, transparent 25%), linear-gradient(45deg, rgb(13 110 253 / 0.1) 25%, transparent 25%), linear-gradient(315deg, rgb(13 110 253 / 0.1) 25%, #e5e5f7 25%)',
         backgroundPosition: post.backgroundImageUrl ? 'center' : '11px 0, 11px 0, 0 0, 0 0',
         backgroundSize: post.backgroundImageUrl ? 'cover' : '22px 22px',
