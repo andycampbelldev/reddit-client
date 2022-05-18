@@ -34,7 +34,9 @@ export default function PostDetail(props) {
     }, [displayingPost, dispatch])
 
     useEffect(() => {
-        dispatch(getCommentsForPost(permalink));
+        if(permalink) {
+            dispatch(getCommentsForPost(permalink));
+        }
     }, [url, dispatch])
 
     return (
