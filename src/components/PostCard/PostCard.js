@@ -1,4 +1,5 @@
 import React from "react";
+import timeElapsed from "../../utils/timeElapsed";
 import { useDispatch } from "react-redux";
 import { setPost, toggleDisplayPost } from "../../features/post/postSlice";
 
@@ -13,7 +14,12 @@ export default function PostCard(props) {
 
     const { data } = props;
     // handle crossposts from other subreddits
-    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
+    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink, created_utc } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
+
+    const postDate = new Date(created_utc * 1000);
+    const postAge = timeElapsed(postDate);
+    const [ unitOfTime, unitsElapsed ] = postAge.largestUnit;
+    const whenPostedDisplay = unitOfTime === 'day' && unitsElapsed > 7 ? postDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`
 
     // replace encoded ampersands in title string with ampersand character
     const decodedTitle = title.replace(/&amp;/g, '&');
@@ -27,11 +33,12 @@ export default function PostCard(props) {
         type: postType,
         title: decodedTitle,
         author,
+        whenPostedDisplay,
         ups,
         downs,
         content: selftext,
         permalink,
-        thumbnail
+        thumbnail,
     }
 
     if (postType === 'image') {
@@ -73,16 +80,14 @@ export default function PostCard(props) {
                     </CardText>
                     {postType === 'link' && <img src={thumbnail} />}
                 </CardBody>
-                <CardFooter className={`d-flex justify-content-between border-0 bg-transparent ${post.backgroundImageUrl && 'text-light'}`}>
-                    <span>
-                        { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups}</>}
-                        { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs}</>}
-                    </span>
-                    {/* for galleries, show how many images are in the gallery */}
-                    { is_gallery && <span>{`1/${gallery_data.items.length}`}</span>}
-                    <span>
-                        /u/{author}
-                    </span>
+                <CardFooter className={`d-flex justify-content-between flex-wrap border-0 bg-transparent ${post.backgroundImageUrl && 'text-light'}`}>
+                    {(ups > 0 || downs > 0) && 
+                        <span>
+                            { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups}</>}
+                            { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs}</>}
+                        </span>}
+                    <span className='mx-1'>/u/{author}</span>
+                    <span>{unitOfTime === 'day' && unitsElapsed > 7 ? postDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`}</span>
                 </CardFooter>
             </Card>
         </Col>

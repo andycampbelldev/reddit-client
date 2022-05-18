@@ -21,7 +21,7 @@ export default function PostDetail(props) {
     const commentsLoading = useSelector(selectCommentsLoading);
     const commentsError = useSelector(selectCommentsError);
 
-    const  { type, ups, downs, title, author, url, secure_media, gallery_data, permalink, thumbnail } = post;
+    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail } = post;
     //const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
 
     const handleClose = () => {
@@ -44,15 +44,17 @@ export default function PostDetail(props) {
         <Modal className='Post' size='lg' scrollable isOpen={show}>
             <ModalHeader
                 close={<button className='btn-close' onClick={handleClose}></button>}
-                className='align-items-start'
+                className='Post-header align-items-start'
+                tag='div'
             >
                 <span className='Post-votes'>
                         { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups} </>}
                         { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs} </>}
                 </span>
-                {title}
-                <CardSubtitle className='Post-author text-muted'>
-                    /u/{author}
+                <span>{title}</span>
+                <CardSubtitle className='Post-subtitle text-muted'>
+                    <span>/u/{author}</span>
+                    <span className='ms-2 fw-light'>{whenPostedDisplay}</span>
                 </CardSubtitle>
             </ModalHeader>
             <ModalBody>

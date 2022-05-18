@@ -16,6 +16,7 @@ const options = {
         type: '',
         title: '',
         author: '',
+        whenPostedDisplay: '',
         ups: 0,
         downs: 0,
         content: '',
@@ -33,13 +34,14 @@ const options = {
             state.displayingPost = !state.displayingPost;
         },
         setPost: (state, action) => {
-            const { url, title, author, ups, downs, content, type, secure_media, gallery_data, permalink, thumbnail } = action.payload;
+            const { url, title, author, ups, downs, content, type, secure_media, gallery_data, permalink, thumbnail, whenPostedDisplay } = action.payload;
             state.url = url;
             state.permalink = permalink;
             state.thumbnail = thumbnail;
             state.type = type;
             state.title = title;
             state.author = author;
+            state.whenPostedDisplay = whenPostedDisplay;
             state.ups = ups;
             state.downs = downs;
             state.content = content;
