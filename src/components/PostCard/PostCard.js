@@ -24,8 +24,8 @@ export default function PostCard(props) {
     // replace encoded ampersands in title string with ampersand character
     const decodedTitle = title.replace(/&amp;/g, '&');
     
-    // determine what type of post - image, gallery or video
-    const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : post_hint === 'link' ? 'link' : is_gallery ? 'gallery' : undefined;
+    // determine what type of post - image, gallery or video, or link to external content like imgur or youtube
+    const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : ['link', 'rich:video'].includes(post_hint) ? 'link' : is_gallery ? 'gallery' : undefined;
 
     // construct post object to send to store when PostCard is clicked
     const post = {
