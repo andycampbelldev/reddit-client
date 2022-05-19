@@ -1,4 +1,6 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 import { useSelector, useDispatch } from "react-redux";
 import { selectGalleryIndex, setGalleryIndex } from "../../features/post/postSlice";
 
@@ -33,7 +35,7 @@ export default function ImageCarousel(props) {
                 onClickHandler={newIndex => {dispatch(setGalleryIndex(newIndex))}}
             />
             {items.map((image, i) => (
-                <CarouselItem>
+                <CarouselItem key={uuidv4()}>
                     <img 
                         alt={`Slide ${i+1}`}
                         src={`https://i.redd.it/${image.media_id}.jpg`}
