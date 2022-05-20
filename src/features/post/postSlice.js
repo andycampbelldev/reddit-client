@@ -58,7 +58,7 @@ const options = {
             state.comments.hasError = false;
         },
         [getCommentsForPost.fulfilled]: (state, action) => {
-            state.comments.comments = action.payload[1].data.children;
+            state.comments.comments = action.payload[1].data.children.filter(object => object.kind === 't1');
             state.comments.isLoading = false;
             state.comments.hasError = false;
         },
