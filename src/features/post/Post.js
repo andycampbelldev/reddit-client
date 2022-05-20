@@ -26,7 +26,7 @@ export default function PostDetail(props) {
 
     const handleClose = () => {
         dispatch(toggleDisplayPost());
-        dispatch(setGalleryIndex(0))
+        dispatch(setGalleryIndex(0));
     }
 
     // prevent body scrolling when Post is showing
@@ -70,9 +70,11 @@ export default function PostDetail(props) {
                 {post.content && <p>{post.content}</p>}
                 <h5 className='my-3'>Comments</h5>
                 {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
+
                 {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
-                {comments.length > 0 
-                ? comments.map(comment => (
+                
+                {!commentsLoading && comments.length > 0
+                && comments.map(comment => (
                     <PostComment 
                         key={uuidv4()}
                         author={comment.data.author}
@@ -82,7 +84,9 @@ export default function PostDetail(props) {
                         downs={comment.data.downs}
                     />)
                 ) 
-                : <p>This post has no comments</p>}
+                }
+                
+                {!commentsLoading && comments.length === 0 && <p>This post has no comments</p>}
             </ModalBody>
         </Modal>
     )
