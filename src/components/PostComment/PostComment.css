@@ -1,3 +1,8 @@
 .card-footer span {
     font-size: 0.8rem;
 }
+
+blockquote {
+    border-left: 5px solid grey;
+    padding-left: 0.5rem;
+}

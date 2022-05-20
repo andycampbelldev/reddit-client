@@ -39,7 +39,11 @@ function App() {
     {
       name: '/r/pizza',
       url: 'https://www.reddit.com/r/Pizza/'
-    }
+    },
+    {
+      name: '/r/videos',
+      url: 'https://www.reddit.com/r/videos/'
+    },
   ]
 
   useEffect(() => {
