@@ -25,7 +25,8 @@ const options = {
         comments: {
             isLoading: false,
             hasError: false,
-            comments: []
+            comments: [],
+            visibleComments: 3
         },
         galleryIndex: 0
     },
@@ -50,6 +51,9 @@ const options = {
         },
         setGalleryIndex: (state, action) => {
             state.galleryIndex = action.payload;
+        },
+        setVisibleComments: (state, action) => {
+            state.comments.visibleComments = action.payload;
         }
     },
     extraReducers: {
@@ -58,7 +62,7 @@ const options = {
             state.comments.hasError = false;
         },
         [getCommentsForPost.fulfilled]: (state, action) => {
-            state.comments.comments = action.payload[1].data.children.filter(object => object.kind === 't1');
+            state.comments.comments = action.payload[1].data.children.filter(object => object.kind === 't1').map(comment => ({...comment, visibleComments: 3}));
             state.comments.isLoading = false;
             state.comments.hasError = false;
         },
@@ -77,6 +81,7 @@ export const selectGalleryIndex = state => state.post.galleryIndex;
 export const selectCommentsLoading = state => state.post.comments.isLoading;
 export const selectCommentsError = state => state.post.comments.hasError;
 export const selectComments = state => state.post.comments.comments;
+export const selectVisibleComments = state => state.post.comments.visibleComments;
 
-export const { toggleDisplayPost, setPost, setGalleryIndex } = postSlice.actions;
+export const { toggleDisplayPost, setPost, setGalleryIndex, setVisibleComments } = postSlice.actions;
 export default postSlice.reducer;

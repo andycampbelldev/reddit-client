@@ -20,3 +20,16 @@
 .Post-external-link img {
     max-width: 200px;
 }
+
+.Post-more-comments {
+    display: block;
+    background-color: unset;
+    border: none;
+    margin: auto;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.Post-more-comments:hover {
+    text-decoration: underline;
+}

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from "react-redux";
-import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost } from "./postSlice";
+import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setVisibleComments, selectVisibleComments } from "./postSlice";
 
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import PostComment from "../../components/PostComment/PostComment";
 
-import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, CardSubtitle, Row, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown, faSpinner, faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,6 +18,7 @@ export default function PostDetail(props) {
     const post = useSelector(selectPost);
     const displayingPost = useSelector(selectDisplayingPost);
     const comments = useSelector(selectComments);
+    const visibleComments = useSelector(selectVisibleComments);
     const commentsLoading = useSelector(selectCommentsLoading);
     const commentsError = useSelector(selectCommentsError);
 
@@ -27,6 +28,12 @@ export default function PostDetail(props) {
     const handleClose = () => {
         dispatch(toggleDisplayPost());
         dispatch(setGalleryIndex(0));
+        dispatch(setVisibleComments(3));
+    }
+
+    const handleMoreComments = () => {
+        const newVisibleComments = visibleComments + 3;
+        dispatch(setVisibleComments(newVisibleComments))
     }
 
     // prevent body scrolling when Post is showing
@@ -68,25 +75,28 @@ export default function PostDetail(props) {
                     </Row>
                 }
                 {post.content && <p>{post.content}</p>}
-                <h5 className='my-3'>Comments</h5>
-                {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
+                <h5 className='my-3'>{comments.length} Comment{comments.length > 1 || comments.length === 0 ? 's' : ''}</h5>
+                <div className='Post-comments d-flex flex-column'>
+                    {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
 
-                {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
+                    {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
+                    
+                    {!commentsLoading && comments.length > 0
+                    && comments.slice(0, visibleComments).map(comment => (
+                        <PostComment 
+                            key={uuidv4()}
+                            author={comment.data.author}
+                            content={comment.data.body}
+                            createdUTC={comment.data.created_utc}
+                            ups={comment.data.ups}
+                            downs={comment.data.downs}
+                            replies={comment.data.replies ? comment.data.replies.data.children.filter(c => c.kind === 't1') : []}
+                        />)
+                    ) 
+                    }
+                    { !commentsLoading && visibleComments < comments.length && <button onClick={handleMoreComments} className='Post-more-comments'>more comments</button> }
+                </div>
                 
-                {!commentsLoading && comments.length > 0
-                && comments.map(comment => (
-                    <PostComment 
-                        key={uuidv4()}
-                        author={comment.data.author}
-                        content={comment.data.body}
-                        createdUTC={comment.data.created_utc}
-                        ups={comment.data.ups}
-                        downs={comment.data.downs}
-                    />)
-                ) 
-                }
-                
-                {!commentsLoading && comments.length === 0 && <p>This post has no comments</p>}
             </ModalBody>
         </Modal>
     )

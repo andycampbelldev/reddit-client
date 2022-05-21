@@ -1,8 +1,54 @@
-.card-footer span {
+.PostComment {
+    /* transition: all 1s ease; */
+    overflow: hidden;
+}
+
+.PostComment-body, .PostComment-replies {
+    max-height: 9999px;
+    overflow: hidden;
+    transition: all 1s ease;
+}
+
+.PostComment .PostComment-toggle {
+    background-color: rgb(13, 110, 253);
+    margin: -10px 0px;
+    margin-right: 0.5rem;
+    display: block;
+    padding: 0;
+    flex: 0 0 8px;
+    transition: all 1s ease;
+}
+
+.PostComment-collapsed .PostComment-toggle {
+    background-color: rgba(13, 110, 253, 0.5);
+}
+
+.PostComment-collapsed .PostComment-body, .PostComment-collapsed .PostComment-replies {
+    max-height: 0px;
+}
+
+.PostComment-author {
     font-size: 0.8rem;
 }
 
-blockquote {
+.ReactMarkdown blockquote {
     border-left: 5px solid grey;
     padding-left: 0.5rem;
+}
+
+.ReactMarkdown p {
+    overflow-wrap: anywhere;
+}
+
+.PostComment-more-replies {
+    display: block;
+    background-color: unset;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    /* margin: auto; */
+}
+
+.PostComment-more-replies:hover {
+    text-decoration: underline;
 }
