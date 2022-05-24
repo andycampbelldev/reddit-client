@@ -57,15 +57,14 @@ export default function PostComment(props) {
                 </div>
                 <div className='PostComment-body'>
                     <ReactMarkdown className='ReactMarkdown' children={content} linkTarget='_blank' skipHtml={true}/>
+                    {nestedReplies.length > 0 && <div className='PostComment-replies d-flex flex-column'>{nestedReplies.slice(0, numberOfReplies)}</div>}
+                    { numberOfReplies < nestedReplies.length && 
+                    <div className='d-flex my-2 PostComment-collapsed'>
+                        <div className='PostComment-toggle' role='button' onClick={handleMoreReplies}></div>
+                        <button onClick={handleMoreReplies} className='PostComment-more-replies'>more replies</button> 
+                    </div>
+                    }
                 </div>
-                {nestedReplies.length > 0 && <div className='PostComment-replies d-flex flex-column'>{nestedReplies.slice(0, numberOfReplies)}</div>}
-                { numberOfReplies < nestedReplies.length && 
-                <div className='d-flex my-2 PostComment-collapsed'>
-                    <div className='PostComment-toggle' role='button' onClick={handleMoreReplies}></div>
-                    <button onClick={handleMoreReplies} className='PostComment-more-replies'>more replies</button> 
-                </div>
-                
-                }
             </div>
         </div>
     )
