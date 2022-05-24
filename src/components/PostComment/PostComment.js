@@ -13,11 +13,17 @@ export default function PostComment(props) {
     const commentAge = timeElapsed(commentDate);
     const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;
     const [ isVisible, setIsVisible ] = useState(true);
+    const [ isReading, setIsReading ] = useState(false);
     const [ numberOfReplies, setNumberOfReplies ]  = useState(3);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
+        setIsReading(false);
         setNumberOfReplies(3);
+    }
+
+    const toggleReaderMode = () => {
+        setIsReading(!isReading);
     }
 
     const handleMoreReplies = () => {
@@ -36,11 +42,11 @@ export default function PostComment(props) {
     })
 
     return (
-        <div className={`PostComment d-flex justify-content-start py-2 my-2 ${!isVisible && 'PostComment-collapsed'}`}>
-            <div className='PostComment-toggle' role='button' onClick={toggleVisibility}></div>
+        <div className={`PostComment d-flex justify-content-start py-2 my-2 ${!isVisible && 'PostComment-collapsed'} ${isReading && 'PostComment-reading'}`}>
+            <div className='PostComment-toggle' role='button' onClick={toggleReaderMode}></div>
             <div className='PostComment-content flex-grow-1'>
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
-                    <div className='PostComment-author'>
+                    <div className='PostComment-author PostComment-toggle-read' role='button' onClick={toggleVisibility}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
                         <span className=''>posted {unitOfTime === 'day' && unitsElapsed > 7 ? commentDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`}</span>
                     </div>
@@ -53,7 +59,13 @@ export default function PostComment(props) {
                     <ReactMarkdown className='ReactMarkdown' children={content} linkTarget='_blank' skipHtml={true}/>
                 </div>
                 {nestedReplies.length > 0 && <div className='PostComment-replies d-flex flex-column'>{nestedReplies.slice(0, numberOfReplies)}</div>}
-                { numberOfReplies < nestedReplies.length && <button onClick={handleMoreReplies} className='PostComment-more-replies'>more replies</button> }
+                { numberOfReplies < nestedReplies.length && 
+                <div className='d-flex my-2 PostComment-collapsed'>
+                    <div className='PostComment-toggle' role='button' onClick={handleMoreReplies}></div>
+                    <button onClick={handleMoreReplies} className='PostComment-more-replies'>more replies</button> 
+                </div>
+                
+                }
             </div>
         </div>
     )
