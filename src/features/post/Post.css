@@ -3,9 +3,13 @@
     margin-right: 0.5rem;
 }
 
-.Post-subtitle {
-    font-size: 1rem;
+.Post-author {
+    font-size: 0.8rem;
 }
+
+/* .Post-subtitle {
+    font-size: 1rem;
+} */
 
 .Post video, .Post img {
     max-height: 600px;

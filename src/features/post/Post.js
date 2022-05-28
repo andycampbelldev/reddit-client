@@ -59,9 +59,9 @@ export default function PostDetail(props) {
                         { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs} </>}
                 </span>
                 <span>{title}</span>
-                <CardSubtitle className='Post-subtitle text-muted'>
-                    <span>/u/{author}</span>
-                    <span className='ms-2 fw-light'>{whenPostedDisplay}</span>
+                <CardSubtitle className='Post-author mt-1'>
+                    <span className='fw-bold'>/u/{author}</span>
+                    <span className='ms-2'>posted {whenPostedDisplay}</span>
                 </CardSubtitle>
             </ModalHeader>
             <ModalBody>
