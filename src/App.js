@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import SubredditNav from './features/subredditNav/SubredditNav';
 import PostsGrid from './features/postsGrid/PostsGrid';
 import PostDetail from './features/post/Post';
+import Footer from './components/Footer/Footer';
 
 
 import { Container } from 'reactstrap';
@@ -58,6 +59,7 @@ function App() {
       <Container className='mt-5'>
         <PostsGrid />
       </Container>
+      <Footer />
     </>
   );
 }
