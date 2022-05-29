@@ -15,7 +15,7 @@ export default function PostComment(props) {
     const [ isVisible, setIsVisible ] = useState(true);
     const [ isReading, setIsReading ] = useState(false);
     const [ numberOfReplies, setNumberOfReplies ]  = useState(3);
-
+    
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
         setIsReading(false);

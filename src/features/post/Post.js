@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { useSelector, useDispatch } from "react-redux";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setVisibleComments, selectVisibleComments } from "./postSlice";
 
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
@@ -15,7 +15,7 @@ import './Post.css'
 export default function PostDetail(props) {
     const { show } = props;
     const dispatch = useDispatch();
-    const post = useSelector(selectPost);
+    const post = useSelector(selectPost, shallowEqual);
     const displayingPost = useSelector(selectDisplayingPost);
     const comments = useSelector(selectComments);
     const visibleComments = useSelector(selectVisibleComments);
@@ -24,6 +24,7 @@ export default function PostDetail(props) {
 
     const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail } = post;
     //const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
+
 
     const handleClose = () => {
         dispatch(toggleDisplayPost());
@@ -45,7 +46,7 @@ export default function PostDetail(props) {
         if(permalink) {
             dispatch(getCommentsForPost(permalink));
         }
-    }, [url, dispatch])
+    }, [permalink, dispatch])
 
     return (
         <Modal className='Post' size='lg' scrollable isOpen={show}>
