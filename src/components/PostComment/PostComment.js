@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import timeElapsed from "../../utils/timeElapsed";
 
 import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/post/postSlice";
@@ -17,13 +17,7 @@ export default function PostComment(props) {
     const commentDate = new Date(createdUTC * 1000);
     const commentAge = timeElapsed(commentDate);
     const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;
-    //const [ numberOfReplies, setNumberOfReplies ]  = useState(3);
     
-    const toggleVisibility = () => {
-        //setIsVisible(!isVisible);
-        //setIsReading(false);
-        //setNumberOfReplies(3);
-    }
 
     const toggleHighlight = () => {
         dispatch(toggleCommentHighlight([...parent, name]))
@@ -38,7 +32,6 @@ export default function PostComment(props) {
             parents: [...parent, name],
             threadLength: threadLength + 3
         }))
-        //setNumberOfReplies(numberOfReplies + 3);
     }
 
     
@@ -55,7 +48,7 @@ export default function PostComment(props) {
             replies={nestedReply.data.replies ? nestedReply.data.replies.data.children.filter(reply => reply.kind === 't1') : []}
             highlight={nestedReply.highlight}
             collapsed={nestedReply.collapsed}
-            // if the reply doesn't have an explicit length, then default to 3 comments each, for the first two layers of reply. 0 Replies for the 3rd layer and beyond
+            // if the reply doesn't have an explicit length in state, then don't show any replies.
             threadLength={nestedReply.threadLength === undefined ? 0 : nestedReply.threadLength }
         />
     })

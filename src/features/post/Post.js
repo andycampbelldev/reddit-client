@@ -37,11 +37,6 @@ export default function PostDetail(props) {
         dispatch(setPostThreadLength(newLength))
     }
 
-    // DEBUG ONLY: See how often the PostDetail is re-rendering
-    useEffect(() => {
-        console.log(`Post component useEffect!`)
-    })
-
     // prevent body scrolling when Post is showing
     useEffect(() => {
         document.body.style.overflow = displayingPost ? 'hidden' : 'unset';
