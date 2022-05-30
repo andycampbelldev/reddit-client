@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import timeElapsed from "../../utils/timeElapsed";
+
+import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/post/postSlice";
 
 import ReactMarkdown from "react-markdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,45 +11,61 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import './PostComment.css'
 
 export default function PostComment(props) {
-    const { author, content, createdUTC, ups, downs, replies } = props;
+    const dispatch = useDispatch();
+    
+    const { author, content, createdUTC, ups, downs, replies, name, parent, highlight, collapsed, threadLength } = props;
     const commentDate = new Date(createdUTC * 1000);
     const commentAge = timeElapsed(commentDate);
     const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;
-    const [ isVisible, setIsVisible ] = useState(true);
-    const [ isReading, setIsReading ] = useState(false);
-    const [ numberOfReplies, setNumberOfReplies ]  = useState(3);
+    //const [ numberOfReplies, setNumberOfReplies ]  = useState(3);
     
     const toggleVisibility = () => {
-        setIsVisible(!isVisible);
-        setIsReading(false);
-        setNumberOfReplies(3);
+        //setIsVisible(!isVisible);
+        //setIsReading(false);
+        //setNumberOfReplies(3);
     }
 
-    const toggleReaderMode = () => {
-        setIsReading(!isReading);
+    const toggleHighlight = () => {
+        dispatch(toggleCommentHighlight([...parent, name]))
     }
 
-    const handleMoreReplies = () => {
-        setNumberOfReplies(numberOfReplies + 3);
+    const toggleCollapse = () => {
+        dispatch(toggleCommentCollapse([...parent, name]))
     }
+
+    const handleIncreaseThreadLength = () => {
+        dispatch(setCommentThreadLength({
+            parents: [...parent, name],
+            threadLength: threadLength + 3
+        }))
+        //setNumberOfReplies(numberOfReplies + 3);
+    }
+
+    
 
     const nestedReplies = (replies || []).map(nestedReply => {
         return <PostComment 
+            name={nestedReply.data.name}
+            parent={[...parent, nestedReply.data.parent_id]}
             author={nestedReply.data.author}
             content={nestedReply.data.body}
             createdUTC={nestedReply.data.created_utc}
             ups={nestedReply.data.ups}
             downs={nestedReply.data.downs}
             replies={nestedReply.data.replies ? nestedReply.data.replies.data.children.filter(reply => reply.kind === 't1') : []}
+            highlight={nestedReply.highlight}
+            collapsed={nestedReply.collapsed}
+            // if the reply doesn't have an explicit length, then default to 3 comments each, for the first two layers of reply. 0 Replies for the 3rd layer and beyond
+            threadLength={nestedReply.threadLength === undefined ? 0 : nestedReply.threadLength }
         />
     })
 
     return (
-        <div className={`PostComment d-flex justify-content-start py-2 my-2 ${!isVisible && 'PostComment-collapsed'} ${isReading && 'PostComment-reading'}`}>
-            <div className='PostComment-toggle' role='button' onClick={toggleReaderMode}></div>
+        <div className={`PostComment d-flex justify-content-start py-2 my-2 ${collapsed && 'PostComment-collapsed'} ${highlight && 'PostComment-reading'}`}>
+            <div className='PostComment-toggle' role='button' onClick={toggleHighlight}></div>
             <div className='PostComment-content flex-grow-1'>
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
-                    <div className='PostComment-author PostComment-toggle-read' role='button' onClick={toggleVisibility}>
+                    <div className='PostComment-author PostComment-toggle-read' role='button' onClick={toggleCollapse}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
                         <span className=''>posted {unitOfTime === 'day' && unitsElapsed > 7 ? commentDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`}</span>
                     </div>
@@ -57,11 +76,11 @@ export default function PostComment(props) {
                 </div>
                 <div className='PostComment-body'>
                     <ReactMarkdown className='ReactMarkdown' children={content} linkTarget='_blank' skipHtml={true}/>
-                    {nestedReplies.length > 0 && <div className='PostComment-replies d-flex flex-column'>{nestedReplies.slice(0, numberOfReplies)}</div>}
-                    { numberOfReplies < nestedReplies.length && 
+                    {nestedReplies.length > 0 && <div className='PostComment-replies d-flex flex-column'>{nestedReplies.slice(0, threadLength)}</div>}
+                    { threadLength < nestedReplies.length && 
                     <div className='d-flex my-2 PostComment-collapsed'>
-                        <div className='PostComment-toggle' role='button' onClick={handleMoreReplies}></div>
-                        <button onClick={handleMoreReplies} className='PostComment-more-replies'>more replies</button> 
+                        <div className='PostComment-toggle' role='button' onClick={handleIncreaseThreadLength}></div>
+                        <button onClick={handleIncreaseThreadLength} className='PostComment-more-replies'>more replies</button> 
                     </div>
                     }
                 </div>

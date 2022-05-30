@@ -6,6 +6,19 @@ export const getCommentsForPost = createAsyncThunk('post/getCommentsForPost', as
     return result;
 })
 
+//locate a given comment in state.comments.comments from an array of comment names, ordered by parent to child
+const findComment = (state, nameArr) => {
+    // first, find top level comment
+    let comment = state.comments.comments.find(comment => comment.data.name === nameArr[0]);
+    // drill down into replies if necessary
+    if (nameArr.length > 1) {
+        for (let parent of nameArr.slice(1)) {
+            comment = comment.data.replies.data.children.find(reply => reply.data.name === parent)
+        }
+    }
+    return comment;
+}
+
 const options = {
     name: 'post',
     initialState: {
@@ -25,10 +38,10 @@ const options = {
         comments: {
             isLoading: false,
             hasError: false,
-            comments: [],
-            visibleComments: 3
+            comments: []
         },
-        galleryIndex: 0
+        galleryIndex: 0,
+        threadLength: 3
     },
     reducers: {
         toggleDisplayPost: (state, action) => {
@@ -52,9 +65,22 @@ const options = {
         setGalleryIndex: (state, action) => {
             state.galleryIndex = action.payload;
         },
-        setVisibleComments: (state, action) => {
-            state.comments.visibleComments = action.payload;
+        setPostThreadLength: (state, action) => {
+            state.threadLength = action.payload;
+        },
+        setCommentThreadLength: (state, action) => {
+            const comment = findComment(state, action.payload.parents);
+            comment.threadLength = action.payload.threadLength
+        },
+        toggleCommentHighlight: (state, action) => {
+            const comment = findComment(state, action.payload);
+            comment.highlight = !comment.highlight;
+        },
+        toggleCommentCollapse: (state, action) => {
+            const comment = findComment(state, action.payload);
+            comment.collapsed = !comment.collapsed;
         }
+
     },
     extraReducers: {
         [getCommentsForPost.pending]: (state, action) => {
@@ -62,7 +88,7 @@ const options = {
             state.comments.hasError = false;
         },
         [getCommentsForPost.fulfilled]: (state, action) => {
-            state.comments.comments = action.payload[1].data.children.filter(object => object.kind === 't1').map(comment => ({...comment, visibleComments: 3}));
+            state.comments.comments = action.payload[1].data.children.filter(object => object.kind === 't1').map(comment => ({...comment, threadLength: 1, highlight: false, collapsed: false}));
             state.comments.isLoading = false;
             state.comments.hasError = false;
         },
@@ -78,14 +104,14 @@ const postSlice = createSlice(options);
 export const selectDisplayingPost = state => state.post.displayingPost;
 //export const selectPost = state => state.post;
 export const selectPost = state => {
-    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail } = state.post
-    return { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail }
+    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name } = state.post
+    return { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name }
 }
 export const selectGalleryIndex = state => state.post.galleryIndex;
 export const selectCommentsLoading = state => state.post.comments.isLoading;
 export const selectCommentsError = state => state.post.comments.hasError;
+export const selectPostThreadLength = state => state.post.threadLength;
 export const selectComments = state => state.post.comments.comments;
-export const selectVisibleComments = state => state.post.comments.visibleComments;
 
-export const { toggleDisplayPost, setPost, setGalleryIndex, setVisibleComments } = postSlice.actions;
+export const { toggleDisplayPost, setPost, setGalleryIndex, setPostThreadLength, setCommentThreadLength, toggleCommentHighlight, toggleCommentCollapse } = postSlice.actions;
 export default postSlice.reducer;

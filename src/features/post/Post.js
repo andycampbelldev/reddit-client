@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setVisibleComments, selectVisibleComments } from "./postSlice";
+import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setPostThreadLength, selectPostThreadLength } from "./postSlice";
 
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import PostComment from "../../components/PostComment/PostComment";
@@ -17,25 +17,30 @@ export default function PostDetail(props) {
     const dispatch = useDispatch();
     const post = useSelector(selectPost, shallowEqual);
     const displayingPost = useSelector(selectDisplayingPost);
+    const threadLength = useSelector(selectPostThreadLength);
     const comments = useSelector(selectComments);
-    const visibleComments = useSelector(selectVisibleComments);
     const commentsLoading = useSelector(selectCommentsLoading);
     const commentsError = useSelector(selectCommentsError);
 
-    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail } = post;
+    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name } = post;
     //const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
 
 
     const handleClose = () => {
         dispatch(toggleDisplayPost());
         dispatch(setGalleryIndex(0));
-        dispatch(setVisibleComments(3));
+        //dispatch(setVisibleComments(3));
     }
 
     const handleMoreComments = () => {
-        const newVisibleComments = visibleComments + 3;
-        dispatch(setVisibleComments(newVisibleComments))
+        const newLength = threadLength + 3;
+        dispatch(setPostThreadLength(newLength))
     }
+
+    // DEBUG ONLY: See how often the PostDetail is re-rendering
+    useEffect(() => {
+        console.log(`Post component useEffect!`)
+    })
 
     // prevent body scrolling when Post is showing
     useEffect(() => {
@@ -83,19 +88,25 @@ export default function PostDetail(props) {
                     {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
                     
                     {!commentsLoading && comments.length > 0
-                    && comments.slice(0, visibleComments).map(comment => (
+                    //&& comments.map((comment, index) => (
+                    && comments.slice(0, threadLength).map((comment, index) => (
                         <PostComment 
                             key={uuidv4()}
+                            name={comment.data.name}
+                            parent={[]}
                             author={comment.data.author}
                             content={comment.data.body}
                             createdUTC={comment.data.created_utc}
                             ups={comment.data.ups}
                             downs={comment.data.downs}
                             replies={comment.data.replies ? comment.data.replies.data.children.filter(c => c.kind === 't1') : []}
+                            highlight={comment.highlight}
+                            collapsed={comment.collapsed}
+                            threadLength={comment.threadLength}
                         />)
                     ) 
                     }
-                    { !commentsLoading && visibleComments < comments.length && <button onClick={handleMoreComments} className='Post-more-comments'>more comments</button> }
+                    { !commentsLoading && threadLength < comments.length && <button onClick={handleMoreComments} className='Post-more-comments'>more comments</button> }
                 </div>
                 
             </ModalBody>
