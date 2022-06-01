@@ -40,7 +40,7 @@ export default function ImageCarousel(props) {
                         alt={`Slide ${i+1}`}
                         src={`https://i.redd.it/${image.media_id}.jpg`}
                     />
-                    {image.caption && <CarouselCaption captionText={image.caption}/>}
+                    {image.caption && <CarouselCaption className='ImageCarousel-caption' captionText={image.caption}/>}
                 </CarouselItem>
             ))}
             <CarouselControl
