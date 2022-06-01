@@ -1,5 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+
+import { v4 as uuidv4 } from 'uuid';
+
 import timeElapsed from "../../utils/timeElapsed";
 
 import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/post/postSlice";
@@ -38,6 +41,7 @@ export default function PostComment(props) {
 
     const nestedReplies = (replies || []).map(nestedReply => {
         return <PostComment 
+            key={uuidv4()}
             name={nestedReply.data.name}
             parent={[...parent, nestedReply.data.parent_id]}
             author={nestedReply.data.author}
