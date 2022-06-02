@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSearchTerm, setSearchTerm } from "./searchTermSlice";
+import { selectSearchTerm, setSearchTerm } from "./SearchTermSlice";
 import { Label, Input, Button } from 'reactstrap';
 
 function SearchForm() {

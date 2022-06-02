@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render } from '@testing-library/react';
-import SearchForm from './searchForm'
+import SearchForm from './SearchForm'
 
 describe('SearchForm component testing', () => {
     test('SearchForm contains text input', () => {
