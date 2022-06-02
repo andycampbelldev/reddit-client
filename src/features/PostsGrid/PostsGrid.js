@@ -1,7 +1,7 @@
 import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from "react-redux";
-import { selectPosts, selectPostsIsLoading, selectPostsHasError } from "./postsSlice";
+import { selectPosts, selectPostsIsLoading, selectPostsHasError } from "./PostsSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faHeartBroken } from "@fortawesome/free-solid-svg-icons";

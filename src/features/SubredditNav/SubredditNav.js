@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { selectSubreddit, setSubreddit } from "./subredditSlice";
+import { selectSubreddit, setSubreddit } from "./SubredditSlice";
 import { v4 as uuidv4 } from 'uuid';
 
 import SubredditLink from '../../components/SubredditLink/SubredditLink';

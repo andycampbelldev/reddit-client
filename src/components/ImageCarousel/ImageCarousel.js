@@ -2,7 +2,7 @@ import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectGalleryIndex, setGalleryIndex } from "../../features/post/postSlice";
+import { selectGalleryIndex, setGalleryIndex } from "../../features/Post/PostSlice";
 
 import { Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl } from "reactstrap";
 

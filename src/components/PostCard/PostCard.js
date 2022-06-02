@@ -1,7 +1,7 @@
 import React from "react";
 import timeElapsed from "../../utils/timeElapsed";
 import { useDispatch } from "react-redux";
-import { setPost, toggleDisplayPost } from "../../features/post/postSlice";
+import { setPost, toggleDisplayPost } from "../../features/Post/PostSlice";
 
 import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

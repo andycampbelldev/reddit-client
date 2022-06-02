@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import timeElapsed from "../../utils/timeElapsed";
 
-import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/post/postSlice";
+import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/Post/PostSlice";
 
 import ReactMarkdown from "react-markdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setPostThreadLength, selectPostThreadLength } from "./postSlice";
+import { selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setPostThreadLength, selectPostThreadLength } from "./PostSlice";
 
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import PostComment from "../../components/PostComment/PostComment";

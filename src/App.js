@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectDisplayingPost } from './features/post/postSlice';
-import { selectSubreddit } from './features/subredditNav/subredditSlice';
-import { getPosts } from './features/postsGrid/postsSlice';
+import { selectDisplayingPost } from './features/Post/PostSlice';
+import { selectSubreddit } from './features/SubredditNav/SubredditSlice';
+import { getPosts } from './features/PostsGrid/PostsSlice';
 
 import Navbar from './components/Navbar/Navbar';
-import SubredditNav from './features/subredditNav/SubredditNav';
-import PostsGrid from './features/postsGrid/PostsGrid';
-import PostDetail from './features/post/Post';
+import SubredditNav from './features/SubredditNav/SubredditNav';
+import PostsGrid from './features/PostsGrid/PostsGrid';
+import PostDetail from './features/Post/Post';
 import Footer from './components/Footer/Footer';
 
 
