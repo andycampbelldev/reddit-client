@@ -20,35 +20,12 @@ function App() {
   const displayingPost = useSelector(selectDisplayingPost);
   const subreddit = useSelector(selectSubreddit);
   
-  const subredditList = [
-    {
-      name: '/r/beerporn',
-      url: 'https://www.reddit.com/r/beerporn/'
-    },
-    {
-      name: '/r/patiogardening',
-      url: 'https://www.reddit.com/r/patiogardening/'
-    },
-    {
-      name: '/r/reactjs',
-      url: 'https://www.reddit.com/r/reactjs/'
-    },
-    {
-      name: '/r/sourdough',
-      url: 'https://www.reddit.com/r/Sourdough/'
-    },
-    {
-      name: '/r/pizza',
-      url: 'https://www.reddit.com/r/Pizza/'
-    },
-    {
-      name: '/r/videos',
-      url: 'https://www.reddit.com/r/videos/'
-    },
-  ]
+  const subredditList = ['beerporn', 'patiogardening', 'reactjs', 'sourdough', 'pizza', 'videos']
 
   useEffect(() => {
-    dispatch(getPosts(`https://www.reddit.com${subreddit}.json?limit=100`));
+    if(subreddit) {
+      dispatch(getPosts(`https://www.reddit.com/r/${subreddit}.json?limit=100`));
+    }
   }, [subreddit, dispatch]);
 
   return (

@@ -12,6 +12,7 @@ function SearchForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
+        dispatch(setSubreddit(''))
         dispatch(getPosts(`https://www.reddit.com/search.json?q=${searchTerm}&limit=100`));
     }
 

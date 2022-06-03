@@ -12,7 +12,7 @@ function SubredditLink(props) {
     return (
         <NavItem>
             <NavLink onClick={handleClick} active={active} href='#'>
-                {name}
+                /r/{name}
             </NavLink>
         </NavItem>
     )

@@ -17,7 +17,7 @@ const SubredditNav = (props) => {
 
     return (
         <Nav pills className='d-flex justify-content-between p-2'>
-            {subreddits.map(sub => <SubredditLink key={uuidv4()} name={sub.name} active={(sub.name === subreddit)} setSubreddit={handleClick}/>)}
+            {subreddits.map(subredditName => <SubredditLink key={uuidv4()} name={subredditName} active={(subredditName === subreddit)} setSubreddit={handleClick}/>)}
         </Nav>
     )
 }
