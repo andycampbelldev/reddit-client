@@ -48,7 +48,7 @@ function App() {
   ]
 
   useEffect(() => {
-    dispatch(getPosts(subreddit));
+    dispatch(getPosts(`https://www.reddit.com${subreddit}.json?limit=100`));
   }, [subreddit, dispatch]);
 
   return (

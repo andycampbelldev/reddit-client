@@ -1,15 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { selectSubreddit, setSubreddit } from "../SubredditNav/SubredditSlice";
+import { getPosts } from "../PostsGrid/PostsSlice";
 import { selectSearchTerm, setSearchTerm } from "./SearchTermSlice";
 import { Label, Input, Button } from 'reactstrap';
 
 function SearchForm() {
     const dispatch = useDispatch();
+    const subreddit = useSelector(selectSubreddit);
     const searchTerm = useSelector(selectSearchTerm);
 
     const handleSubmit = e => {
         e.preventDefault();
-        alert(`You searched for: ${searchTerm}`);
+        dispatch(getPosts(`https://www.reddit.com/search.json?q=${searchTerm}&limit=100`));
     }
 
     const handleChange = e => {
@@ -24,7 +27,7 @@ function SearchForm() {
             <Input
                 id="exampleSearch"
                 name="search"
-                placeholder="search placeholder"
+                placeholder="search reddit"
                 type="search"
                 value={searchTerm}
                 onChange={handleChange}

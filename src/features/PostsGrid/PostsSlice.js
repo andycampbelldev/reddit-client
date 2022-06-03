@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getPosts = createAsyncThunk('posts/getPosts', async (subredditName, thunkAPI) => {
-    const response = await fetch(`https://www.reddit.com${subredditName}.json?limit=100`);
+export const getPosts = createAsyncThunk('posts/getPosts', async (url, thunkAPI) => {
+    const response = await fetch(url);
     const result = await response.json();
     return result.data.children;
 })
