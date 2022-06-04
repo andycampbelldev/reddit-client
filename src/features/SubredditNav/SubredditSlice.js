@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const options = {
     name: 'subreddit',
-    initialState: '/r/beerporn',
+    initialState: 'beerporn',
     reducers: {
         setSubreddit: (state, action) => {
             return action.payload;
