@@ -1,7 +1,8 @@
 import React from "react";
 import timeElapsed from "../../utils/timeElapsed";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPost, toggleDisplayPost } from "../../features/Post/PostSlice";
+import { selectSubreddit } from "../../features/SubredditNav/SubredditSlice";
 
 import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,10 +12,11 @@ import './PostCard.css'
 
 export default function PostCard(props) {
     const dispatch = useDispatch();
+    const appSubreddit = useSelector(selectSubreddit);
 
     const { data } = props;
     // handle crossposts from other subreddits
-    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink, created_utc, num_comments } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
+    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink, created_utc, num_comments, subreddit } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
 
     const postDate = new Date(created_utc * 1000);
     const postAge = timeElapsed(postDate);
@@ -52,7 +54,7 @@ export default function PostCard(props) {
         post.gallery_data = gallery_data;
     }
 
-    const background = {
+    const postCardStyle = {
         backgroundColor: post.backgroundImageUrl ? 'unset' : '#e5e5f7',
         opacity: 1,
         backgroundImage: post.backgroundImageUrl ?
@@ -60,7 +62,8 @@ export default function PostCard(props) {
         : 'linear-gradient(135deg, rgb(13 110 253 / 0.1) 25%, transparent 25%), linear-gradient(225deg, rgb(13 110 253 / 0.1) 25%, transparent 25%), linear-gradient(45deg, rgb(13 110 253 / 0.1) 25%, transparent 25%), linear-gradient(315deg, rgb(13 110 253 / 0.1) 25%, #e5e5f7 25%)',
         backgroundPosition: post.backgroundImageUrl ? 'center' : '11px 0, 11px 0, 0 0, 0 0',
         backgroundSize: post.backgroundImageUrl ? 'cover' : '22px 22px',
-        backgroundRepeat: post.backgroundImageUrl ? 'no-repeat' : 'repeat'
+        backgroundRepeat: post.backgroundImageUrl ? 'no-repeat' : 'repeat',
+        color: post.backgroundImageUrl ? 'rgb(248,249,250)' : 'rgb(33,37,41)'
     }
 
     const handleClick = () => {
@@ -70,18 +73,19 @@ export default function PostCard(props) {
     
     return (
         <Col sm={{size: 6}} md={{size: 4}} className='d-flex align-items-stretch mb-2 px-1'>
-            <Card className='PostCard flex-grow-1' style={background} onClick={handleClick}>
+            <Card className='PostCard flex-grow-1' style={postCardStyle} onClick={handleClick}>
                 <CardBody className='CardBody'>
-                    <CardTitle className={`CardTitle ${post.backgroundImageUrl && 'text-light'}`}>
+                    <CardTitle className={`CardTitle`}>
                         {decodedTitle.length > 100 ? `${decodedTitle.substring(0, 99)}...` : decodedTitle}
                     </CardTitle>
                     {postType === 'link' && <CardSubtitle>{url_overridden_by_dest}</CardSubtitle>}
+                    {appSubreddit !== subreddit && <CardSubtitle>/r/{subreddit}</CardSubtitle>}
                     <CardText>
                         {selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext}
                     </CardText>
                     {postType === 'link' && <img src={thumbnail} />}
                 </CardBody>
-                <CardFooter className={`PostCard-footer d-flex justify-content-between flex-wrap border-0 bg-transparent ${post.backgroundImageUrl && 'text-light'}`}>
+                <CardFooter className={`PostCard-footer d-flex justify-content-between flex-wrap border-0 bg-transparent`}>
                     {(ups > 0 || downs > 0) && 
                         <span>
                             { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups}</>}
