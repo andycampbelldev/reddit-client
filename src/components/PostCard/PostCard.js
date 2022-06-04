@@ -5,7 +5,7 @@ import { setPost, toggleDisplayPost } from "../../features/Post/PostSlice";
 
 import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faArrowDown, faComment } from "@fortawesome/free-solid-svg-icons";
 
 import './PostCard.css'
 
@@ -14,7 +14,7 @@ export default function PostCard(props) {
 
     const { data } = props;
     // handle crossposts from other subreddits
-    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink, created_utc } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
+    const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink, created_utc, num_comments } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
 
     const postDate = new Date(created_utc * 1000);
     const postAge = timeElapsed(postDate);
@@ -80,13 +80,14 @@ export default function PostCard(props) {
                     </CardText>
                     {postType === 'link' && <img src={thumbnail} />}
                 </CardBody>
-                <CardFooter className={`d-flex justify-content-between flex-wrap border-0 bg-transparent ${post.backgroundImageUrl && 'text-light'}`}>
+                <CardFooter className={`PostCard-footer d-flex justify-content-between flex-wrap border-0 bg-transparent ${post.backgroundImageUrl && 'text-light'}`}>
                     {(ups > 0 || downs > 0) && 
                         <span>
                             { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups}</>}
                             { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs}</>}
                         </span>}
-                    <span className='mx-1'>/u/{author}</span>
+                    <span><FontAwesomeIcon icon={faComment} /> {num_comments}</span>
+                    <span className='mx-1 fw-bold'>/u/{author}</span>
                     <span>{unitOfTime === 'day' && unitsElapsed > 7 ? postDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`}</span>
                 </CardFooter>
             </Card>

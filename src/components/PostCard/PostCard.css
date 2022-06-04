@@ -21,3 +21,7 @@
 .PostCard img {
     width: 100%;
 }
+
+.PostCard-footer {
+    font-size: 0.8rem;
+}
