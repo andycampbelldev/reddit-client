@@ -35,6 +35,7 @@ const options = {
         content: '',
         secure_media: {},
         gallery_data: {},
+        num_comments: 0,
         comments: {
             isLoading: false,
             hasError: false,
@@ -48,7 +49,7 @@ const options = {
             state.displayingPost = !state.displayingPost;
         },
         setPost: (state, action) => {
-            const { url, title, author, ups, downs, content, type, secure_media, gallery_data, permalink, thumbnail, whenPostedDisplay } = action.payload;
+            const { url, title, author, ups, downs, content, type, secure_media, gallery_data, permalink, thumbnail, whenPostedDisplay, num_comments } = action.payload;
             state.url = url;
             state.permalink = permalink;
             state.thumbnail = thumbnail;
@@ -61,6 +62,7 @@ const options = {
             state.content = content;
             state.secure_media = secure_media;
             state.gallery_data = gallery_data;
+            state.num_comments = num_comments;
         },
         setGalleryIndex: (state, action) => {
             state.galleryIndex = action.payload;
@@ -104,8 +106,8 @@ const postSlice = createSlice(options);
 export const selectDisplayingPost = state => state.post.displayingPost;
 //export const selectPost = state => state.post;
 export const selectPost = state => {
-    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name } = state.post
-    return { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name }
+    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments } = state.post
+    return { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments }
 }
 export const selectGalleryIndex = state => state.post.galleryIndex;
 export const selectCommentsLoading = state => state.post.comments.isLoading;

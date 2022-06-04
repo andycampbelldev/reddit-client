@@ -39,6 +39,7 @@ export default function PostCard(props) {
         content: selftext,
         permalink,
         thumbnail,
+        num_comments
     }
 
     if (postType === 'image') {

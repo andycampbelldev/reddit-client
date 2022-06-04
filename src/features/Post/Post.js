@@ -22,7 +22,7 @@ export default function PostDetail(props) {
     const commentsLoading = useSelector(selectCommentsLoading);
     const commentsError = useSelector(selectCommentsError);
 
-    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name } = post;
+    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments } = post;
     //const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : is_gallery ? 'gallery' : undefined;
 
 
@@ -76,7 +76,7 @@ export default function PostDetail(props) {
                     </Row>
                 }
                 {post.content && <p>{post.content}</p>}
-                <h5 className='my-3'>{comments.length} Comment{comments.length > 1 || comments.length === 0 ? 's' : ''}</h5>
+                <h5 className='my-3'>{num_comments} Comment{num_comments > 1 || num_comments === 0 ? 's' : ''}</h5>
                 <div className='Post-comments d-flex flex-column'>
                     {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
 
