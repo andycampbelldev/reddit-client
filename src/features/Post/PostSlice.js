@@ -106,8 +106,8 @@ const postSlice = createSlice(options);
 export const selectDisplayingPost = state => state.post.displayingPost;
 //export const selectPost = state => state.post;
 export const selectPost = state => {
-    const  { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments } = state.post
-    return { type, ups, downs, title, author, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments }
+    const  { type, ups, downs, title, author, content, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments } = state.post
+    return { type, ups, downs, title, author, content, whenPostedDisplay, url, secure_media, gallery_data, permalink, thumbnail, name, num_comments }
 }
 export const selectGalleryIndex = state => state.post.galleryIndex;
 export const selectCommentsLoading = state => state.post.comments.isLoading;
