@@ -16,6 +16,7 @@
 .PostCard .CardTitle {
     font-size: 1.5rem;
     font-weight: bold;
+    line-height: 1.5rem;
 }
 
 .PostCard img {
