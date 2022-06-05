@@ -7,7 +7,7 @@ import postReducer from '../features/Post/PostSlice';
 export const store = configureStore({
   reducer: {
     searchTerm: searchTermReducer,
-    subreddit: subredditReducer,
+    subreddits: subredditReducer,
     posts: postsReducer,
     post: postReducer
   }

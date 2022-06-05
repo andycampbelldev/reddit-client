@@ -1,18 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSubreddit, setSubreddit } from "../SubredditNav/SubredditSlice";
+import { selectCurrentSubreddit, setCurrentSubreddit } from "../SubredditNav/SubredditSlice";
 import { getPosts } from "../PostsGrid/PostsSlice";
 import { selectSearchTerm, setSearchTerm } from "./SearchTermSlice";
 import { Label, Input, Button } from 'reactstrap';
 
 function SearchForm() {
     const dispatch = useDispatch();
-    const subreddit = useSelector(selectSubreddit);
+    const subreddit = useSelector(selectCurrentSubreddit);
     const searchTerm = useSelector(selectSearchTerm);
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(setSubreddit(''))
+        dispatch(setCurrentSubreddit(''))
         dispatch(getPosts(`https://www.reddit.com/search.json?q=${searchTerm}&limit=100`));
     }
 

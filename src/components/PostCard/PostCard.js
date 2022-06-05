@@ -2,7 +2,7 @@ import React from "react";
 import timeElapsed from "../../utils/timeElapsed";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost, toggleDisplayPost } from "../../features/Post/PostSlice";
-import { selectSubreddit } from "../../features/SubredditNav/SubredditSlice";
+import { selectCurrentSubreddit } from "../../features/SubredditNav/SubredditSlice";
 
 import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ import './PostCard.css'
 
 export default function PostCard(props) {
     const dispatch = useDispatch();
-    const appSubreddit = useSelector(selectSubreddit);
+    const appSubreddit = useSelector(selectCurrentSubreddit);
 
     const { data } = props;
     // handle crossposts from other subreddits

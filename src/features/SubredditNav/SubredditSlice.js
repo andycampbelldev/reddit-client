@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const options = {
-    name: 'subreddit',
-    initialState: 'beerporn',
+    name: 'subreddits',
+    initialState: {
+        currentSubreddit: 'beerporn'
+    },
     reducers: {
-        setSubreddit: (state, action) => {
-            return action.payload;
+        setCurrentSubreddit: (state, action) => {
+            state.currentSubreddit = action.payload;
         }
     }
 }
 
 const subredditSlice = createSlice(options);
 
-export const selectSubreddit = state => state.subreddit;
+export const selectCurrentSubreddit = state => state.subreddits.currentSubreddit;
 
-export const { setSubreddit } = subredditSlice.actions;
+export const { setCurrentSubreddit } = subredditSlice.actions;
 export default subredditSlice.reducer;

@@ -1,12 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
+import { setCurrentSubreddit } from "../../features/SubredditNav/SubredditSlice";
+import { setSearchTerm } from "../../features/SearchForm/SearchTermSlice";
 
 import { NavItem, NavLink } from "reactstrap";
 
 function SubredditLink(props) {
-    const { name, active, setSubreddit } = props;
+    const dispatch = useDispatch();
+    const { name, active } = props;
 
     const handleClick = () => {
-        setSubreddit(name);
+        dispatch(setSearchTerm(''));
+        dispatch(setCurrentSubreddit(name));
     }
 
     return (
