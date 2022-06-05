@@ -79,7 +79,7 @@ export default function PostCard(props) {
                         {decodedTitle.length > 100 ? `${decodedTitle.substring(0, 99)}...` : decodedTitle}
                     </CardTitle>
                     {postType === 'link' && <CardSubtitle>{url_overridden_by_dest}</CardSubtitle>}
-                    {appSubreddit !== subreddit && <CardSubtitle>/r/{subreddit}</CardSubtitle>}
+                    {appSubreddit.toLowerCase() !== subreddit.toLowerCase() && <CardSubtitle>/r/{subreddit}</CardSubtitle>}
                     <CardText>
                         {selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext}
                     </CardText>
