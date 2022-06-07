@@ -27,7 +27,7 @@ export default function PostCard(props) {
     const decodedTitle = title.replace(/&amp;/g, '&');
     
     // determine what type of post - image, gallery or video, or link to external content like imgur or youtube
-    const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : ['link', 'rich:video'].includes(post_hint) ? 'link' : is_gallery ? 'gallery' : undefined;
+    const postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : ['link', 'rich:video'].includes(post_hint) ? 'link' : is_gallery && gallery_data ? 'gallery' : undefined;
 
     // construct post object to send to store when PostCard is clicked
     const post = {
