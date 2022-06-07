@@ -12,7 +12,7 @@ const SubredditNav = (props) => {
 
     return (
         <Nav pills className='d-flex justify-content-between p-2'>
-            {subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} active={(sr.name === subreddit)} />)}
+            {subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )
 }

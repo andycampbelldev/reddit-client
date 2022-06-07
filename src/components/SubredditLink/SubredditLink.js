@@ -6,9 +6,11 @@ import { setSearchTerm } from "../../features/SearchForm/SearchTermSlice";
 
 import { NavItem, NavLink } from "reactstrap";
 
+import './SubredditLink.css';
+
 function SubredditLink(props) {
     const dispatch = useDispatch();
-    const { name, active } = props;
+    const { name, iconUrl, active } = props;
 
     const handleClick = () => {
         dispatch(setSearchTerm(''));
@@ -18,6 +20,7 @@ function SubredditLink(props) {
     return (
         <NavItem>
             <NavLink onClick={handleClick} active={active} href='#'>
+                <img className='SubredditLink-icon' src={iconUrl} alt={`community icon for the ${name} subreddit`}/>
                 /r/{name}
             </NavLink>
         </NavItem>

@@ -34,7 +34,7 @@ const options = {
         [getSubredditInfo.fulfilled]: (state, action) => {
             const subreddit = state.allSubreddits.find(sr => sr.name.toLowerCase() === action.payload.display_name.toLowerCase());
             subreddit.description = action.payload.public_description;
-            subreddit.icon = action.payload.community_icon;
+            subreddit.icon = action.payload.community_icon.replace(/&amp;/g, '&');
             state.isLoading = false;
             state.hasError = false;
         },
