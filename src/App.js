@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectDisplayingPost } from './features/Post/PostSlice';
-import { selectCurrentSubreddit } from './features/SubredditNav/SubredditSlice';
+import { getSubredditInfo, selectAllSubreddits, selectCurrentSubreddit } from './features/SubredditNav/SubredditSlice';
 import { getPosts } from './features/PostsGrid/PostsSlice';
 
 import Navbar from './components/Navbar/Navbar';
@@ -20,7 +20,14 @@ function App() {
   const displayingPost = useSelector(selectDisplayingPost);
   const subreddit = useSelector(selectCurrentSubreddit);
   
-  const subredditList = ['beerporn', 'patiogardening', 'reactjs', 'sourdough', 'pizza', 'videos']
+  //const subredditList = ['beerporn', 'patiogardening', 'reactjs', 'sourdough', 'pizza', 'videos']
+  const allSubreddits = useSelector(selectAllSubreddits)
+
+  useEffect(() => {
+    for (let subreddit of allSubreddits) {
+      dispatch(getSubredditInfo(`https://www.reddit.com/r/${subreddit.name}/about.json`));
+    }
+  }, []);
 
   useEffect(() => {
     if(subreddit) {
@@ -32,7 +39,7 @@ function App() {
     <>
       <PostDetail show={displayingPost} />
       <Navbar />
-      <SubredditNav subreddits={subredditList} />
+      <SubredditNav subreddits={allSubreddits} />
       <Container className='mt-5'>
         <PostsGrid />
       </Container>
