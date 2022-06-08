@@ -11,8 +11,6 @@ export const getSubredditInfo = createAsyncThunk('subreddits/getSubredditInfo', 
     }
 })
 
-//const subredditList = ['beerporn', 'patiogardening', 'reactjs', 'sourdough', 'pizza', 'videos']
-
 const options = {
     name: 'subreddits',
     initialState: {
@@ -47,6 +45,7 @@ const options = {
 
 const subredditSlice = createSlice(options);
 
+export const selectSubredditsAreLoading = state => state.subreddits.isLoading;
 export const selectCurrentSubreddit = state => state.subreddits.currentSubreddit;
 export const selectAllSubreddits = state => state.subreddits.allSubreddits;
 
