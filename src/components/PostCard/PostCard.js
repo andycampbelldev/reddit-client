@@ -8,13 +8,27 @@ import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } fr
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown, faComment } from "@fortawesome/free-solid-svg-icons";
 
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import './PostCard.css'
 
 export default function PostCard(props) {
     const dispatch = useDispatch();
     const appSubreddit = useSelector(selectCurrentSubreddit);
 
-    const { data } = props;
+    const { data, isLoading } = props;
+
+    if (isLoading) {
+        return (
+            <Col sm={{size: 6}} md={{size: 4}} className='d-flex align-items-stretch mb-2 px-1'>
+                <Card className='PostCard flex-grow-1 border-0'>
+                    <Skeleton height={400} />
+                </Card>
+            </Col>
+        )
+    }
+
     // handle crossposts from other subreddits
     const { url, url_overridden_by_dest, title, author, selftext, ups, downs, post_hint, is_gallery, gallery_data, secure_media, thumbnail, permalink, created_utc, num_comments, subreddit } = data.crosspost_parent_list ? data.crosspost_parent_list[0] : data;
 

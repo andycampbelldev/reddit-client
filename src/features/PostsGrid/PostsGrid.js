@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectPosts, selectPostsIsLoading, selectPostsHasError } from "./PostsSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner, faHeartBroken } from "@fortawesome/free-solid-svg-icons";
+import { faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 
 import { Row, Col } from "reactstrap";
 import PostCard from "../../components/PostCard/PostCard";
@@ -14,7 +14,16 @@ function PostsGrid() {
     const isLoading = useSelector(selectPostsIsLoading);
     const hasError = useSelector(selectPostsHasError);
     if(isLoading) {
-        return <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>
+        return (
+            <Row>
+                <PostCard isLoading={true}/>
+                <PostCard isLoading={true}/>
+                <PostCard isLoading={true}/>
+                <PostCard isLoading={true}/>
+                <PostCard isLoading={true}/>
+                <PostCard isLoading={true}/>
+            </Row>
+        ) 
     }
     if(hasError) {
         return <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>

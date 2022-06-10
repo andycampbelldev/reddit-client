@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import { v4 as uuidv4 } from 'uuid';
 
 import timeElapsed from "../../utils/timeElapsed";
@@ -16,7 +19,28 @@ import './PostComment.css'
 export default function PostComment(props) {
     const dispatch = useDispatch();
     
-    const { author, content, createdUTC, ups, downs, replies, name, parent, highlight, collapsed, threadLength } = props;
+    const { author, content, createdUTC, ups, downs, replies, name, parent, highlight, collapsed, threadLength, isLoading } = props;
+    
+    if(isLoading) {
+        return (
+            <div className={`PostComment d-flex justify-content-start align-items-center py-2 my-2`}>
+                <Skeleton className='me-2' height={110} width={10} />
+                <div className='PostComment-content flex-grow-1'>
+                    <div className='PostComment-header d-flex justify-content-between align-items-center'>
+                        <div className='PostComment-author PostComment-toggle-read d-flex'>
+                            <Skeleton className='me-2' width={50} />
+                            <Skeleton width={100} />
+                        </div>
+                        <Skeleton className='PostCOmment-ups-downs' width={50} />
+                    </div>
+                    <div className='PostComment-body'>
+                        <Skeleton count={3}/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    
     const commentDate = new Date(createdUTC * 1000);
     const commentAge = timeElapsed(commentDate);
     const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;

@@ -78,7 +78,7 @@ export default function PostDetail(props) {
                 {content && <p>{content}</p>}
                 <h5 className='my-3'>{num_comments} Comment{num_comments > 1 || num_comments === 0 ? 's' : ''}</h5>
                 <div className='Post-comments d-flex flex-column'>
-                    {commentsLoading && <Row><FontAwesomeIcon className='fa-spin fa-5x' icon={faSpinner} /></Row>}
+                    {commentsLoading && <PostComment isLoading={true} />}
 
                     {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
                     

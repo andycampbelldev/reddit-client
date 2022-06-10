@@ -12,9 +12,17 @@ const SubredditNav = (props) => {
     const subreddit = useSelector(selectCurrentSubreddit);
     const isLoading = useSelector(selectSubredditsAreLoading);
 
+    if(isLoading) {
+        return (
+            <Nav className='d-flex justify-content-center p-2'>
+                {subreddits.map(sr => <SubredditLink isLoading={true} />)}
+            </Nav>
+        )
+    }
+
     return (
-        <Nav pills className='d-flex justify-content-between p-2'>
-            {!isLoading && subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
+        <Nav pills className='d-flex justify-content-center p-2'>
+            {subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )
 }

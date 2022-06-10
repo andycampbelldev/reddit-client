@@ -6,15 +6,26 @@ import { setSearchTerm } from "../../features/SearchForm/SearchTermSlice";
 
 import { NavItem, NavLink } from "reactstrap";
 
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import './SubredditLink.css';
 
 function SubredditLink(props) {
     const dispatch = useDispatch();
-    const { name, iconUrl, active } = props;
+    const { name, iconUrl, active, isLoading } = props;
 
     const handleClick = () => {
         dispatch(setSearchTerm(''));
         dispatch(setCurrentSubreddit(name));
+    }
+
+    if (isLoading) {
+        return (
+            <div className='d-flex p-4'>
+                <Skeleton className='me-2' circle={true} height={40} width={40} /> <Skeleton height={40} width={200} />
+            </div>
+        )
     }
 
     return (
