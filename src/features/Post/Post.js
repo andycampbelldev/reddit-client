@@ -68,7 +68,7 @@ export default function PostDetail(props) {
             <ModalBody>
                 {type === 'image' && <img className='img-fluid' src={url}></img>}
                 {type === 'video' && <video className='img-fluid' controls muted src={secure_media.reddit_video.fallback_url}>Error</video> }
-                {type === 'gallery' && <ImageCarousel items={gallery_data.items} /> }
+                {type === 'gallery' && <ImageCarousel images={gallery_data.items} /> }
                 {type === 'link' &&
                     <Row className='Post-external-link d-flex justify-content-between align-items-center'>
                         <a target='_blank' href={url}>{url}</a>
