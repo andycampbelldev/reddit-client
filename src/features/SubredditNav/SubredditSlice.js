@@ -1,14 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getSubredditInfo = createAsyncThunk('subreddits/getSubredditInfo', async (url, thunkAPI) => {
-    const response = await fetch(url);
-    const result = await response.json();
-    const { display_name, public_description, community_icon } = result.data;
-    return {
-        display_name,
-        public_description,
-        community_icon
+export const getSubredditsInfo = createAsyncThunk('subreddits/getSubredditsInfo', async (subreddits, thunkAPI) => {
+    const updatedSubreddits = []
+    for (let subreddit of subreddits) {
+        const response = await fetch(`https://www.reddit.com/r/${subreddit.name}/about.json`);
+        const result = await response.json();
+        const { public_description, community_icon } = result.data;
+        updatedSubreddits.push({
+            ...subreddit, 
+            description: public_description, 
+            icon: community_icon.replace(/&amp;/g, '&')})
     }
+    return updatedSubreddits;
 })
 
 const options = {
@@ -16,7 +19,7 @@ const options = {
     initialState: {
         currentSubreddit: 'beerporn',
         allSubreddits: [{name: 'beerporn'}, {name: 'patiogardening'}, {name: 'reactjs'}, {name: 'sourdough'}, {name: 'pizza'}, {name: 'videos'}],
-        isLoading: false,
+        isLoading: true,
         hasError: false,
     },
     reducers: {
@@ -25,18 +28,16 @@ const options = {
         }
     },
     extraReducers: {
-        [getSubredditInfo.pending]: (state, action) => {
+        [getSubredditsInfo.pending]: (state, action) => {
             state.isLoading = true;
             state.hasError = false;
         },
-        [getSubredditInfo.fulfilled]: (state, action) => {
-            const subreddit = state.allSubreddits.find(sr => sr.name.toLowerCase() === action.payload.display_name.toLowerCase());
-            subreddit.description = action.payload.public_description;
-            subreddit.icon = action.payload.community_icon.replace(/&amp;/g, '&');
+        [getSubredditsInfo.fulfilled]: (state, action) => {
+            state.allSubreddits = action.payload;
             state.isLoading = false;
             state.hasError = false;
         },
-        [getSubredditInfo.rejected]: (state, action) => {
+        [getSubredditsInfo.rejected]: (state, action) => {
             state.isLoading = false;
             state.hasError = true;
         }

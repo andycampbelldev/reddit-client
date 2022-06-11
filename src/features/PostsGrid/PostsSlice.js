@@ -10,7 +10,7 @@ const options = {
     name: 'posts',
     initialState: {
         posts: [],
-        isLoading: false,
+        isLoading: true,
         hasError: false
     },
     reducers: {
