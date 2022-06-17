@@ -26,3 +26,18 @@
 .PostCard-footer {
     font-size: 0.8rem;
 }
+
+.PostCard-background-image {
+    opacity: 1;
+    color: rgb(248,249,250);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.PostCard-no-background-image {
+    color: rgb(33,37,41);
+    background-repeat: repeat;
+    background-size: 22px 22px;
+    background-position: 11px 0, 11px 0, 0 0, 0 0;
+}
