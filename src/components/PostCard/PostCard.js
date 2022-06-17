@@ -65,6 +65,7 @@ export default function PostCard({ data, isLoading }) {
         backgroundImageUrl
     }
 
+    // PostCard background
     const dynamicPostCardStyle = {
         backgroundColor: post.backgroundImageUrl ? 'unset' : 'rgb(229, 229, 247)',
         backgroundImage: post.backgroundImageUrl ? `linear-gradient(180deg, rgba(0, 0, 0, 0.8) -20%, transparent 60%), linear-gradient(360deg, rgba(0, 0, 0, 1) -10%, transparent 50%), url(${post.backgroundImageUrl})`
