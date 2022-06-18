@@ -40,7 +40,7 @@ function App() {
       {activePost && <PostDetail show={displayingPost} data={activePost.data} />}
       <Navbar />
       <SubredditNav subreddits={allSubreddits} />
-      <Container className='mt-5'>
+      <Container>
         <PostsGrid />
       </Container>
       <Footer />

@@ -14,14 +14,14 @@ const SubredditNav = (props) => {
 
     if(isLoading) {
         return (
-            <Nav className='d-flex justify-content-center p-2'>
+            <Nav className='d-flex justify-content-center p-2 my-2'>
                 {subreddits.map(sr => <SubredditLink isLoading={true} />)}
             </Nav>
         )
     }
 
     return (
-        <Nav pills className='d-flex justify-content-center p-2'>
+        <Nav pills className='d-flex justify-content-center p-2 my-2'>
             {subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )
