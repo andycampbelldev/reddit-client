@@ -1,14 +1,13 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { selectCurrentSubreddit, selectSubredditsAreLoading } from "./SubredditSlice";
+import { selectCurrentSubreddit, selectSubredditsAreLoading } from './SubredditSlice';
 
-import SubredditLink from '../../components/SubredditLink/SubredditLink';
 import { Nav } from 'reactstrap';
+import SubredditLink from '../../components/SubredditLink/SubredditLink';
 
-const SubredditNav = (props) => {
-    const { subreddits } = props;
+const SubredditNav = ({subreddits}) => {
     const subreddit = useSelector(selectCurrentSubreddit);
     const isLoading = useSelector(selectSubredditsAreLoading);
 
