@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectDisplayingPost } from './features/Post/PostSlice';
+import { selectActivePostId, selectDisplayingPost } from './features/Post/PostSlice';
 import { getSubredditsInfo, selectAllSubreddits, selectCurrentSubreddit } from './features/SubredditNav/SubredditSlice';
-import { getPosts } from './features/PostsGrid/PostsSlice';
+import { selectPosts, getPosts } from './features/PostsGrid/PostsSlice';
 
 import Navbar from './components/Navbar/Navbar';
 import SubredditNav from './features/SubredditNav/SubredditNav';
@@ -19,8 +19,11 @@ function App() {
   const dispatch = useDispatch();
   const displayingPost = useSelector(selectDisplayingPost);
   const subreddit = useSelector(selectCurrentSubreddit);
-  
+  const allPosts = useSelector(selectPosts);
+  const activePostId = useSelector(selectActivePostId);
   const allSubreddits = useSelector(selectAllSubreddits)
+
+  const activePost = allPosts.find(p => p.data.id === activePostId);
 
   useEffect(() => {
     dispatch(getSubredditsInfo(allSubreddits));
@@ -34,7 +37,7 @@ function App() {
 
   return (
     <>
-      <PostDetail show={displayingPost} />
+      {activePost && <PostDetail show={displayingPost} data={activePost.data} />}
       <Navbar />
       <SubredditNav subreddits={allSubreddits} />
       <Container className='mt-5'>

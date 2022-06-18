@@ -23,19 +23,7 @@ const options = {
     name: 'post',
     initialState: {
         displayingPost: false,
-        url: '',
-        permalink: '',
-        thumbnail: '',
-        type: '',
-        title: '',
-        author: '',
-        whenPostedDisplay: '',
-        ups: 0,
-        downs: 0,
-        content: '',
-        secure_media: {},
-        gallery_data: {},
-        num_comments: 0,
+        activePostId: '',
         comments: {
             isLoading: false,
             hasError: false,
@@ -48,21 +36,8 @@ const options = {
         toggleDisplayPost: (state, action) => {
             state.displayingPost = !state.displayingPost;
         },
-        setPost: (state, action) => {
-            const { url, title, author, ups, downs, content, type, secure_media, gallery_data, permalink, thumbnail, whenPostedDisplay, num_comments } = action.payload;
-            state.url = url;
-            state.permalink = permalink;
-            state.thumbnail = thumbnail;
-            state.type = type;
-            state.title = title;
-            state.author = author;
-            state.whenPostedDisplay = whenPostedDisplay;
-            state.ups = ups;
-            state.downs = downs;
-            state.content = content;
-            state.secure_media = secure_media;
-            state.gallery_data = gallery_data;
-            state.num_comments = num_comments;
+        setActivePostId: (state, action) => {
+            state.activePostId = action.payload;
         },
         setGalleryIndex: (state, action) => {
             state.galleryIndex = action.payload;
@@ -103,6 +78,7 @@ const options = {
 
 const postSlice = createSlice(options);
 
+export const selectActivePostId = state => state.post.activePostId;
 export const selectDisplayingPost = state => state.post.displayingPost;
 //export const selectPost = state => state.post;
 export const selectPost = state => {
@@ -115,5 +91,5 @@ export const selectCommentsError = state => state.post.comments.hasError;
 export const selectPostThreadLength = state => state.post.threadLength;
 export const selectComments = state => state.post.comments.comments;
 
-export const { toggleDisplayPost, setPost, setGalleryIndex, setPostThreadLength, setCommentThreadLength, toggleCommentHighlight, toggleCommentCollapse } = postSlice.actions;
+export const { toggleDisplayPost, setActivePostId, setGalleryIndex, setPostThreadLength, setCommentThreadLength, toggleCommentHighlight, toggleCommentCollapse } = postSlice.actions;
 export default postSlice.reducer;
