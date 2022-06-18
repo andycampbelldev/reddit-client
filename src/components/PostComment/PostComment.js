@@ -73,9 +73,8 @@ export default function PostComment(props) {
     })
 
     const commentDate = new Date(createdUTC * 1000);
-    const commentAge = timeElapsed(commentDate);
-    const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;
-    const whenPostedContent = unitOfTime === 'day' && unitsElapsed > 7 ? commentDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`
+    const commentAge = timeElapsed(commentDate, 'day', 7);
+    const whenPosted = commentAge.toPreferredString();
 
     const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
     const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
@@ -94,7 +93,7 @@ export default function PostComment(props) {
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
                     <div className='PostComment-author PostComment-toggle-read' role='button' onClick={toggleCollapse}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
-                        <span>posted {whenPostedContent}</span>
+                        <span>posted {whenPosted}</span>
                     </div>
                     <span className='PostComment-ups-downs me-2'>{upsCount}{downsCount}</span>
                 </div>
