@@ -1,13 +1,14 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentSubreddit, setCurrentSubreddit } from "../SubredditNav/SubredditSlice";
-import { getPosts } from "../PostsGrid/PostsSlice";
-import { selectSearchTerm, setSearchTerm } from "./SearchTermSlice";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setCurrentSubreddit } from '../SubredditNav/SubredditSlice';
+import { getPosts } from '../PostsGrid/PostsSlice';
+import { selectSearchTerm, setSearchTerm } from './SearchTermSlice';
+
 import { Label, Input, Button } from 'reactstrap';
 
 function SearchForm() {
     const dispatch = useDispatch();
-    const subreddit = useSelector(selectCurrentSubreddit);
     const searchTerm = useSelector(selectSearchTerm);
 
     const handleSubmit = e => {
@@ -21,24 +22,17 @@ function SearchForm() {
     }
     
     return (
-        <form className="d-flex align-items-center gap-2" onSubmit={handleSubmit} >
-            <Label for="exampleSearch" className="visually-hidden">
-                Search
-            </Label>
+        <form className='d-flex align-items-center gap-2' onSubmit={handleSubmit} >
+            <Label for='searchInput' className='visually-hidden'>Search</Label>
             <Input
-                id="exampleSearch"
-                name="search"
-                placeholder="search reddit"
-                type="search"
+                id='searchInput'
+                name='search'
+                placeholder='search reddit'
+                type='search'
                 value={searchTerm}
                 onChange={handleChange}
             />
-            <Button 
-                color="primary"
-                outline
-            >
-                Search
-            </Button>
+            <Button color='primary' outline>Search</Button>
         </form>
     )
 }
