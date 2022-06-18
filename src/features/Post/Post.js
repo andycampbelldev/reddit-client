@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 
 import { 
+    selectActivePostId,
     selectDisplayingPost, 
     toggleDisplayPost, 
     setGalleryIndex, 
@@ -43,6 +44,7 @@ export default function PostDetail({ show, data }) {
     const dispatch = useDispatch();
     
     const displayingPost = useSelector(selectDisplayingPost);
+    const activePostId = useSelector(selectActivePostId);
     const threadLength = useSelector(selectPostThreadLength);
     const comments = useSelector(selectComments);
     const commentsLoading = useSelector(selectCommentsLoading);
@@ -64,10 +66,11 @@ export default function PostDetail({ show, data }) {
     }, [displayingPost, dispatch])
     
     useEffect(() => {
-        if(permalink) {
+        if(activePostId) {
             dispatch(getCommentsForPost(permalink));
+            dispatch(setPostThreadLength(3));
         }
-    }, [permalink, dispatch])
+    }, [activePostId, dispatch])
     
     const postUrl = postType !== 'link' ? url : url_overridden_by_dest
     
