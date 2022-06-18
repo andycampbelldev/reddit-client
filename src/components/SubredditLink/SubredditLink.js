@@ -5,15 +5,13 @@ import { setCurrentSubreddit } from "../../features/SubredditNav/SubredditSlice"
 import { setSearchTerm } from "../../features/SearchForm/SearchTermSlice";
 
 import { NavItem, NavLink } from "reactstrap";
-
 import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css'
 
+import 'react-loading-skeleton/dist/skeleton.css'
 import './SubredditLink.css';
 
-function SubredditLink(props) {
+function SubredditLink({ name, iconUrl, active, isLoading }) {
     const dispatch = useDispatch();
-    const { name, iconUrl, active, isLoading } = props;
 
     const handleClick = () => {
         dispatch(setSearchTerm(''));
