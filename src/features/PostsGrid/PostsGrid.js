@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { useSelector } from "react-redux";
-import { selectPosts, selectPostsIsLoading, selectPostsHasError } from "./PostsSlice";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeartBroken } from "@fortawesome/free-solid-svg-icons";
+import { selectPosts, selectPostsIsLoading, selectPostsHasError } from './PostsSlice';
 
-import { Row, Col } from "reactstrap";
-import PostCard from "../../components/PostCard/PostCard";
+import { Row } from 'reactstrap';
+import PostCard from '../../components/PostCard/PostCard';
+
 
 function PostsGrid() {
     const posts = useSelector(selectPosts);
     const isLoading = useSelector(selectPostsIsLoading);
     const hasError = useSelector(selectPostsHasError);
+
     if(isLoading) {
         return (
             <Row>
@@ -25,8 +25,9 @@ function PostsGrid() {
             </Row>
         ) 
     }
+
     if(hasError) {
-        return <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>
+        return <p className='text-center'>Could not load Posts. Please try again.</p>
     }
 
     return (
