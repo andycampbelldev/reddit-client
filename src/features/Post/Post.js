@@ -1,25 +1,46 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
-import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import { selectPosts } from "../PostsGrid/PostsSlice";
-import { selectActivePostId, selectDisplayingPost, selectPost, toggleDisplayPost, setGalleryIndex, selectComments, selectCommentsLoading, selectCommentsError, getCommentsForPost, setPostThreadLength, selectPostThreadLength } from "./PostSlice";
 
+import { 
+    selectDisplayingPost, 
+    toggleDisplayPost, 
+    setGalleryIndex, 
+    selectComments, 
+    selectCommentsLoading, 
+    selectCommentsError, 
+    getCommentsForPost, 
+    setPostThreadLength, 
+    selectPostThreadLength 
+} from "./PostSlice";
+
+import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import PostComment from "../../components/PostComment/PostComment";
 
-import { Modal, ModalHeader, ModalBody, CardSubtitle, Row, Button } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown, faSpinner, faHeartBroken } from "@fortawesome/free-solid-svg-icons";
-
 import './Post.css'
 
-export default function PostDetail(props) {
-    const { show, data } = props;
-    const dispatch = useDispatch();
-    //const post = useSelector(selectPost, shallowEqual);
+export default function PostDetail({ show, data }) {
+    const  { 
+        postType, 
+        url, 
+        url_overridden_by_dest, 
+        ups, 
+        downs, 
+        decodedTitle, 
+        author, 
+        selftext, 
+        whenPostedDisplay, 
+        secure_media, 
+        gallery_data, 
+        permalink, 
+        thumbnail, 
+        num_comments 
+    } = data;
     
-    const allPosts = useSelector(selectPosts);
-    const activePostId = useSelector(selectActivePostId);
+    const dispatch = useDispatch();
     
     const displayingPost = useSelector(selectDisplayingPost);
     const threadLength = useSelector(selectPostThreadLength);
@@ -27,30 +48,73 @@ export default function PostDetail(props) {
     const commentsLoading = useSelector(selectCommentsLoading);
     const commentsError = useSelector(selectCommentsError);
 
-    const  { postType, url, url_overridden_by_dest, ups, downs, decodedTitle, author, selftext, whenPostedDisplay, secure_media, gallery_data, permalink, thumbnail, name, num_comments } = data;
-    const postUrl = postType !== 'link' ? url : url_overridden_by_dest
-
     const handleClose = () => {
         dispatch(toggleDisplayPost());
         dispatch(setGalleryIndex(0));
-        //dispatch(setVisibleComments(3));
     }
-
+    
     const handleMoreComments = () => {
         const newLength = threadLength + 3;
         dispatch(setPostThreadLength(newLength))
     }
-
+    
     // prevent body scrolling when Post is showing
     useEffect(() => {
         document.body.style.overflow = displayingPost ? 'hidden' : 'unset';
     }, [displayingPost, dispatch])
-
+    
     useEffect(() => {
         if(permalink) {
             dispatch(getCommentsForPost(permalink));
         }
     }, [permalink, dispatch])
+    
+    const postUrl = postType !== 'link' ? url : url_overridden_by_dest
+    
+    let postMainContent
+    if (postType === 'image') {
+        postMainContent = <img className='img-fluid' src={postUrl} alt={decodedTitle}></img>
+    } else if (postType === 'video') {
+        postMainContent = <video className='img-fluid' controls muted src={secure_media.reddit_video.fallback_url}>Error</video>
+    } else if (postType === 'gallery') {
+        postMainContent = <ImageCarousel images={gallery_data.items} />
+    } else if (postType === 'link') {
+        postMainContent = 
+        <Row className='Post-external-link d-flex justify-content-between align-items-center'>
+                <a target='_blank' rel='noreferrer' href={postUrl}>{postUrl}</a>
+                <img className='m-2' src={thumbnail} alt={decodedTitle} />
+            </Row>
+    }
+
+    const commentsContent = !commentsLoading && comments.length > 0 
+        ?  comments.slice(0, threadLength).map((comment) => (
+            <PostComment 
+                key={uuidv4()}
+                name={comment.data.name}
+                parent={[]}
+                author={comment.data.author}
+                content={comment.data.body}
+                createdUTC={comment.data.created_utc}
+                ups={comment.data.ups}
+                downs={comment.data.downs}
+                replies={comment.data.replies ? comment.data.replies.data.children.filter(c => c.kind === 't1') : []}
+                highlight={comment.highlight}
+                collapsed={comment.collapsed}
+                threadLength={comment.threadLength}
+            />)
+        )
+        : '';
+    
+    const moreCommentsButton = !commentsLoading && threadLength < comments.length 
+        ? <button onClick={handleMoreComments} className='Post-more-comments'>more comments</button>
+        : '';
+    
+    const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
+    const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
+    const postTextContent = selftext ? <p>{selftext}</p> : '';
+    const commentsHeader = `${num_comments} Comment${num_comments > 1 || num_comments === 0 ? 's' : ''}`
+    const commentsErrorMessage = commentsError ? <p>Could not load comments. Please try again.</p> : '';
+    const commentsLoadingSkeleton = commentsLoading ? <PostComment isLoading={true} /> : '';
 
     return (
         <Modal className='Post' size='lg' scrollable isOpen={show}>
@@ -59,10 +123,7 @@ export default function PostDetail(props) {
                 className='Post-header align-items-start'
                 tag='div'
             >
-                <span className='Post-votes'>
-                        { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups} </>}
-                        { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs} </>}
-                </span>
+                <span className='Post-votes'>{upsCount}{downsCount}</span>
                 <span>{decodedTitle}</span>
                 <CardSubtitle className='Post-author mt-1'>
                     <span className='fw-bold'>/u/{author}</span>
@@ -70,44 +131,15 @@ export default function PostDetail(props) {
                 </CardSubtitle>
             </ModalHeader>
             <ModalBody>
-                {postType === 'image' && <img className='img-fluid' src={postUrl}></img>}
-                {postType === 'video' && <video className='img-fluid' controls muted src={secure_media.reddit_video.fallback_url}>Error</video> }
-                {postType === 'gallery' && <ImageCarousel images={gallery_data.items} /> }
-                {postType === 'link' &&
-                    <Row className='Post-external-link d-flex justify-content-between align-items-center'>
-                        <a target='_blank' href={postUrl}>{postUrl}</a>
-                        <img className='m-2' src={thumbnail}/>
-                    </Row>
-                }
-                {selftext && <p>{selftext}</p>}
-                <h5 className='my-3'>{num_comments} Comment{num_comments > 1 || num_comments === 0 ? 's' : ''}</h5>
+                {postMainContent}
+                {postTextContent}
+                <h5 className='my-3'>{commentsHeader}</h5>
                 <div className='Post-comments d-flex flex-column'>
-                    {commentsLoading && <PostComment isLoading={true} />}
-
-                    {commentsError && <Row><FontAwesomeIcon className='fa-5x' icon={faHeartBroken} /></Row>}
-                    
-                    {!commentsLoading && comments.length > 0
-                    //&& comments.map((comment, index) => (
-                    && comments.slice(0, threadLength).map((comment, index) => (
-                        <PostComment 
-                            key={uuidv4()}
-                            name={comment.data.name}
-                            parent={[]}
-                            author={comment.data.author}
-                            content={comment.data.body}
-                            createdUTC={comment.data.created_utc}
-                            ups={comment.data.ups}
-                            downs={comment.data.downs}
-                            replies={comment.data.replies ? comment.data.replies.data.children.filter(c => c.kind === 't1') : []}
-                            highlight={comment.highlight}
-                            collapsed={comment.collapsed}
-                            threadLength={comment.threadLength}
-                        />)
-                    ) 
-                    }
-                    { !commentsLoading && threadLength < comments.length && <button onClick={handleMoreComments} className='Post-more-comments'>more comments</button> }
+                    {commentsErrorMessage}
+                    {commentsLoadingSkeleton}
+                    {commentsContent}
+                    {moreCommentsButton}
                 </div>
-                
             </ModalBody>
         </Modal>
     )
