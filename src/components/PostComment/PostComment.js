@@ -1,26 +1,39 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-
-import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css'
-
 import { v4 as uuidv4 } from 'uuid';
+
+import { useDispatch } from "react-redux";
+import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/Post/PostSlice";
 
 import timeElapsed from "../../utils/timeElapsed";
 
-import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/Post/PostSlice";
-
+import Skeleton from "react-loading-skeleton";
 import ReactMarkdown from "react-markdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import './PostComment.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function PostComment(props) {
     const dispatch = useDispatch();
     
     const { author, content, createdUTC, ups, downs, replies, name, parent, highlight, collapsed, threadLength, isLoading } = props;
     
+    const toggleHighlight = () => {
+        dispatch(toggleCommentHighlight([...parent, name]))
+    }
+
+    const toggleCollapse = () => {
+        dispatch(toggleCommentCollapse([...parent, name]))
+    }
+
+    const handleIncreaseThreadLength = () => {
+        dispatch(setCommentThreadLength({
+            parents: [...parent, name],
+            threadLength: threadLength + 3
+        }))
+    }
+
     if(isLoading) {
         return (
             <div className={`PostComment d-flex justify-content-start align-items-center py-2 my-2`}>
@@ -41,28 +54,6 @@ export default function PostComment(props) {
         )
     }
     
-    const commentDate = new Date(createdUTC * 1000);
-    const commentAge = timeElapsed(commentDate);
-    const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;
-    
-
-    const toggleHighlight = () => {
-        dispatch(toggleCommentHighlight([...parent, name]))
-    }
-
-    const toggleCollapse = () => {
-        dispatch(toggleCommentCollapse([...parent, name]))
-    }
-
-    const handleIncreaseThreadLength = () => {
-        dispatch(setCommentThreadLength({
-            parents: [...parent, name],
-            threadLength: threadLength + 3
-        }))
-    }
-
-    
-
     const nestedReplies = (replies || []).map(nestedReply => {
         return <PostComment 
             key={uuidv4()}
@@ -81,6 +72,21 @@ export default function PostComment(props) {
         />
     })
 
+    const commentDate = new Date(createdUTC * 1000);
+    const commentAge = timeElapsed(commentDate);
+    const [ unitOfTime, unitsElapsed ] = commentAge.largestUnit;
+    const whenPostedContent = unitOfTime === 'day' && unitsElapsed > 7 ? commentDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`
+
+    const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
+    const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
+    const nestedReplyContent = nestedReplies.length > 0 ? nestedReplies.slice(0, threadLength) : '';
+    const moreRepliesButton = threadLength < nestedReplies.length 
+        ? <div className='d-flex my-2 PostComment-collapsed'>
+            <div className='PostComment-toggle'></div>
+            <button onClick={handleIncreaseThreadLength} className='PostComment-more-replies'>more replies</button> 
+        </div> 
+        : '';
+
     return (
         <div className={`PostComment d-flex justify-content-start py-2 my-2 ${collapsed && 'PostComment-collapsed'} ${highlight && 'PostComment-reading'}`}>
             <div className='PostComment-toggle' role='button' onClick={toggleHighlight}></div>
@@ -88,22 +94,14 @@ export default function PostComment(props) {
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
                     <div className='PostComment-author PostComment-toggle-read' role='button' onClick={toggleCollapse}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
-                        <span className=''>posted {unitOfTime === 'day' && unitsElapsed > 7 ? commentDate.toLocaleDateString() : `${unitsElapsed} ${unitOfTime}${unitsElapsed > 1 ? 's' : ''} ago`}</span>
+                        <span>posted {whenPostedContent}</span>
                     </div>
-                    <span className='PostComment-ups-downs me-2'>
-                        { ups > 0 && <><FontAwesomeIcon icon={faArrowUp} /> {ups}</>}
-                        { downs > 0 && <><FontAwesomeIcon icon={faArrowDown} /> {downs}</>}
-                    </span>
+                    <span className='PostComment-ups-downs me-2'>{upsCount}{downsCount}</span>
                 </div>
                 <div className='PostComment-body'>
                     <ReactMarkdown className='ReactMarkdown' children={content} linkTarget='_blank' skipHtml={true}/>
-                    {nestedReplies.length > 0 && <div className='PostComment-replies d-flex flex-column'>{nestedReplies.slice(0, threadLength)}</div>}
-                    { threadLength < nestedReplies.length && 
-                    <div className='d-flex my-2 PostComment-collapsed'>
-                        <div className='PostComment-toggle' role='button' onClick={handleIncreaseThreadLength}></div>
-                        <button onClick={handleIncreaseThreadLength} className='PostComment-more-replies'>more replies</button> 
-                    </div>
-                    }
+                    <div className='PostComment-replies d-flex flex-column'>{nestedReplyContent}</div>
+                    {moreRepliesButton}
                 </div>
             </div>
         </div>
