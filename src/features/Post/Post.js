@@ -32,7 +32,7 @@ export default function PostDetail({ show, data }) {
         decodedTitle, 
         author, 
         selftext, 
-        whenPostedDisplay, 
+        whenPosted, 
         secure_media, 
         gallery_data, 
         permalink, 
@@ -127,7 +127,7 @@ export default function PostDetail({ show, data }) {
                 <span>{decodedTitle}</span>
                 <CardSubtitle className='Post-author mt-1'>
                     <span className='fw-bold'>/u/{author}</span>
-                    <span className='ms-2'>posted {whenPostedDisplay}</span>
+                    <span className='ms-2'>posted {whenPosted}</span>
                 </CardSubtitle>
             </ModalHeader>
             <ModalBody>
