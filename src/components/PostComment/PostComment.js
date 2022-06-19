@@ -10,6 +10,7 @@ import Skeleton from 'react-loading-skeleton';
 import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import More from '../More/More';
 
 import './PostComment.css'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -79,12 +80,7 @@ export default function PostComment(props) {
     const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
     const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
     const nestedReplyContent = nestedReplies.length > 0 ? nestedReplies.slice(0, threadLength) : '';
-    const moreRepliesButton = threadLength < nestedReplies.length 
-        ? <div className='d-flex my-2 PostComment-collapsed'>
-            <div className='PostComment-toggle'></div>
-            <button onClick={handleIncreaseThreadLength} className='PostComment-more-replies'>more replies</button> 
-        </div> 
-        : '';
+    const moreRepliesButton = threadLength < nestedReplies.length ? <More moreWhat='replies' onClick={handleIncreaseThreadLength} /> : '';
 
     return (
         <div className={`PostComment d-flex justify-content-start py-2 my-2 ${collapsed && 'PostComment-collapsed'} ${highlight && 'PostComment-reading'}`}>

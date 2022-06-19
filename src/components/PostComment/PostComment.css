@@ -51,16 +51,3 @@
 .ReactMarkdown p {
     overflow-wrap: anywhere;
 }
-
-.PostComment-more-replies {
-    display: block;
-    background-color: unset;
-    border: none;
-    font-size: 0.8rem;
-    font-weight: bold;
-    /* margin: auto; */
-}
-
-.PostComment-more-replies:hover {
-    text-decoration: underline;
-}

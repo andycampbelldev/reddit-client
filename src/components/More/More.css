@@ -1,0 +1,26 @@
+.More-blockquote {
+    background-color: rgba(13, 110, 253, 0.5);
+    background-color: rgb(13, 110, 253);
+    margin: -10px 0px;
+    margin-right: 0.5rem;
+    display: block;
+    padding: 0;
+    flex: 0 0 8px;
+    transition: all 1s ease;
+}
+
+.PostComment-reading .More-blockquote {
+    background-color: rgb(0, 72, 181);
+}
+
+.More-button {
+    display: block;
+    background-color: unset;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.More-button:hover {
+    text-decoration: underline;
+}
