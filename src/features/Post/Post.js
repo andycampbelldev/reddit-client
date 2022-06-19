@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
 import PostComment from '../../components/PostComment/PostComment';
+import More from '../../components/More/More';
 
 import './Post.css'
 
@@ -108,16 +109,13 @@ export default function PostDetail({ show, data }) {
         )
         : '';
     
-    const moreCommentsButton = !commentsLoading && threadLength < comments.length 
-        ? <button onClick={handleMoreComments} className='Post-more-comments'>more comments</button>
-        : '';
-    
-    const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
-    const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
-    const postTextContent = selftext ? <p>{selftext}</p> : '';
-    const commentsHeader = `${num_comments} Comment${num_comments > 1 || num_comments === 0 ? 's' : ''}`
-    const commentsErrorMessage = commentsError ? <p>Could not load comments. Please try again.</p> : '';
-    const commentsLoadingSkeleton = commentsLoading ? <PostComment isLoading={true} /> : '';
+        const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
+        const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
+        const postTextContent = selftext ? <p>{selftext}</p> : '';
+        const commentsHeader = `${num_comments} Comment${num_comments > 1 || num_comments === 0 ? 's' : ''}`
+        const commentsErrorMessage = commentsError ? <p>Could not load comments. Please try again.</p> : '';
+        const commentsLoadingSkeleton = commentsLoading ? <PostComment isLoading={true} /> : '';
+        const moreCommentsButton = !commentsLoading && threadLength < comments.length ? <More moreWhat='comments' onClick={handleMoreComments} /> : '';
 
     return (
         <Modal className='Post' size='lg' scrollable isOpen={show}>

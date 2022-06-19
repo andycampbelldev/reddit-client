@@ -7,10 +7,6 @@
     font-size: 0.8rem;
 }
 
-/* .Post-subtitle {
-    font-size: 1rem;
-} */
-
 .Post video, .Post img {
     max-height: 600px;
     display: block;
@@ -23,17 +19,4 @@
 
 .Post-external-link img {
     max-width: 200px;
-}
-
-.Post-more-comments {
-    display: block;
-    background-color: unset;
-    border: none;
-    margin: auto;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.Post-more-comments:hover {
-    text-decoration: underline;
 }
