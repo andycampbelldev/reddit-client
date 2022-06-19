@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getSubredditsInfo = createAsyncThunk('subreddits/getSubredditsInfo', async (subreddits, thunkAPI) => {
     const updatedSubreddits = []

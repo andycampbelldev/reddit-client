@@ -1,11 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { setCurrentSubreddit } from "../../features/SubredditNav/SubredditSlice";
-import { setSearchTerm } from "../../features/SearchForm/SearchTermSlice";
+import { setCurrentSubreddit } from '../../features/SubredditNav/SubredditSlice';
+import { setSearchTerm } from '../../features/SearchForm/SearchTermSlice';
 
-import { NavItem, NavLink } from "reactstrap";
-import Skeleton from "react-loading-skeleton";
+import { NavItem, NavLink } from 'reactstrap';
+import Skeleton from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import './SubredditLink.css';

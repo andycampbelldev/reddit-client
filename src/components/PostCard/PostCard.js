@@ -1,13 +1,13 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { setActivePostId, toggleDisplayPost } from "../../features/Post/PostSlice";
-import { selectCurrentSubreddit } from "../../features/SubredditNav/SubredditSlice";
+import { setActivePostId, toggleDisplayPost } from '../../features/Post/PostSlice';
+import { selectCurrentSubreddit } from '../../features/SubredditNav/SubredditSlice';
 
-import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown, faComment } from "@fortawesome/free-solid-svg-icons";
-import Skeleton from "react-loading-skeleton";
+import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown, faComment } from '@fortawesome/free-solid-svg-icons';
+import Skeleton from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import './PostCard.css'

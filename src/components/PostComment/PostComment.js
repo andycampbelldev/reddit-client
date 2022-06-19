@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useDispatch } from "react-redux";
-import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from "../../features/Post/PostSlice";
+import { useDispatch } from 'react-redux';
+import { toggleCommentHighlight, toggleCommentCollapse, setCommentThreadLength } from '../../features/Post/PostSlice';
 
-import timeElapsed from "../../utils/timeElapsed";
+import timeElapsed from '../../utils/timeElapsed';
 
-import Skeleton from "react-loading-skeleton";
-import ReactMarkdown from "react-markdown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import Skeleton from 'react-loading-skeleton';
+import ReactMarkdown from 'react-markdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 import './PostComment.css'
 import 'react-loading-skeleton/dist/skeleton.css'

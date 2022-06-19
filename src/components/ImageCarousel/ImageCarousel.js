@@ -1,10 +1,10 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { selectGalleryIndex, setGalleryIndex } from "../../features/Post/PostSlice";
+import { selectGalleryIndex, setGalleryIndex } from '../../features/Post/PostSlice';
 
-import { Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl } from "reactstrap";
+import { Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl } from 'reactstrap';
 import './ImageCarousel.css'
 
 export default function ImageCarousel({ images }) {
@@ -40,14 +40,14 @@ export default function ImageCarousel({ images }) {
             ))}
             <CarouselControl
                 className={'CarouselControlPrev'}
-                direction="prev"
-                directionText="Previous"
+                direction='prev'
+                directionText='Previous'
                 onClickHandler={handlePrevSlide}
                 />
             <CarouselControl
                 className={'CarouselControlNext'}
-                direction="next"
-                directionText="Next"
+                direction='next'
+                directionText='Next'
                 onClickHandler={handleNextSlide}
             />
         </Carousel>

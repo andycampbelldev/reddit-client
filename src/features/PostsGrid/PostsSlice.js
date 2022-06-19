@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import timeElapsed from "../../utils/timeElapsed";
+import timeElapsed from '../../utils/timeElapsed';
 
 export const getPosts = createAsyncThunk('posts/getPosts', async (url, thunkAPI) => {
     const response = await fetch(url);

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import { 
@@ -13,13 +13,13 @@ import {
     getCommentsForPost, 
     setPostThreadLength, 
     selectPostThreadLength 
-} from "./PostSlice";
+} from './PostSlice';
 
-import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
-import PostComment from "../../components/PostComment/PostComment";
+import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
+import PostComment from '../../components/PostComment/PostComment';
 
 import './Post.css'
 
