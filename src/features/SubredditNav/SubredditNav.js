@@ -14,7 +14,7 @@ const SubredditNav = ({subreddits}) => {
     if(isLoading) {
         return (
             <Nav className='d-flex justify-content-center p-2 my-2'>
-                {subreddits.map(sr => <SubredditLink isLoading={true} />)}
+                {subreddits.map(sr => <SubredditLink key={uuidv4()} isLoading={true} />)}
             </Nav>
         )
     }
