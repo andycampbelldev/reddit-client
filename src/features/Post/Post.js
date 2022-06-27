@@ -93,18 +93,13 @@ export default function PostDetail({ show, data }) {
     const commentsContent = !commentsLoading && comments.length > 0 
         ?  comments.slice(0, threadLength).map((comment) => (
             <PostComment 
-                key={uuidv4()}
-                name={comment.data.name}
-                parent={[]}
+                key={comment.data.id}
                 author={comment.data.author}
                 content={comment.data.body}
                 createdUTC={comment.data.created_utc}
                 ups={comment.data.ups}
                 downs={comment.data.downs}
                 replies={comment.data.replies ? comment.data.replies.data.children.filter(c => c.kind === 't1') : []}
-                highlight={comment.highlight}
-                collapsed={comment.collapsed}
-                threadLength={comment.threadLength}
             />)
         )
         : '';

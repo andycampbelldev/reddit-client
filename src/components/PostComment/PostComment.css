@@ -6,10 +6,10 @@
 .PostComment-body, .PostComment-replies {
     max-height: 9999px;
     overflow: hidden;
-    transition: all 1s ease;
+    transition: max-height 1s ease;
 }
 
-.PostComment .PostComment-toggle {
+.PostComment .PostComment-blockquote {
     background-color: rgb(13, 110, 253);
     margin: -10px 0px;
     margin-right: 0.5rem;
@@ -19,23 +19,23 @@
     transition: all 1s ease;
 }
 
-.PostComment-reading {
+.PostComment-highlight {
     background-color: rgb(0, 0, 0, 0.05);
 }
 
-.PostComment-reading .PostComment-toggle {
+.PostComment-reading .PostComment-blockquote {
     background-color: rgb(0, 72, 181);
 }
 
-.PostComment-collapsed .PostComment-toggle {
+.PostComment .PostComment-blockquote-collapsed {
     background-color: rgba(13, 110, 253, 0.5);
 }
 
-.PostComment-toggle:hover {
+.PostComment-blockquote:hover {
     background-color: rgb(116, 16, 255);
 }
 
-.PostComment-collapsed .PostComment-body, .PostComment-collapsed .PostComment-replies {
+.PostComment-body-collapsed {
     max-height: 0px;
 }
 
