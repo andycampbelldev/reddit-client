@@ -33,7 +33,7 @@ export default function ImageCarousel({ images }) {
                 onClickHandler={newIndex => {dispatch(setGalleryIndex(newIndex))}}
             />
             {images.map((image, i) => (
-                <CarouselItem key={uuidv4()}>
+                <CarouselItem key={image.media_id}>
                     <img  alt={`Slide ${i+1}`} src={`https://i.redd.it/${image.media_id}.jpg`} />
                     {image.caption && <CarouselCaption className='ImageCarousel-caption' captionText={image.caption}/>}
                 </CarouselItem>
