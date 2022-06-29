@@ -28,9 +28,6 @@ const options = {
         [getPosts.fulfilled]: (state, action) => {
             // loop over each post returned and set additional properties
             for (let post of action.payload) {
-                // handle crossposts - use data from the first parent
-                post.data = post.data.crosspost_parent_list ? post.data.crosspost_parent_list[0] : post.data;
-            
                 const { post_hint, is_gallery, gallery_data, created_utc, title, url, thumbnail } = post.data;
                 //when posted
                 post.data.whenPosted = timeElapsed(new Date(created_utc * 1000), 'day', 7).toPreferredString();
