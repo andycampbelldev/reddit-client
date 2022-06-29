@@ -16,12 +16,12 @@ function PostsGrid() {
     if(isLoading) {
         return (
             <Row>
-                <PostCard key={uuidv4()} isLoading={true}/>
-                <PostCard key={uuidv4()} isLoading={true}/>
-                <PostCard key={uuidv4()} isLoading={true}/>
-                <PostCard key={uuidv4()} isLoading={true}/>
-                <PostCard key={uuidv4()} isLoading={true}/>
-                <PostCard key={uuidv4()} isLoading={true}/>
+                <PostCard key='postcard-skeleton-1' isLoading={true}/>
+                <PostCard key='postcard-skeleton-2' isLoading={true}/>
+                <PostCard key='postcard-skeleton-3' isLoading={true}/>
+                <PostCard key='postcard-skeleton-4' isLoading={true}/>
+                <PostCard key='postcard-skeleton-5' isLoading={true}/>
+                <PostCard key='postcard-skeleton-6' isLoading={true}/>
             </Row>
         ) 
     }
@@ -33,7 +33,7 @@ function PostsGrid() {
     return (
         <Row>
             {posts.map(post => 
-                <PostCard key={uuidv4()} data={post.data} />
+                <PostCard key={post.data.id} data={post.data} />
             )}
         </Row>
     )
