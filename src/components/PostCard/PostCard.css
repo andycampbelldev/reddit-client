@@ -5,6 +5,11 @@
     cursor: pointer;
 }
 
+/* override Bootstrap card class border */
+.PostCard.PostCard-background-image {
+    border: none;
+}
+
 .CardBody {
     overflow: hidden;
 }
