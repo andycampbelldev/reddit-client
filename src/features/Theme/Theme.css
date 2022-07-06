@@ -6,9 +6,13 @@
     --color-primary: #FF6464;
     --color-secondary: #8B4367;
     --color-text: #f7f7f7;
+    --color-text-hover: var(--color-text);
 }
 
 .light {
-    --color-bg: #FFF;
+    --color-bg: #f7f7f7;
     --color-primary: #FF6464;
+    --color-secondary: #8B4367;
+    --color-text: #151515;
+    --color-text-hover: #f7f7f7;
 }

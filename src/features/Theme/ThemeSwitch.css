@@ -10,7 +10,7 @@
 }
 
 .ThemeSwitch.ThemeSwitch-Button:hover {
-    color: var(--color-text);
+    color: var(--color-text-hover);
     border-color: var(--color-secondary);
     background-color: var(--color-secondary);
 }
