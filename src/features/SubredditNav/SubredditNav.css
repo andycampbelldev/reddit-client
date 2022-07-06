@@ -3,7 +3,6 @@ ul.SubredditNav {
     flex-wrap: nowrap;
 }
 
-
 /* hide scrollbar but allow scrolling */
 ul.SubredditNav {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
