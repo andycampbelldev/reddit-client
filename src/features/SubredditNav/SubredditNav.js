@@ -7,20 +7,22 @@ import { selectCurrentSubreddit, selectSubredditsAreLoading } from './SubredditS
 import { Nav } from 'reactstrap';
 import SubredditLink from '../../components/SubredditLink/SubredditLink';
 
+import './SubredditNav.css';
+
 const SubredditNav = ({subreddits}) => {
     const subreddit = useSelector(selectCurrentSubreddit);
     const isLoading = useSelector(selectSubredditsAreLoading);
 
     if(isLoading) {
         return (
-            <Nav className='d-flex justify-content-center p-2 my-2'>
+            <Nav className='SubredditNav p-2 my-2'>
                 {subreddits.map(sr => <SubredditLink key={uuidv4()} isLoading={true} />)}
             </Nav>
         )
     }
 
     return (
-        <Nav pills className='d-flex justify-content-center p-2 my-2'>
+        <Nav pills className='SubredditNav p-2 my-2'>
             {subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )
