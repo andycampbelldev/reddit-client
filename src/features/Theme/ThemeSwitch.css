@@ -1,15 +1,15 @@
-.ThemeSwitch:focus {
+.ThemeSwitch.ThemeSwitch-Button:focus {
     border-color: var(--color-secondary);
     outline: none;
     box-shadow: none;
 }
 
-.ThemeSwitch {
+.ThemeSwitch.ThemeSwitch-Button {
     color: var(--color-primary);
     border-color:  var(--color-primary);
 }
 
-.ThemeSwitch:hover {
+.ThemeSwitch.ThemeSwitch-Button:hover {
     color: var(--color-text);
     border-color: var(--color-secondary);
     background-color: var(--color-secondary);
