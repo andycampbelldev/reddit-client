@@ -1,3 +1,19 @@
+.SubredditLink-link.nav-link {
+    color: var(--color-primary);
+}
+
+.SubredditLink-link.nav-link:hover {
+    color: var(--color-secondary);
+}
+
+.SubredditLink-active .SubredditLink-name::after {
+    content: '';
+    display: block;
+    border-bottom: 1px solid var(--color-primary);
+    width: 100%;
+    padding-top: 0.25rem;
+}
+
 .SubredditLink-icon {
     display: inline-block;
     max-height: 45px;
