@@ -1,0 +1,16 @@
+.ThemeSwitch:focus {
+    border-color: var(--color-secondary);
+    outline: none;
+    box-shadow: none;
+}
+
+.ThemeSwitch {
+    color: var(--color-primary);
+    border-color:  var(--color-primary);
+}
+
+.ThemeSwitch:hover {
+    color: var(--color-text);
+    border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+}

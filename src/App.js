@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectActivePostId, selectDisplayingPost } from './features/Post/PostSlice';
 import { getSubredditsInfo, selectAllSubreddits, selectCurrentSubreddit } from './features/SubredditNav/SubredditSlice';
 import { selectPosts, getPosts } from './features/PostsGrid/PostsSlice';
+import { selectDarkMode } from './features/Theme/ThemeSlice';
 
 import Navbar from './components/Navbar/Navbar';
 import SubredditNav from './features/SubredditNav/SubredditNav';
@@ -14,6 +15,7 @@ import Footer from './components/Footer/Footer';
 import { Container } from 'reactstrap';
 
 import './App.css';
+import './features/Theme/Theme.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ function App() {
   const allPosts = useSelector(selectPosts);
   const activePostId = useSelector(selectActivePostId);
   const allSubreddits = useSelector(selectAllSubreddits)
+  const darkMode = useSelector(selectDarkMode);
 
   const activePost = allPosts.find(p => p.data.id === activePostId);
 
@@ -36,7 +39,7 @@ function App() {
   }, [subreddit, dispatch]);
 
   return (
-    <>
+    <main className={`App-Container ${darkMode ? 'dark' : 'light'}`}>
       {activePost && <PostDetail show={displayingPost} data={activePost.data} />}
       <Navbar />
       <SubredditNav subreddits={allSubreddits} />
@@ -44,7 +47,7 @@ function App() {
         <PostsGrid />
       </Container>
       <Footer />
-    </>
+    </main>
   );
 }
 

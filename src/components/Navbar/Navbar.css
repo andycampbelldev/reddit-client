@@ -1,0 +1,7 @@
+.Navbar {
+    background-color: var(--color-bg);
+}
+
+.Navbar .NavbarBrand {
+    color: var(--color-primary);
+}

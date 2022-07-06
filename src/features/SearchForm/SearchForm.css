@@ -1,0 +1,29 @@
+.SearchForm .SearchForm-Input, .SearchForm .SearchForm-Input:focus {
+    background-color: unset;
+    color: var(--color-text);
+    border-bottom: 1px solid;
+    border-color: var(--color-primary);
+    border-radius: 40px;
+    transition: border-color 0.5s ease;
+}
+
+.SearchForm .SearchForm-Input:focus {
+    border-color: var(--color-secondary);
+    outline: none;
+    box-shadow: none;
+}
+
+.SearchForm .SearchForm-Submit {
+    color: var(--color-primary);
+    border-color:  var(--color-primary);
+}
+
+.SearchForm .SearchForm-Submit:hover {
+    color: var(--color-text);
+    border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+}
+
+/* ::webkit-input-placeholder, :moz-placeholder, ::moz-placedholder, ::placeholder {
+    color: var(--color-primary);
+} */

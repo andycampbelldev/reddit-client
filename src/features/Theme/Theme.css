@@ -1,0 +1,14 @@
+/* https://colorhunt.co/palette/01024e5438648b4367ff6464 */
+
+.dark {
+    /* --color-bg: #272727; */
+    --color-bg: #000129;
+    --color-primary: #FF6464;
+    --color-secondary: #8B4367;
+    --color-text: #f7f7f7;
+}
+
+.light {
+    --color-bg: #FFF;
+    --color-primary: #FF6464;
+}

@@ -4,14 +4,15 @@ import { Navbar, NavbarBrand } from 'reactstrap'
 import SearchForm from '../../features/SearchForm/SearchForm';
 import ThemeSwitch from '../../features/Theme/ThemeSwitch';
 
+import './Navbar.css';
+
 export default () => {
     return (
         <Navbar
-            color='light'
+            className='Navbar'
             expand='md'
-            light
         >
-            <NavbarBrand href='/'>
+            <NavbarBrand className='NavbarBrand' href='/'>
                 Reddit-Board
             </NavbarBrand>
             <SearchForm />

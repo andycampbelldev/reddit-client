@@ -7,6 +7,8 @@ import { selectSearchTerm, setSearchTerm } from './SearchTermSlice';
 
 import { Label, Input, Button } from 'reactstrap';
 
+import './SearchForm.css';
+
 function SearchForm() {
     const dispatch = useDispatch();
     const searchTerm = useSelector(selectSearchTerm);
@@ -22,9 +24,10 @@ function SearchForm() {
     }
     
     return (
-        <form className='d-flex align-items-center gap-2' onSubmit={handleSubmit} >
+        <form className='SearchForm d-flex align-items-center gap-2' onSubmit={handleSubmit} >
             <Label for='searchInput' className='visually-hidden'>Search</Label>
             <Input
+                className='SearchForm-Input'
                 id='searchInput'
                 name='search'
                 placeholder='search reddit'
@@ -32,7 +35,7 @@ function SearchForm() {
                 value={searchTerm}
                 onChange={handleChange}
             />
-            <Button color='primary' outline>Search</Button>
+            <Button className='SearchForm-Submit' outline>Search</Button>
         </form>
     )
 }

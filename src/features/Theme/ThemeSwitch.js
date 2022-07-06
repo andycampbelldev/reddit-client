@@ -7,6 +7,8 @@ import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
+import './ThemeSwitch.css';
+
 export default function ThemeSwitch(props) {
     const dispatch = useDispatch();
     const darkMode = useSelector(selectDarkMode);
@@ -20,7 +22,7 @@ export default function ThemeSwitch(props) {
     }
 
     return (
-        <Button onClick={handleToggleDarkMode} color='primary' outline>
+        <Button className='ThemeSwitch' onClick={handleToggleDarkMode} outline>
             <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
         </Button>
     )
