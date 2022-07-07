@@ -13,6 +13,7 @@ import Footer from './components/Footer/Footer';
 
 
 import { Container } from 'reactstrap';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 import './App.css';
 import './features/Theme/Theme.css';
@@ -39,15 +40,17 @@ function App() {
   }, [subreddit, dispatch]);
 
   return (
-    <main className={`App-Container ${darkMode ? 'dark' : 'light'}`}>
-      {activePost && <PostDetail show={displayingPost} data={activePost.data} />}
-      <Navbar />
-      <SubredditNav subreddits={allSubreddits} />
-      <Container>
-        <PostsGrid />
-      </Container>
-      <Footer />
-    </main>
+    <SkeletonTheme baseColor={darkMode ? '#0d0e34' : ''} highlightColor={darkMode ? '#18003a' : ''}>
+      <main className={`App-Container ${darkMode ? 'dark' : 'light'}`}>
+        {activePost && <PostDetail show={displayingPost} data={activePost.data} />}
+        <Navbar />
+        <SubredditNav subreddits={allSubreddits} />
+        <Container>
+          <PostsGrid />
+        </Container>
+        <Footer />
+      </main>
+    </SkeletonTheme>
   );
 }
 

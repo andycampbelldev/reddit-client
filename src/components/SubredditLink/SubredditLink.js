@@ -20,8 +20,8 @@ function SubredditLink({ name, iconUrl, active, isLoading }) {
 
     if (isLoading) {
         return (
-            <div className='d-flex align-items-center p-4'>
-                <Skeleton className='me-2' circle={true} height={45} width={45} /> <Skeleton height={25} width={150} />
+            <div className='d-flex align-items-center px-4'>
+                <Skeleton className='me-2' circle={true} height={45} width={45} /> <Skeleton height={25} width={100} />
             </div>
         )
     }

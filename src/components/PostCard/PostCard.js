@@ -24,7 +24,7 @@ export default function PostCard({ data, isLoading }) {
     if (isLoading) {
         return (
             <Col sm={{size: 6}} md={{size: 4}} className='d-flex align-items-stretch mb-2 px-1'>
-                <Card className='PostCard flex-grow-1 border-0'>
+                <Card className='PostCard flex-grow-1 border-0 lh-1 bg-transparent'>
                     <Skeleton height={400} />
                 </Card>
             </Col>
