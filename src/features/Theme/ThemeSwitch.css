@@ -1,5 +1,5 @@
 .ThemeSwitch.ThemeSwitch-Button:focus {
-    border-color: var(--color-secondary);
+    border-color: var(--color-primary);
     outline: none;
     box-shadow: none;
 }
