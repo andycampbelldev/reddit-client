@@ -6,6 +6,7 @@
     --color-secondary: #8B4367;
     --color-text: #f7f7f7;
     --color-text-hover: var(--color-text);
+    --color-bg-highlight: rgba(255, 255, 255, 0.1);
 }
 
 .light {
@@ -14,4 +15,5 @@
     --color-secondary: #8B4367;
     --color-text: #151515;
     --color-text-hover: #f7f7f7;
+    --color-bg-highlight: rgba(0, 0, 0, 0.05);
 }

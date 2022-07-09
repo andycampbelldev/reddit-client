@@ -1,5 +1,5 @@
 .PostComment {
-    transition: background-color 1s ease;
+    transition: background-color 1s ease, opacity 1s ease;
     overflow: hidden;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .PostComment-blockquote {
-    background-color: rgb(13, 110, 253);
+    background-color: var(--color-primary);
     margin: -10px 0px;
     margin-right: 0.5rem;
     display: block;
@@ -20,19 +20,15 @@
 }
 
 .PostComment-highlight {
-    background-color: rgb(0, 0, 0, 0.05);
+    background-color: var(--color-bg-highlight);
 }
 
 .PostComment-highlight .PostComment-blockquote {
-    background-color: rgb(0, 72, 181);
-}
-
-.PostComment .PostComment-blockquote-collapsed {
-    background-color: rgba(13, 110, 253, 0.5);
+    background-color: var(--color-secondary)
 }
 
 .PostComment-blockquote:hover {
-    background-color: rgb(116, 16, 255);
+    background-color: var(--color-secondary);
 }
 
 .PostComment-body-collapsed {

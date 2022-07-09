@@ -15,13 +15,16 @@ import {
     selectPostThreadLength 
 } from './PostSlice';
 
+import { selectDarkMode } from '../Theme/ThemeSlice';
+
 import { Modal, ModalHeader, ModalBody, CardSubtitle, Row } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown, faXmark } from '@fortawesome/free-solid-svg-icons';
 import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
 import PostComment from '../../components/PostComment/PostComment';
 import More from '../../components/More/More';
 
+import '../Theme/Theme.css'
 import './Post.css'
 
 export default function PostDetail({ show, data }) {
@@ -44,6 +47,7 @@ export default function PostDetail({ show, data }) {
     
     const dispatch = useDispatch();
     
+    const darkMode = useSelector(selectDarkMode);
     const displayingPost = useSelector(selectDisplayingPost);
     const activePostId = useSelector(selectActivePostId);
     const threadLength = useSelector(selectPostThreadLength);
@@ -113,9 +117,9 @@ export default function PostDetail({ show, data }) {
         const moreCommentsButton = !commentsLoading && threadLength < comments.length ? <More moreWhat='comments' onClick={handleMoreComments} /> : '';
 
     return (
-        <Modal className='Post' size='lg' scrollable isOpen={show}>
+        <Modal className={`Post ${darkMode ? 'dark' : 'light'}`} size='lg' scrollable isOpen={show}>
             <ModalHeader
-                close={<button className='btn-close' onClick={handleClose}></button>}
+                close={<button className='Post-close btn btn-outline p-0 ms-2' onClick={handleClose}><FontAwesomeIcon icon={faXmark} size='2x' /></button>}
                 className='Post-header align-items-start'
                 tag='div'
             >

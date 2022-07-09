@@ -1,3 +1,12 @@
+.Post .modal-content {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+.Post .Post-close {
+    color: var(--color-text);
+}
+
 .Post-votes {
     font-weight: bold;
     margin-right: 0.5rem;
