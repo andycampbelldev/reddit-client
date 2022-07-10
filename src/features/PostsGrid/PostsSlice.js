@@ -36,7 +36,7 @@ const options = {
                 //post type - image, gallery or video, or link to external content like imgur or youtube
                 post.data.postType = post_hint === 'image' ? 'image' : post_hint === 'hosted:video' ? 'video' : ['link', 'rich:video'].includes(post_hint) ? 'link' : is_gallery && gallery_data ? 'gallery' : undefined;
                 //background image url for use on PostCard. Where possible, use a 640px wide image, otherwise fallback to largest.
-                if (post.data.postType === 'image') {
+                if (post.data.postType === 'image' || post.data.postType === 'video') {
                     const previewImageResolutions = post.data.preview.images[0].resolutions;
                     const image = previewImageResolutions.find(image => image.width === 640) || previewImageResolutions[previewImageResolutions.length - 1];
                     post.data.backgroundImageUrl = image.url.replace(/&amp;/g, '&');
@@ -47,11 +47,7 @@ const options = {
                     // use the 640px image, or fallback to the largest available
                     let image = previewImageResolutions.find(image => image.x === 640) || previewImageResolutions[previewImageResolutions.length - 1];
                     post.data.backgroundImageUrl = image.u.replace(/&amp;/g, '&');
-                } else {
-                    post.data.backgroundImageUrl = post.data.postType === 'video' ? thumbnail : undefined;
-                }
-
-
+                } 
             }
             state.posts = action.payload;
             state.isLoading = false;
