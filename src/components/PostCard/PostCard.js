@@ -58,7 +58,7 @@ export default function PostCard({ data, isLoading }) {
     const subtitle = postType === 'link' ? url_overridden_by_dest : '';
     const originalSubreddit = appSubreddit.toLowerCase() !== subreddit.toLowerCase() ? `/r/${subreddit}` : '';
     const cardText = selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext;
-    const thumbnailImage = postType === 'link' && <img src={thumbnail} />
+    // const thumbnailImage = postType === 'link' && <img src={thumbnail} />
     const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
     const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
     
@@ -70,7 +70,7 @@ export default function PostCard({ data, isLoading }) {
                     <CardSubtitle>{subtitle}</CardSubtitle>
                     <CardSubtitle>{originalSubreddit}</CardSubtitle>
                     <CardText>{cardText}</CardText>
-                    {thumbnailImage}
+                    {/* {thumbnailImage} */}
                 </CardBody>
                 <CardFooter className={`PostCard-footer d-flex justify-content-between flex-wrap border-0 bg-transparent`}>
                     <span>{upsCount}{downsCount}</span>
