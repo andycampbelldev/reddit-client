@@ -41,8 +41,8 @@ export default function PostDetail({ show, data }) {
         secure_media, 
         gallery_data, 
         permalink, 
-        thumbnail, 
-        num_comments 
+        num_comments,
+        backgroundImageUrl
     } = data;
     
     const dispatch = useDispatch();
@@ -87,11 +87,13 @@ export default function PostDetail({ show, data }) {
     } else if (postType === 'gallery') {
         postMainContent = <ImageCarousel images={gallery_data.items} />
     } else if (postType === 'link') {
+        const previewImageResolutions = data.preview.images[0].resolutions;
+        const imageUrl = previewImageResolutions[previewImageResolutions.length - 1].url.replace(/&amp;/g, '&');
         postMainContent = 
-        <Row className='Post-external-link d-flex justify-content-between align-items-center'>
-                <a target='_blank' rel='noreferrer' href={postUrl}>{postUrl}</a>
-                <img className='m-2' src={thumbnail} alt={decodedTitle} />
-            </Row>
+        <Row className='Post-external-link d-flex flex-column justify-content-between align-items-center'>
+            <img className='m-2' src={backgroundImageUrl} alt={decodedTitle} />
+            <a target='_blank' rel='noreferrer' href={postUrl}>{postUrl}</a>
+        </Row>
     }
 
     const commentsContent = !commentsLoading && comments.length > 0 
