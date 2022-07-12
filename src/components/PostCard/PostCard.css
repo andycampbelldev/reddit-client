@@ -41,8 +41,9 @@
 }
 
 .PostCard-no-background-image {
-    color: rgb(33,37,41);
-    background-repeat: repeat;
-    background-size: 22px 22px;
-    background-position: 11px 0, 11px 0, 0 0, 0 0;
+    color: var(--color-text);
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-size: 10px 10px;
+    background-image: repeating-linear-gradient(45deg, var(--color-bg-pattern) 0, var(--color-bg-pattern) 1px, var(--color-bg) 0, var(--color-bg) 50%);
 }
