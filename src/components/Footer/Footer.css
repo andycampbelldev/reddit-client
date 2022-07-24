@@ -1,6 +1,7 @@
 .Footer {
     font-size: 0.8rem;
     text-align: right;
+    color: var(--color-text);
 }
 
 .Footer a {
