@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     if(subreddit) {
-      dispatch(getPosts(`https://www.reddit.com/r/${subreddit}.json?limit=25`));
+      dispatch(getPosts(`https://www.reddit.com/r/${subreddit}.json?limit=50`));
     }
   }, [subreddit, dispatch]);
 
