@@ -31,6 +31,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getSubredditsInfo(allSubreddits));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
