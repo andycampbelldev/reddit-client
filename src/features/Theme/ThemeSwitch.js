@@ -22,7 +22,7 @@ export default function ThemeSwitch(props) {
     }
 
     return (
-        <Button className='ThemeSwitch ThemeSwitch-Button' onClick={handleToggleDarkMode} outline>
+        <Button aria-label={`Toggle ${darkMode ? 'light' : 'dark'} theme`} className='ThemeSwitch ThemeSwitch-Button' onClick={handleToggleDarkMode} outline>
             <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
         </Button>
     )
