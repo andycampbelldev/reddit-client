@@ -16,14 +16,14 @@ const SubredditNav = ({subreddits}) => {
     if(isLoading) {
         return (
             <Nav className='SubredditNav p-2 my-2'>
-                {subreddits.map(sr => <SubredditLink key={uuidv4()} isLoading={true} />)}
+                {subreddits.map((sr, i) => <SubredditLink key={i} isLoading={true} />)}
             </Nav>
         )
     }
 
     return (
         <Nav pills className='SubredditNav p-2 my-2'>
-            {subreddits.map(sr => <SubredditLink key={uuidv4()} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
+            {subreddits.map((sr, i) => <SubredditLink key={i} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )
 }
