@@ -61,7 +61,7 @@ export default function PostCard({ data, isLoading }) {
     const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
     
     return (
-        <Col sm={{size: 6}} md={{size: 4}} className='d-flex align-items-stretch mb-2 px-1'>
+        <Col sm={{size: 6}} md={{size: 4}} lg={{size: 3}} className='d-flex align-items-stretch mb-2 px-1'>
             <Card className={`PostCard flex-grow-1 ${backgroundImageUrl ? 'PostCard-background-image' : 'PostCard-no-background-image'}`} style={backgroundImageUrl ? backgroundImageStyle : {}} onClick={handleClick}>
                 <CardBody className='CardBody'>
                     <CardTitle className='CardTitle'>{title}</CardTitle>
