@@ -24,6 +24,10 @@
     background-color: var(--color-secondary);
 }
 
+.SearchForm-Input::-webkit-search-cancel-button {
+    display: none;
+}
+
 /* ::webkit-input-placeholder, :moz-placeholder, ::moz-placedholder, ::placeholder {
     color: var(--color-primary);
 } */
