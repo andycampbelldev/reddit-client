@@ -35,7 +35,7 @@ function SearchForm() {
                 value={searchTerm}
                 onChange={handleChange}
             />
-            <Button className='SearchForm-Submit' outline>Search</Button>
+            <Button className='SearchForm-Submit' outline disabled={!searchTerm ? true : false }>Search</Button>
         </form>
     )
 }
