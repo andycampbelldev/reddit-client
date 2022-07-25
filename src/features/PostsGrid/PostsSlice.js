@@ -39,7 +39,6 @@ const options = {
                 if (post.data.postType === 'image' || post.data.postType === 'video' || post.data.postType === 'link') {
                     const previewImageResolutions = post.data.preview.images[0].resolutions;
                     const image = previewImageResolutions.find(image => image.width === 320) || previewImageResolutions[previewImageResolutions.length - 1];
-                    console.log(image);
                     post.data.backgroundImageUrl = image ? image.url.replace(/&amp;/g, '&') : '';
                 } else if (post.data.postType === 'gallery') {
                     const { media_metadata } = post.data;
