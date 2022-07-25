@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setCurrentSubreddit } from '../../features/SubredditNav/SubredditSlice';
-import { setSearchTerm } from '../../features/SearchForm/SearchTermSlice';
+import { setSearchInput, setSearchedTerm } from '../../features/SearchForm/SearchTermSlice';
 
 import { NavItem, NavLink } from 'reactstrap';
 import Skeleton from 'react-loading-skeleton';
@@ -14,7 +14,8 @@ function SubredditLink({ name, iconUrl, active, isLoading }) {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(setSearchTerm(''));
+        dispatch(setSearchInput(''));
+        dispatch(setSearchedTerm(''));
         dispatch(setCurrentSubreddit(name));
     }
 

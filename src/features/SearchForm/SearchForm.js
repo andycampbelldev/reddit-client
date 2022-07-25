@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { setCurrentSubreddit } from '../SubredditNav/SubredditSlice';
 import { getPosts } from '../PostsGrid/PostsSlice';
-import { selectSearchTerm, setSearchTerm } from './SearchTermSlice';
+import { selectSearchInput, setSearchedTerm, setSearchInput } from './SearchTermSlice';
 
 import { Label, Input, Button } from 'reactstrap';
 
@@ -11,16 +11,17 @@ import './SearchForm.css';
 
 function SearchForm() {
     const dispatch = useDispatch();
-    const searchTerm = useSelector(selectSearchTerm);
+    const searchTerm = useSelector(selectSearchInput);
 
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(setCurrentSubreddit(''))
+        dispatch(setSearchedTerm(searchTerm));
         dispatch(getPosts(`https://www.reddit.com/search.json?q=${searchTerm}&limit=100`));
     }
 
     const handleChange = e => {
-        dispatch(setSearchTerm(e.target.value));
+        dispatch(setSearchInput(e.target.value));
     }
     
     return (
