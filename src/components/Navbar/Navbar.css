@@ -1,5 +1,5 @@
 .Navbar {
-    background-color: var(--color-bg);
+    background-color: var(--color-bg-highlight);
 }
 
 .Navbar .NavbarBrand {

@@ -5,7 +5,9 @@ import { setCurrentSubreddit } from '../SubredditNav/SubredditSlice';
 import { getPosts } from '../PostsGrid/PostsSlice';
 import { selectSearchInput, setSearchedTerm, setSearchInput } from './SearchTermSlice';
 
-import { Label, Input, Button } from 'reactstrap';
+import { Label, Input, Button, InputGroup } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import './SearchForm.css';
 
@@ -27,16 +29,18 @@ function SearchForm() {
     return (
         <form className='SearchForm d-flex align-items-center gap-2' onSubmit={handleSubmit} >
             <Label for='searchInput' className='visually-hidden'>Search</Label>
-            <Input
-                className='SearchForm-Input'
-                id='searchInput'
-                name='search'
-                placeholder='search reddit'
-                type='search'
-                value={searchTerm}
-                onChange={handleChange}
-            />
-            <Button className='SearchForm-Submit' outline disabled={!searchTerm ? true : false }>Search</Button>
+            <InputGroup>
+                <Input
+                    className='SearchForm-Input'
+                    id='searchInput'
+                    name='search'
+                    placeholder='search reddit'
+                    type='search'
+                    value={searchTerm}
+                    onChange={handleChange}
+                />
+                <Button className='SearchForm-Submit' outline disabled={!searchTerm ? true : false }><FontAwesomeIcon icon={faMagnifyingGlass}/></Button>
+            </InputGroup>
         </form>
     )
 }

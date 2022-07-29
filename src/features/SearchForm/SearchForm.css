@@ -1,27 +1,39 @@
-.SearchForm .SearchForm-Input, .SearchForm .SearchForm-Input:focus {
-    background-color: unset;
-    color: var(--color-text);
-    border-bottom: 1px solid;
-    border-color: var(--color-primary);
+.SearchForm .input-group {
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-primary);
     border-radius: 40px;
-    transition: border-color 0.5s ease;
+    overflow: hidden;
+}
+
+.SearchForm .SearchForm-Input, .SearchForm .SearchForm-Input:focus {
+    background-color: transparent;
+    color: var(--color-text);
+    border: none;
+    /* transition: width 0.5s ease; */
 }
 
 .SearchForm .SearchForm-Input:focus {
-    border-color: var(--color-secondary);
     outline: none;
     box-shadow: none;
 }
 
+.SearchForm .SearchForm-Submit:disabled {
+    background-color: transparent;
+}
+
 .SearchForm .SearchForm-Submit {
-    color: var(--color-primary);
-    border-color:  var(--color-primary);
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--color-text);
+    /* border-color:  var(--color-primary); */
+    border: none;
 }
 
 .SearchForm .SearchForm-Submit:hover {
-    color: var(--color-text-hover);
-    border-color: var(--color-secondary);
-    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    background-color: transparent;
+    /* border-color: var(--color-secondary);
+    background-color: var(--color-secondary); */
 }
 
 .SearchForm-Input::-webkit-search-cancel-button {
