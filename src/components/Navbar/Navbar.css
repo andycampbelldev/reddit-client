@@ -4,4 +4,6 @@
 
 .Navbar .NavbarBrand {
     color: var(--color-primary);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
 }
