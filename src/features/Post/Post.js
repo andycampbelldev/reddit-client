@@ -120,19 +120,19 @@ export default function PostDetail({ show, data }) {
 
     return (
         <Modal className={`Post ${darkMode ? 'dark' : 'light'}`} size='lg' scrollable isOpen={show}>
-            <ModalHeader
-                close={<button className='Post-close btn btn-outline p-0 ms-2' onClick={handleClose}><FontAwesomeIcon icon={faXmark} size='2x' /></button>}
-                className='Post-header align-items-start'
-                tag='div'
-            >
-                <span className='Post-votes'>{upsCount}{downsCount}</span>
-                <span>{decodedTitle}</span>
-                <CardSubtitle className='Post-author mt-1'>
-                    <span className='fw-bold'>/u/{author}</span>
-                    <span className='ms-2'>posted {whenPosted}</span>
-                </CardSubtitle>
-            </ModalHeader>
             <ModalBody>
+                <ModalHeader
+                    close={<button className='Post-close btn btn-outline p-0 ms-2' onClick={handleClose}><FontAwesomeIcon icon={faXmark} size='2x' /></button>}
+                    className='Post-header align-items-start'
+                    tag='div'
+                >
+                    <span className='Post-votes'>{upsCount}{downsCount}</span>
+                    <span>{decodedTitle}</span>
+                    <CardSubtitle className='Post-author mt-1'>
+                        <span className='fw-bold'>/u/{author}</span>
+                        <span className='ms-2'>posted {whenPosted}</span>
+                    </CardSubtitle>
+                </ModalHeader>
                 {postMainContent}
                 {postTextContent}
                 <h5 className='my-3'>{commentsHeader}</h5>

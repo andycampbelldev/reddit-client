@@ -25,3 +25,18 @@
 .Post-external-link.row>* {
     width: auto;
 }
+
+.Post-header.modal-header {
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+.modal-body::-webkit-scrollbar {
+    background-color: var(--color-bg);
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background-color: var(--color-bg-highlight);
+    border-radius: 1rem;
+}
