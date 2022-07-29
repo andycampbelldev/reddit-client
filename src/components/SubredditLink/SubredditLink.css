@@ -1,9 +1,9 @@
 .SubredditLink-link.nav-link {
-    color: var(--color-primary);
+    color: var(--color-text);
 }
 
 .SubredditLink-link.nav-link:hover {
-    color: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 .SubredditLink-active .SubredditLink-name::after {
