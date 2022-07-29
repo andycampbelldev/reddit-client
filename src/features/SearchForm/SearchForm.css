@@ -9,7 +9,6 @@
     background-color: transparent;
     color: var(--color-text);
     border: none;
-    /* transition: width 0.5s ease; */
 }
 
 .SearchForm .SearchForm-Input:focus {
@@ -25,21 +24,14 @@
     border-radius: 50%;
     background-color: transparent;
     color: var(--color-text);
-    /* border-color:  var(--color-primary); */
     border: none;
 }
 
 .SearchForm .SearchForm-Submit:hover {
     color: var(--color-primary);
     background-color: transparent;
-    /* border-color: var(--color-secondary);
-    background-color: var(--color-secondary); */
 }
 
 .SearchForm-Input::-webkit-search-cancel-button {
     display: none;
 }
-
-/* ::webkit-input-placeholder, :moz-placeholder, ::moz-placedholder, ::placeholder {
-    color: var(--color-primary);
-} */
