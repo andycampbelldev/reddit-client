@@ -18,7 +18,7 @@ const options = {
     name: 'subreddits',
     initialState: {
         currentSubreddit: 'beerporn',
-        allSubreddits: [{name: 'beerporn'}, {name: 'patiogardening'}, {name: 'reactjs'}, {name: 'sourdough'}, {name: 'pizza'}, {name: 'videos'}],
+        allSubreddits: [{name: 'beerporn'}, {name: 'patiogardening'}, {name: 'skateboarding'}, {name: 'sourdough'}, {name: 'pizza'}, {name: 'aww'}],
         isLoading: true,
         hasError: false,
     },
