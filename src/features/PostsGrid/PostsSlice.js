@@ -51,7 +51,7 @@ const options = {
             }
             state.posts = action.payload;
             state.isLoading = false;
-            state.hasError = true;
+            state.hasError = false;
         },
         [getPosts.rejected]: (state, action) => {
             state.isLoading = false;
