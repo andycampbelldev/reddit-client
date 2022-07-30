@@ -1,4 +1,5 @@
-.SubredditLink-link.nav-link {
+.SubredditLink-link.nav-link,
+.SubredditLink-link.nav-link:focus {
     color: var(--color-text);
 }
 
