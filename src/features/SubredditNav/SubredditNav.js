@@ -14,7 +14,7 @@ const SubredditNav = ({subreddits}) => {
 
     if(isLoading) {
         return (
-            <Nav className='SubredditNav p-2 my-2'>
+            <Nav className='SubredditNav justify-content-lg-center justify-content-md-start p-2 my-2'>
                 {subreddits.map((sr, i) => <SubredditLink key={`SubredditLink-Skeleton-${i + 1}`} isLoading={true} />)}
             </Nav>
         )
