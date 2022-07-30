@@ -26,6 +26,7 @@ export default function ImageCarousel({ images }) {
             activeIndex={galleryIndex}
             next={handleNextSlide}
             previous={handlePrevSlide}
+            interval={false}
         >
             <CarouselIndicators
                 activeIndex={galleryIndex}
