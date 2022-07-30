@@ -21,7 +21,7 @@ const SubredditNav = ({subreddits}) => {
     }
 
     return (
-        <Nav pills className='SubredditNav p-2 my-2'>
+        <Nav pills className='SubredditNav justify-content-lg-center justify-content-md-start p-2 my-2'>
             {subreddits.map((sr, i) => <SubredditLink key={`SubredditLink-${i + 1}`} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )
