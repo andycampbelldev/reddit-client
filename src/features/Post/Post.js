@@ -129,7 +129,7 @@ export default function PostDetail({ show, data }) {
                     <span className='Post-votes'>{upsCount}{downsCount}</span>
                     <span>{decodedTitle}</span>
                     <CardSubtitle className='Post-author mt-1'>
-                        <span className='fw-bold'>/u/{author}</span>
+                        <span className='fw-bold'>u/{author}</span>
                         <span className='ms-2'>posted {whenPosted}</span>
                     </CardSubtitle>
                 </ModalHeader>

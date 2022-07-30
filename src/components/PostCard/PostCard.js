@@ -55,7 +55,7 @@ export default function PostCard({ data, isLoading }) {
 
     const title = decodedTitle.length > 100 ? `${decodedTitle.substring(0, 99)}...` : decodedTitle;
     const subtitle = postType === 'link' ? url_overridden_by_dest : '';
-    const originalSubreddit = appSubreddit.toLowerCase() !== subreddit.toLowerCase() ? `/r/${subreddit}` : '';
+    const originalSubreddit = appSubreddit.toLowerCase() !== subreddit.toLowerCase() ? `r/${subreddit}` : '';
     const cardText = selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext;
     const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
     const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
@@ -72,7 +72,7 @@ export default function PostCard({ data, isLoading }) {
                 <CardFooter className={`PostCard-footer d-flex justify-content-between flex-wrap border-0 bg-transparent`}>
                     <span>{upsCount}{downsCount}</span>
                     <span><FontAwesomeIcon icon={faComment} /> {num_comments}</span>
-                    <span className='mx-1 fw-bold'>/u/{author}</span>
+                    <span className='mx-1 fw-bold'>u/{author}</span>
                     <span>{whenPosted}</span>
                 </CardFooter>
             </Card>
