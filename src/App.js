@@ -44,12 +44,18 @@ function App() {
     <SkeletonTheme baseColor={darkMode ? '#0d0e34' : ''} highlightColor={darkMode ? '#18003a' : ''}>
       <main className={`App-Container ${darkMode ? 'dark' : 'light'}`}>
         {activePost && <PostDetail show={displayingPost} data={activePost.data} />}
-        <Navbar />
-        <SubredditNav subreddits={allSubreddits} />
-        <Container>
-          <PostsGrid />
-        </Container>
-        <Footer />
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          <SubredditNav subreddits={allSubreddits} />
+          <Container>
+            <PostsGrid />
+          </Container>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </main>
     </SkeletonTheme>
   );
