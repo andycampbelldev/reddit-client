@@ -10,6 +10,8 @@ import { Row } from 'reactstrap';
 import SearchResultsHeader from '../../components/SearchResultsHeader/SearchResultsHeader';
 import PostCard from '../../components/PostCard/PostCard';
 
+import './PostsGrid.css';
+
 function PostsGrid() {
     const posts = useSelector(selectPosts);
     const isLoading = useSelector(selectPostsIsLoading);
@@ -34,7 +36,7 @@ function PostsGrid() {
     }
 
     if(hasError) {
-        return <p className='text-center'>Could not load Posts. Please try again.</p>
+        return <p className='PostsGrid-error'>Could not load Posts. Please try again.</p>
     }
 
     return (
