@@ -1,4 +1,4 @@
-.PostsGrid-error {
+.PostsGrid-error, .PostsGrid-no-results {
     color: var(--color-text);
     text-align: center;
 }

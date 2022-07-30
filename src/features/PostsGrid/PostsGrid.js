@@ -42,6 +42,7 @@ function PostsGrid() {
     return (
         <>
             {searchedTerm && !subreddit && <SearchResultsHeader searchedTerm={searchedTerm} />}
+            {searchedTerm && !subreddit && posts.length === 0 && <p className='PostsGrid-no-results'>{`Sorry, Reddit didn't have anything for "${searchedTerm}". Refine your search and try again.`}</p>}
             <Row>
                 {posts.map(post => 
                     <PostCard key={post.data.id} data={post.data} />
