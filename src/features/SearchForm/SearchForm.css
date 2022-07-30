@@ -3,6 +3,11 @@
     border: 2px solid var(--color-primary);
     border-radius: 40px;
     overflow: hidden;
+    transition: border-color 0.5s ease;
+}
+
+.SearchForm .input-group:focus-within {
+    border-color: var(--color-secondary);
 }
 
 .SearchForm .SearchForm-Input, .SearchForm .SearchForm-Input:focus {
@@ -21,15 +26,22 @@
 }
 
 .SearchForm .SearchForm-Submit {
-    border-radius: 50%;
     background-color: transparent;
     color: var(--color-text);
     border: none;
 }
 
+.SearchForm .SearchForm-Submit:hover, 
+.SearchForm .SearchForm-Submit:active, 
+.SearchForm .SearchForm-Submit:active:focus, 
+.SearchForm .SearchForm-Submit:focus {
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+}
+
 .SearchForm .SearchForm-Submit:hover {
     color: var(--color-primary);
-    background-color: transparent;
 }
 
 .SearchForm-Input::-webkit-search-cancel-button {

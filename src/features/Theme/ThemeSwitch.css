@@ -1,16 +1,20 @@
+
+.ThemeSwitch.ThemeSwitch-Button:hover, 
+.ThemeSwitch.ThemeSwitch-Button:active, 
+.ThemeSwitch.ThemeSwitch-Button:active:focus, 
 .ThemeSwitch.ThemeSwitch-Button:focus {
-    border-color: var(--color-primary);
+    background-color: transparent;
     outline: none;
     box-shadow: none;
 }
 
-.ThemeSwitch.ThemeSwitch-Button {
+.ThemeSwitch.ThemeSwitch-Button:hover {
     color: var(--color-primary);
-    border-color:  var(--color-primary);
 }
 
-.ThemeSwitch.ThemeSwitch-Button:hover {
-    color: var(--color-text-hover);
-    border-color: var(--color-secondary);
-    background-color: var(--color-secondary);
+
+.ThemeSwitch.ThemeSwitch-Button {
+    background-color: transparent;
+    color: var(--color-text);
+    border: none;
 }
