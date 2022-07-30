@@ -13,7 +13,8 @@ export default () => {
             expand='md'
         >
             <NavbarBrand className='NavbarBrand' href='/'>
-                RedditBoard
+                <span className='d-none d-md-block'>RedditBoard</span>
+                <span className='d-block d-md-none'>RB</span>
             </NavbarBrand>
             <SearchForm />
             <ThemeSwitch />  
