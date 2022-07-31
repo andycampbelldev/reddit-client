@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import ReactPlayer from 'react-player';
 
 import { 
     selectActivePostId,
@@ -83,7 +83,7 @@ export default function PostDetail({ show, data }) {
     if (postType === 'image') {
         postMainContent = <img className='img-fluid' src={postUrl} alt={decodedTitle}></img>
     } else if (postType === 'video') {
-        postMainContent = <video className='img-fluid' controls muted src={secure_media.reddit_video.fallback_url}>Error</video>
+        postMainContent = <ReactPlayer className='Post-video img-fluid' url={secure_media.reddit_video.hls_url.replace(/&amp;/g, '&')} controls playing muted playsinline />
     } else if (postType === 'gallery') {
         postMainContent = <ImageCarousel images={gallery_data.items} />
     } else if (postType === 'link') {

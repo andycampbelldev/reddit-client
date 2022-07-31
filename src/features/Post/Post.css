@@ -16,10 +16,14 @@
     font-size: 0.8rem;
 }
 
-.Post video, .Post img {
+.Post-video, .Post img {
     max-height: 600px;
     display: block;
     margin: auto;
+}
+
+.Post-video video {
+    max-width: 100%;
 }
 
 .Post-external-link.row>* {
