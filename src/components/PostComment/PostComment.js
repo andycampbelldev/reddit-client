@@ -74,10 +74,10 @@ export default function PostComment(props) {
 
     return (
         <div className={`PostComment d-flex justify-content-start py-2 my-2 ${highlight ? 'PostComment-highlight' : ''} ${collapsed ? 'opacity-50' : ''}`}>
-            <div className={`PostComment-blockquote ${collapsed ? 'PostComment-blockquote-collapsed' : ''}`} role='button' onClick={toggleHighlight}></div>
+            <div className={`PostComment-blockquote ${collapsed ? 'PostComment-blockquote-collapsed' : ''}`} role='button' onClick={toggleCollapse}></div>
             <div className='PostComment-content flex-grow-1'>
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
-                    <div className={`PostComment-author PostComment-toggle-collapse`} role='button' onClick={toggleCollapse}>
+                    <div className={`PostComment-author PostComment-toggle-collapse`} role='button' onClick={toggleHighlight}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
                         <span>posted {whenPosted}</span>
                     </div>
