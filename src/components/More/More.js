@@ -2,7 +2,7 @@ import React from 'react';
 
 import './More.css'
 
-export default ({ moreWhat, onClick }) => {
+export default function More({ moreWhat, onClick }) {
     const handleClick = () => {
         onClick();
     }

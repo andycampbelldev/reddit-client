@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Navbar, NavbarBrand } from 'reactstrap'
+import { Navbar as ReactStrapNavbar, NavbarBrand } from 'reactstrap'
 import SearchForm from '../../features/SearchForm/SearchForm';
 import ThemeSwitch from '../../features/Theme/ThemeSwitch';
 
 import './Navbar.css';
 
-export default () => {
+export default function Navbar(props) {
     return (
-        <Navbar
+        <ReactStrapNavbar
             className='Navbar'
             expand='md'
         >
@@ -18,6 +18,6 @@ export default () => {
             </NavbarBrand>
             <SearchForm />
             <ThemeSwitch />  
-        </Navbar>
+        </ReactStrapNavbar>
     )
 }

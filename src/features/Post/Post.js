@@ -41,8 +41,7 @@ export default function PostDetail({ show, data }) {
         secure_media, 
         gallery_data, 
         permalink, 
-        num_comments,
-        backgroundImageUrl
+        num_comments
     } = data;
     
     const dispatch = useDispatch();
@@ -75,7 +74,7 @@ export default function PostDetail({ show, data }) {
             dispatch(getCommentsForPost(permalink));
             dispatch(setPostThreadLength(3));
         }
-    }, [activePostId, dispatch])
+    }, [activePostId, permalink, dispatch])
     
     const postUrl = postType !== 'link' ? url : url_overridden_by_dest
     
@@ -91,7 +90,7 @@ export default function PostDetail({ show, data }) {
         const imageUrl = previewImageResolutions[previewImageResolutions.length - 1].url.replace(/&amp;/g, '&');
         postMainContent = 
         <Row className='Post-external-link d-flex flex-column justify-content-between align-items-center'>
-            <img className='m-2' src={backgroundImageUrl} alt={decodedTitle} />
+            <img className='m-2' src={imageUrl} alt={decodedTitle} />
             <a target='_blank' rel='noreferrer' href={postUrl}>{postUrl}</a>
         </Row>
     }

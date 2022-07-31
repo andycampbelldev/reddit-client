@@ -40,7 +40,6 @@ export default function PostCard({ data, isLoading }) {
         selftext, 
         ups, 
         downs,
-        thumbnail,
         backgroundImageUrl,
         whenPosted, 
         num_comments, 
