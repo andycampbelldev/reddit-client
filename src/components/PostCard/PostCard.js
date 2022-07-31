@@ -59,6 +59,7 @@ export default function PostCard({ data, isLoading }) {
     const cardText = selftext.length > 100 ? `${selftext.substring(0, 99)}...` : selftext;
     const upsCount = ups > 0 ? <span><FontAwesomeIcon icon={faArrowUp} /> {ups}</span> : '';
     const downsCount = downs > 0 ? <span><FontAwesomeIcon icon={faArrowDown} /> {downs}</span> : '';
+    const commentCount = num_comments > 0 ? <span><FontAwesomeIcon icon={faComment} /> {num_comments}</span> : '';
     
     return (
         <Col sm={{size: 6}} md={{size: 4}} lg={{size: 3}} className='d-flex align-items-stretch mb-2 px-1'>
@@ -71,7 +72,7 @@ export default function PostCard({ data, isLoading }) {
                 </CardBody>
                 <CardFooter className={`PostCard-footer d-flex justify-content-between flex-wrap border-0 bg-transparent`}>
                     <span>{upsCount}{downsCount}</span>
-                    <span><FontAwesomeIcon icon={faComment} /> {num_comments}</span>
+                    {commentCount}
                     <span className='mx-1 fw-bold'>u/{author}</span>
                     <span>{whenPosted}</span>
                 </CardFooter>
