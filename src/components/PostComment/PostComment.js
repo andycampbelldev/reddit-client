@@ -77,7 +77,7 @@ export default function PostComment(props) {
             <div className={`PostComment-blockquote ${collapsed ? 'PostComment-blockquote-collapsed' : ''}`} role='button' onClick={toggleCollapse}></div>
             <div className='PostComment-content flex-grow-1'>
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
-                    <div className={`PostComment-author PostComment-toggle-collapse`} role='button' onClick={toggleHighlight}>
+                    <div className={`PostComment-author`} role='button' onClick={toggleHighlight}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
                         <span>posted {whenPosted}</span>
                     </div>
