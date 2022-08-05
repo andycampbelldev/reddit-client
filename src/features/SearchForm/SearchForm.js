@@ -17,9 +17,11 @@ function SearchForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(setCurrentSubreddit(''))
-        dispatch(setSearchedTerm(searchTerm));
-        dispatch(getPosts(`https://www.reddit.com/search.json?q=${searchTerm}&limit=100`));
+        if(searchTerm) {
+            dispatch(setCurrentSubreddit(''))
+            dispatch(setSearchedTerm(searchTerm));
+            dispatch(getPosts(`https://www.reddit.com/search.json?q=${searchTerm}&limit=100`));
+        }
     }
 
     const handleChange = e => {
