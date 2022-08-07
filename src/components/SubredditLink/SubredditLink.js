@@ -30,7 +30,7 @@ function SubredditLink({ name, iconUrl, active, isLoading }) {
     return (
         <NavItem className={`SubredditLink ${active ? 'SubredditLink-active' : ''}`}>
             <NavLink className='SubredditLink-link d-flex align-items-center' onClick={handleClick} href='#'>
-                <img className='SubredditLink-icon' src={iconUrl} alt={`community icon for the ${name} subreddit`}/>
+                <img className='SubredditLink-icon d-inline-block rounded-circle me-3' src={iconUrl} alt={`community icon for the ${name} subreddit`}/>
                 <span className='SubredditLink-name'>r/{name}</span>
                 {/* /r/{name} */}
             </NavLink>
