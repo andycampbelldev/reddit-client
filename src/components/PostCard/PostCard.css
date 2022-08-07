@@ -20,7 +20,7 @@
 }
 
 .PostCard-background-image {
-    color: var(--color-text-header-light);
+    color: var(--color-postcard-title-light);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -29,5 +29,5 @@
 .PostCard-no-background-image {
     color: var(--color-text);
     background-size: 10px 10px;
-    background-image: repeating-linear-gradient(45deg, var(--color-bg-pattern) 0, var(--color-bg-pattern) 1px, var(--color-bg) 0, var(--color-bg) 50%);
+    background-image: repeating-linear-gradient(45deg, var(--color-postcard-stripe) 0, var(--color-postcard-stripe) 1px, var(--color-bg) 0, var(--color-bg) 50%);
 }

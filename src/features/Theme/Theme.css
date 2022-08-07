@@ -1,7 +1,7 @@
 /* https://colorhunt.co/palette/01024e5438648b4367ff6464 */
 
 .App-Container {
-    --color-text-header-light: #f7f7f7;
+    --color-postcard-title-light: #f7f7f7;
 }
 
 .dark {
@@ -9,9 +9,8 @@
     --color-primary: #FF6464;
     --color-secondary: #8B4367;
     --color-text: #f7f7f7;
-    --color-text-hover: var(--color-text);
     --color-bg-highlight: rgba(255, 255, 255, 0.1);
-    --color-bg-pattern: var(--color-secondary)
+    --color-postcard-stripe: var(--color-secondary);
 }
 
 .light {
@@ -19,7 +18,6 @@
     --color-primary: #FF6464;
     --color-secondary: #8B4367;
     --color-text: #151515;
-    --color-text-hover: #f7f7f7;
     --color-bg-highlight: rgba(0, 0, 0, 0.05);
-    --color-bg-pattern: rgba(139, 67, 103, 0.5);
+    --color-postcard-stripe: rgba(139, 67, 103, 0.5);
 }
