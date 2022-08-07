@@ -73,9 +73,9 @@ export default function PostComment(props) {
     const moreRepliesButton = numberReplies < nestedReplies.length ? <More moreWhat='replies' onClick={handleMoreReplies} /> : '';
 
     return (
-        <div className={`PostComment d-flex justify-content-start py-2 my-2 ${highlight ? 'PostComment-highlight' : ''} ${collapsed ? 'opacity-50' : ''}`}>
-            <div className={`PostComment-blockquote ${collapsed ? 'PostComment-blockquote-collapsed' : ''}`} role='button' onClick={toggleCollapse}></div>
-            <div className='PostComment-content flex-grow-1'>
+        <div className={`PostComment d-flex justify-content-start my-2 overflow-hidden ${highlight ? 'PostComment-highlight' : ''} ${collapsed ? 'opacity-50' : ''}`}>
+            <div className={`PostComment-blockquote flex-shrink-0 me-2 ${collapsed ? 'PostComment-blockquote-collapsed' : ''}`} role='button' onClick={toggleCollapse}></div>
+            <div className='PostComment-content flex-grow-1 py-2'>
                 <div className='PostComment-header d-flex justify-content-between align-items-center'>
                     <div className={`PostComment-author`} role='button' onClick={toggleHighlight}>
                         <span className='fw-bold'>{`/u/${author}`} </span>
@@ -83,7 +83,7 @@ export default function PostComment(props) {
                     </div>
                     <span className='PostComment-ups-downs me-2'>{upsCount}{downsCount}</span>
                 </div>
-                <div className={`PostComment-body ${collapsed ? 'PostComment-body-collapsed' : ''}`}>
+                <div className={`PostComment-body overflow-hidden ${collapsed ? 'PostComment-body-collapsed' : ''}`}>
                     <ReactMarkdown className='ReactMarkdown' children={content} linkTarget='_blank' skipHtml={true}/>
                     <div className='PostComment-replies d-flex flex-column'>{nestedReplyContent}</div>
                     {moreRepliesButton}

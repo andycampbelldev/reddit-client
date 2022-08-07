@@ -1,21 +1,15 @@
 .PostComment {
     transition: background-color 1s ease, opacity 1s ease;
-    overflow: hidden;
 }
 
 .PostComment-body {
     max-height: 9999px;
-    overflow: hidden;
     transition: max-height 1s ease;
 }
 
 .PostComment-blockquote {
     background-color: var(--color-primary);
-    margin: -10px 0px;
-    margin-right: 0.5rem;
-    display: block;
-    padding: 0;
-    flex: 0 0 8px;
+    width: 8px;
     transition: all 1s ease;
 }
 
