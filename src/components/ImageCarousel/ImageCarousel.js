@@ -34,7 +34,7 @@ export default function ImageCarousel({ images }) {
             />
             {images.map((image, i) => (
                 <CarouselItem className='CarouselItem' key={image.media_id}>
-                    <img  alt={`Slide ${i+1}`} src={`https://i.redd.it/${image.media_id}.jpg`} />
+                    <img className='img-fluid' alt={`Slide ${i+1}`} src={`https://i.redd.it/${image.media_id}.jpg`} />
                     {image.caption && <CarouselCaption className='CarouselCaption' captionText={image.caption}/>}
                 </CarouselItem>
             ))}
