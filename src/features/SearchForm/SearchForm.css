@@ -2,7 +2,6 @@
     background-color: var(--color-bg);
     border: 2px solid var(--color-primary);
     border-radius: 40px;
-    overflow: hidden;
     transition: border-color 0.5s ease;
 }
 

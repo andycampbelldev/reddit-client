@@ -14,14 +14,14 @@ const SubredditNav = ({subreddits}) => {
 
     if(isLoading) {
         return (
-            <Nav className='SubredditNav justify-content-lg-center justify-content-md-start p-2 my-2'>
+            <Nav className='SubredditNav justify-content-lg-center justify-content-md-start flex-nowrap overflow-scroll p-2 my-2'>
                 {subreddits.map((sr, i) => <SubredditLink key={`SubredditLink-Skeleton-${i + 1}`} isLoading={true} />)}
             </Nav>
         )
     }
 
     return (
-        <Nav pills className='SubredditNav justify-content-lg-center justify-content-md-start p-2 my-2'>
+        <Nav pills className='SubredditNav justify-content-lg-center justify-content-md-start flex-nowrap overflow-scroll p-2 my-2'>
             {subreddits.map((sr, i) => <SubredditLink key={`SubredditLink-${i + 1}`} name={sr.name} iconUrl={sr.icon} active={(sr.name === subreddit)} />)}
         </Nav>
     )

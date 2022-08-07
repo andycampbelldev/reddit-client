@@ -1,13 +1,8 @@
-ul.SubredditNav {
-    overflow: scroll;
-    flex-wrap: nowrap;
-}
 
 /* hide scrollbar but allow scrolling */
 ul.SubredditNav {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll; 
 }
 
 ul.SubredditNav::-webkit-scrollbar {

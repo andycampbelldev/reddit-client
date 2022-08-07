@@ -80,9 +80,9 @@ export default function PostDetail({ show, data }) {
     
     let postMainContent
     if (postType === 'image') {
-        postMainContent = <img className='img-fluid' src={postUrl} alt={decodedTitle}></img>
+        postMainContent = <img className='d-block m-auto img-fluid' src={postUrl} alt={decodedTitle}></img>
     } else if (postType === 'video') {
-        postMainContent = <ReactPlayer className='Post-video img-fluid' url={secure_media.reddit_video.hls_url.replace(/&amp;/g, '&')} controls playing muted playsinline />
+        postMainContent = <ReactPlayer className='Post-video d-block m-auto img-fluid' url={secure_media.reddit_video.hls_url.replace(/&amp;/g, '&')} controls playing muted playsinline />
     } else if (postType === 'gallery') {
         postMainContent = <ImageCarousel images={gallery_data.items} />
     } else if (postType === 'link') {
@@ -122,10 +122,10 @@ export default function PostDetail({ show, data }) {
             <ModalBody>
                 <ModalHeader
                     close={<button className='Post-close btn btn-outline p-0 ms-2' onClick={handleClose}><FontAwesomeIcon icon={faXmark} size='2x' /></button>}
-                    className='Post-header align-items-start'
+                    className='Post-header align-items-start border-0 mb-2'
                     tag='div'
                 >
-                    <span className='Post-votes'>{upsCount}{downsCount}</span>
+                    <span className='Post-votes me-2'>{upsCount}{downsCount}</span>
                     <span>{decodedTitle}</span>
                     <CardSubtitle className='Post-author mt-1'>
                         <span className='fw-bold'>u/{author}</span>

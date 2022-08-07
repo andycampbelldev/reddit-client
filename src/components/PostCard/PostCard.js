@@ -62,8 +62,8 @@ export default function PostCard({ data, isLoading }) {
     
     return (
         <Col sm={{size: 6}} md={{size: 4}} lg={{size: 3}} className='d-flex align-items-stretch mb-2 px-1'>
-            <Card className={`PostCard flex-grow-1 ${backgroundImageUrl ? 'PostCard-background-image' : 'PostCard-no-background-image'}`} style={backgroundImageUrl ? backgroundImageStyle : {}} onClick={handleClick}>
-                <CardBody className='CardBody'>
+            <Card className={`PostCard flex-grow-1 ${backgroundImageUrl ? 'PostCard-background-image' : 'PostCard-no-background-image'} border-0`} style={backgroundImageUrl ? backgroundImageStyle : {}} onClick={handleClick}>
+                <CardBody className='CardBody overflow-hidden'>
                     <CardTitle className='CardTitle'>{title}</CardTitle>
                     <CardSubtitle>{subtitle}</CardSubtitle>
                     <CardSubtitle>{originalSubreddit}</CardSubtitle>

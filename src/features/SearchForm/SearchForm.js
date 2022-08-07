@@ -31,7 +31,7 @@ function SearchForm() {
     return (
         <form className='SearchForm d-flex align-items-center gap-2' onSubmit={handleSubmit} >
             <Label for='searchInput' className='visually-hidden'>Search</Label>
-            <InputGroup>
+            <InputGroup className='overflow-hidden'>
                 <Input
                     className='SearchForm-Input'
                     id='searchInput'

@@ -9,7 +9,6 @@
 
 .Post-votes {
     font-weight: bold;
-    margin-right: 0.5rem;
 }
 
 .Post-author {
@@ -18,8 +17,6 @@
 
 .Post-video, .Post img {
     max-height: 600px;
-    display: block;
-    margin: auto;
 }
 
 .Post-video video {
@@ -28,11 +25,6 @@
 
 .Post-external-link.row>* {
     width: auto;
-}
-
-.Post-header.modal-header {
-    border-bottom: none;
-    margin-bottom: 1rem;
 }
 
 .modal-body::-webkit-scrollbar {
