@@ -1,5 +1,9 @@
 /* https://colorhunt.co/palette/01024e5438648b4367ff6464 */
 
+.App-Container {
+    --color-text-header-light: #f7f7f7;
+}
+
 .dark {
     --color-bg: #000129;
     --color-primary: #FF6464;
