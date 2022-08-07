@@ -1,7 +1,5 @@
 import React from 'react';
 
-//import { Label, Input, Button } from 'reactstrap';
-
 import './SearchResultsHeader.css';
 
 function SearchResultsHeader({ searchedTerm }) {    
